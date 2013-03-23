@@ -1,0 +1,17 @@
+2013-03-22 16:17:54 [CLIENT] [INFO] Setting user: Player88
+2013-03-22 16:17:55 [CLIENT] [INFO] LWJGL Version: 2.4.2
+2013-03-22 16:18:01 [CLIENT] [INFO] Found animation info for: textures/blocks/lava_flow.txt
+2013-03-22 16:18:01 [CLIENT] [INFO] Found animation info for: textures/blocks/water_flow.txt
+2013-03-22 16:18:01 [CLIENT] [INFO] Found animation info for: textures/blocks/fire_0.txt
+2013-03-22 16:18:01 [CLIENT] [INFO] Found animation info for: textures/blocks/fire_1.txt
+2013-03-22 16:18:01 [CLIENT] [INFO] Found animation info for: textures/blocks/lava.txt
+2013-03-22 16:18:01 [CLIENT] [INFO] Found animation info for: textures/blocks/portal.txt
+2013-03-22 16:18:01 [CLIENT] [INFO] Found animation info for: textures/blocks/water.txt
+2013-03-22 16:18:03 [CLIENT] [INFO] Found animation info for: textures/items/clock.txt
+2013-03-22 16:18:03 [CLIENT] [INFO] Found animation info for: textures/items/compass.txt
+2013-03-22 16:23:07 [CLIENT] [WARNING] Memory connection overburdened; after processing 2500 packets, we still have 666 to go!
+2013-03-22 16:23:14 [CLIENT] [WARNING] Memory connection overburdened; after processing 2500 packets, we still have 7497 to go!
+2013-03-22 16:23:14 [CLIENT] [WARNING] Memory connection overburdened; after processing 2500 packets, we still have 5248 to go!
+2013-03-22 16:23:14 [CLIENT] [WARNING] Memory connection overburdened; after processing 2500 packets, we still have 2945 to go!
+2013-03-22 16:23:14 [CLIENT] [WARNING] Memory connection overburdened; after processing 2500 packets, we still have 849 to go!
+2013-03-22 16:23:53 [CLIENT] [INFO] [CHAT] Saved screenshot as 2013-03-22_16.23.53.png
