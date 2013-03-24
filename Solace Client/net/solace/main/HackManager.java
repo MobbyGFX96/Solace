@@ -31,6 +31,7 @@ public class HackManager {
 	public void loadHacks() {
 		for (Hack h : main.getHacks()) {
 			if (checkKey(h.getKeybind())) {
+				h.toggle();
 				if (h.isEnabled())
 					h.onEnabled();
 				toggleArray(h.getName());

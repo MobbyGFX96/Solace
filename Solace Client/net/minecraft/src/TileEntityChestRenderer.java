@@ -1,6 +1,10 @@
 package net.minecraft.src;
 
 import java.util.Calendar;
+
+import net.solace.hacks.ChestESP;
+import net.solace.main.Variables;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -159,6 +163,9 @@ public class TileEntityChestRenderer extends TileEntitySpecialRenderer
             GL11.glDisable(GL12.GL_RESCALE_NORMAL);
             GL11.glPopMatrix();
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+            if (Variables.chestESP) {
+            	ChestESP.chestESP(par2, par4, par6, par8);
+            }
         }
     }
 

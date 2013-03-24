@@ -2,6 +2,7 @@ package net.solace.main;
 
 public class Variables {
 
-	public boolean killAura, ChestESP = false;
+	public static boolean killAura = false;
+	public static boolean chestESP = false;
 	
 }	

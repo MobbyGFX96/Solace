@@ -1636,7 +1636,7 @@ public class RenderGlobal implements IWorldAccess
     /**
      * Draws lines for the edges of the bounding box.
      */
-    private void drawOutlinedBoundingBox(AxisAlignedBB par1AxisAlignedBB)
+    public static void drawOutlinedBoundingBox(AxisAlignedBB par1AxisAlignedBB)
     {
         Tessellator var2 = Tessellator.instance;
         var2.startDrawing(3);
