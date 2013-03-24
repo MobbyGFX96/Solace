@@ -10,7 +10,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
+
 import net.minecraft.client.Minecraft;
+import net.solace.altmanager.AltManager;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.GLU;
 
@@ -262,6 +265,10 @@ public class GuiMainMenu extends GuiScreen {
 		if (par1GuiButton.id == 4) {
 			this.mc.shutdown();
 		}
+		
+		if (par1GuiButton.id == 6) {
+			mc.displayGuiScreen(new AltManager(this));
+		}
 
 		if (par1GuiButton.id == 11) {
 			this.mc.launchIntegratedServer("Demo_World", "Demo_World",
@@ -512,7 +519,7 @@ public class GuiMainMenu extends GuiScreen {
 		this.drawCenteredString(this.fontRenderer, this.splashText, 0, -8,
 				16776960);
 		GL11.glPopMatrix();
-		String var9 = "Minecraft 1.5.1";
+		String var9 = "Logged in as: "+mc.session.username;
 
 		if (this.mc.isDemo()) {
 			var9 = var9 + " Demo";

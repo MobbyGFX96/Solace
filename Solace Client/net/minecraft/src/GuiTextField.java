@@ -29,7 +29,7 @@ public class GuiTextField extends Gui
     /**
      * If this value is true along isEnabled, keyTyped will process the keys.
      */
-    private boolean isFocused = false;
+    public boolean isFocused = false;
 
     /**
      * If this value is true along isFocused, keyTyped will process the keys.
@@ -502,6 +502,8 @@ public class GuiTextField extends Gui
             {
                 String var10 = var5 ? var4.substring(0, var2) : var4;
                 var9 = this.fontRenderer.drawStringWithShadow(var10, var7, var8, var1);
+                //j1 = fontRenderer.drawStringWithShadow(text.replaceAll(".", "*"), j1, i1, i);
+
             }
 
             boolean var13 = this.cursorPosition < this.text.length() || this.text.length() >= this.getMaxStringLength();

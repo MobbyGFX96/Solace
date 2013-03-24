@@ -4,8 +4,8 @@ public class ScaledResolution
 {
     private int scaledWidth;
     private int scaledHeight;
-    private double scaledWidthD;
-    private double scaledHeightD;
+    public double scaledWidthD;
+    public double scaledHeightD;
     private int scaleFactor;
 
     public ScaledResolution(GameSettings par1GameSettings, int par2, int par3)
