@@ -19,7 +19,7 @@ import java.util.List;
 import javax.swing.JPanel;
 
 import net.minecraft.src.*;
-import net.solace.main.Main;
+import net.solace.main.HackManager;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;

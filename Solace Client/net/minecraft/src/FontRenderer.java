@@ -86,7 +86,7 @@ public class FontRenderer
      */
     private boolean strikethroughStyle = false;
 
-    FontRenderer()
+    public FontRenderer()
     {
         this.renderEngine = null;
         this.fontTextureName = null;

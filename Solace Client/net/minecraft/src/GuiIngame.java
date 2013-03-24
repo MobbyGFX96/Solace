@@ -11,16 +11,13 @@ import java.util.Random;
 
 import net.minecraft.client.Minecraft;
 import net.solace.gui.ReliantArt;
-import net.solace.main.Main;
+import net.solace.main.Hack;
+import net.solace.main.HackManager;
 
-import org.darkstorm.minecraft.gui.component.Frame;
-import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
-import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.UnicodeFont;
-import org.newdawn.slick.font.effects.ColorEffect;
 
 public class GuiIngame extends Gui {
 	private static final RenderItem itemRenderer = new RenderItem();
@@ -42,28 +39,15 @@ public class GuiIngame extends Gui {
 	public float prevVignetteBrightness = 1.0F;
 	private int field_92017_k;
 	private ItemStack field_92016_l;
-	private boolean keyStates[];
-	public static HashMap<String, Integer> colourMap = new HashMap<String, Integer>();
 	public static ArrayList<String> hackList = new ArrayList<String>();
 	public UnicodeFont font;
+	public HackManager hackManager;
+	public static HashMap<String, Integer> colourMap = new HashMap<String, Integer>();
 
-	@SuppressWarnings("unchecked")
 	public GuiIngame(Minecraft par1Minecraft) {
 		this.mc = par1Minecraft;
 		this.persistantChatGUI = new GuiNewChat(par1Minecraft);
-		keyStates = new boolean[256];
-		font = new UnicodeFont(new Font("Verdana", Font.PLAIN, 16));
-		font.addAsciiGlyphs();
-		font.getEffects().add(new ColorEffect(java.awt.Color.white));
-		try {
-			font.loadGlyphs();
-		} catch (SlickException e) {
-		}
-		addGuiColours();
-	}
-
-	private void addGuiColours() {
-		colourMap.put("Sneak", 0xff00ff);
+		hackManager = new HackManager();
 	}
 
 	/**
@@ -544,24 +528,13 @@ public class GuiIngame extends Gui {
 			this.mc.mcProfiler.endSection();
 		} else {
 			int loc = 2;
-			for (String s : hackList) {
+			for (String s : hackManager.hackArray) {
 				var8.drawStringWithShadow(s,
 						var5.getScaledWidth() - var8.getStringWidth(s), loc,
-						colourMap.get(s));
+						0xffffff);
 				loc += 10;
 			}
-			if (checkKey(Keyboard.KEY_K)) {
-				toggleArray("Sneak");
-			}
-			
-			// var8.drawStringWithShadow("Solace Client - " +
-			// mc.session.username,
-			// a 2, 2, 0xffff00);
-			ReliantArt.drawBRect(2, 2, 100, 50, 0xcc363636, 0xff5e5e5e);
-			ReliantArt.drawString(new TrueTypeFont(new Font(
-					"Lucida Sans Typewriter", Font.PLAIN, 16), true), "SOLACE",
-					2, 2, org.newdawn.slick.Color.blue);
-
+			hackManager.loadHacks();
 		}
 
 		if (this.recordPlayingUpFor > 0) {
@@ -954,17 +927,6 @@ public class GuiIngame extends Gui {
 
 	public int getUpdateCounter() {
 		return this.updateCounter;
-	}
-
-	public boolean checkKey(int i) {
-		if (mc.currentScreen != null) {
-			return false;
-		}
-		if (Keyboard.isKeyDown(i) != keyStates[i]) {
-			return keyStates[i] = !keyStates[i];
-		} else {
-			return false;
-		}
 	}
 
 	private void toggleArray(String s) {
