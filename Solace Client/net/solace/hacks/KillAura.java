@@ -26,8 +26,9 @@ public class KillAura extends Hack {
 
 	public void onEnabled() {
 		KillAuraPlayer();
+		mc.thePlayer.addChatMessage("[Solace] - Enabled KillAura");
 	}
-
+		//TODO: Make improvements.
 	public boolean isEnabled() {
 		if (Variables.killAura)
 			return true;
@@ -36,7 +37,7 @@ public class KillAura extends Hack {
 	}
 
 	public void onDisable() {
-
+		mc.thePlayer.addChatMessage("Disabled...");
 	}
 
 	public void toggle() {

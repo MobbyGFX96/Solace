@@ -34,6 +34,8 @@ public class HackManager {
 				h.toggle();
 				if (h.isEnabled())
 					h.onEnabled();
+				else
+					h.onDisable();
 				toggleArray(h.getName());
 			}
 		}
