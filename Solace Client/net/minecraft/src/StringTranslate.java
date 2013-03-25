@@ -116,7 +116,7 @@ public class StringTranslate
                 ;
             }
 
-            this.isUnicode = true;
+            this.isUnicode = false;
 
             if (!"en_US".equals(par1Str))
             {

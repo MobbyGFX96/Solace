@@ -6,6 +6,7 @@ import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.solace.hacks.ChestESP;
 import net.solace.hacks.KillAura;
+import net.solace.hacks.Tracer;
 
 import org.lwjgl.input.Keyboard;
 
@@ -19,6 +20,7 @@ public class HackManager {
 	public HackManager() {
 		main.getHacks().add(new KillAura());
 		main.getHacks().add(new ChestESP());
+		main.getHacks().add(new Tracer());
 	}
 	
 	private void toggleArray(String s) {

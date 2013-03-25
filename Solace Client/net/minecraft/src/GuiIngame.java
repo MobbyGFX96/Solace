@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -13,6 +14,7 @@ import net.minecraft.client.Minecraft;
 import net.solace.gui.ReliantArt;
 import net.solace.main.Hack;
 import net.solace.main.HackManager;
+import net.solace.main.Main;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -528,11 +530,15 @@ public class GuiIngame extends Gui {
 			this.mc.mcProfiler.endSection();
 		} else {
 			int loc = 2;
-			for (String s : hackManager.hackArray) {
-				var8.drawStringWithShadow(s,
-						var5.getScaledWidth() - var8.getStringWidth(s), loc,
-						0xffffff);
-				loc += 10;
+			for (Hack h : hackManager.main.getHacks()) {
+				if (h.isEnabled()) {
+					var8.drawStringWithShadow(
+							h.getName(),
+							var5.getScaledWidth()
+									- var8.getStringWidth(h.getName()), loc,
+							h.getColour());
+					loc += 10;
+				}
 			}
 			hackManager.loadHacks();
 		}

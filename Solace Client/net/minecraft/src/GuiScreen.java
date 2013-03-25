@@ -26,7 +26,7 @@ public class GuiScreen extends Gui
     public int height;
 
     /** A list of all the buttons in this container. */
-    protected List buttonList = new ArrayList();
+    protected List<GuiButton> buttonList = new ArrayList<GuiButton>();
     public boolean allowUserInput = false;
 
     /** The FontRenderer used by GuiScreen */

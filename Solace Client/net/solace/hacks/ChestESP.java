@@ -20,7 +20,7 @@ public class ChestESP extends Hack {
 	}
 
 	public void onEnabled() {
-		
+		mc.thePlayer.addChatMessage("[Solace] - Enabled "+getName());
 	}
 
 	public boolean isEnabled() {
@@ -28,7 +28,7 @@ public class ChestESP extends Hack {
 	}
 
 	public void onDisable() {
-
+		mc.thePlayer.addChatMessage("[Solace] - Disabled "+getName());
 	}
 
 	public void toggle() {

@@ -34,7 +34,6 @@ public class AltManager extends GuiScreen
         serverTextField2.updateCursorCounter();
     }
 
-    @SuppressWarnings("unchecked")
 	public void initGui()
     {
         StringTranslate stringtranslate = StringTranslate.getInstance();

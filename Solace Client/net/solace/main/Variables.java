@@ -4,5 +4,6 @@ public class Variables {
 
 	public static boolean killAura = false;
 	public static boolean chestESP = false;
+	public static boolean tracer = false;
 	
 }	
