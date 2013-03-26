@@ -57,9 +57,9 @@ public abstract class Minecraft implements Runnable, IPlayerUsage
 
     /** Instance of PlayerUsageSnooper. */
     private PlayerUsageSnooper usageSnooper = new PlayerUsageSnooper("client", this);
-    public WorldClient theWorld;
+    public static WorldClient theWorld;
     public RenderGlobal renderGlobal;
-    public EntityClientPlayerMP thePlayer;
+    public static EntityClientPlayerMP thePlayer;
 
     /**
      * The Entity from which the renderer determines the render viewpoint. Currently is always the parent Minecraft

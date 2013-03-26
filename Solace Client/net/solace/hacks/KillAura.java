@@ -28,7 +28,6 @@ public class KillAura extends Hack {
 	public void onEnabled() {
 		KillAuraPlayer();
 		KillAuraAnimal();
-		mc.thePlayer.addChatMessage("[Solace] - Enabled KillAura");
 	}
 
 	// TODO: Make improvements.
@@ -37,7 +36,7 @@ public class KillAura extends Hack {
 	}
 
 	public void onDisable() {
-		mc.thePlayer.addChatMessage("Disabled...");
+		
 	}
 
 	public void toggle() {

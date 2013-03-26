@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import net.minecraft.client.Minecraft;
+import net.solace.hacks.Tracer;
+import net.solace.main.Variables;
+
 import org.lwjgl.opengl.ARBOcclusionQuery;
 import org.lwjgl.opengl.GL11;
 
@@ -390,6 +393,9 @@ public class RenderGlobal implements IWorldAccess
      */
     public void renderEntities(Vec3 par1Vec3, ICamera par2ICamera, float par3)
     {
+    	if (Variables.tracer) {
+    		Tracer.tracerLine(true);
+    	}
         if (this.renderEntitiesStartupCounter > 0)
         {
             --this.renderEntitiesStartupCounter;

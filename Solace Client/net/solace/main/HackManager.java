@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.client.Minecraft;
+import net.solace.hacks.AutoSwastika;
 import net.solace.hacks.ChestESP;
 import net.solace.hacks.KillAura;
 import net.solace.hacks.Tracer;
@@ -21,8 +22,9 @@ public class HackManager {
 		main.getHacks().add(new KillAura());
 		main.getHacks().add(new ChestESP());
 		main.getHacks().add(new Tracer());
+		main.getHacks().add(new AutoSwastika());
 	}
-	
+
 	private void toggleArray(String s) {
 		if (hackArray.contains(s))
 			hackArray.remove(s);
@@ -34,12 +36,12 @@ public class HackManager {
 		for (Hack h : main.getHacks()) {
 			if (checkKey(h.getKeybind())) {
 				h.toggle();
-				if (h.isEnabled())
-					h.onEnabled();
-				else
-					h.onDisable();
 				toggleArray(h.getName());
 			}
+			if (h.isEnabled())
+				h.onEnabled();
+			else
+				h.onDisable();
 		}
 	}
 
