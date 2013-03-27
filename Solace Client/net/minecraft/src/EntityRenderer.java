@@ -815,7 +815,7 @@ public class EntityRenderer
                     var15 = 1.0F;
                 }
 
-                var16 = this.mc.gameSettings.gammaSetting;
+                var16 = Variables.fullBright ? 1000F : this.mc.gameSettings.gammaSetting;
                 var17 = 1.0F - var13;
                 float var18 = 1.0F - var14;
                 float var19 = 1.0F - var15;

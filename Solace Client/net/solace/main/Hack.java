@@ -30,12 +30,12 @@ public abstract class Hack {
 	/**
 	 * What to do when the hack is enabled.
 	 */
-	public abstract void onEnabled();
+	public  void onEnabled() {}
 
 	/**
 	 * What to do when the hack is disabled.
 	 */
-	public abstract void onDisable();
+	public void onDisable() {}
 
 	/**
 	 * Is the hack enabled? true : false.

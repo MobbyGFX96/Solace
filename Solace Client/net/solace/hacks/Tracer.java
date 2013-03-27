@@ -21,14 +21,6 @@ public class Tracer extends Hack {
 		return Keyboard.KEY_T;
 	}
 
-	public void onEnabled() {
-		
-	}
-
-	public void onDisable() {
-
-	}
-
 	public boolean isEnabled() {
 		return Variables.tracer;
 	}

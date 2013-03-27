@@ -1,24 +1,22 @@
 package net.solace.hacks;
 
-import net.minecraft.src.Packet12PlayerLook;
-import net.minecraft.src.Packet15Place;
 import net.solace.main.Hack;
 import net.solace.main.Variables;
 
 import org.lwjgl.input.Keyboard;
 
-public class AutoSwastika extends Hack {
-	
+public class FullBright extends Hack {
+
 	public String getName() {
-		return "Auto Swastika";
+		return "Brightness";
 	}
 
 	public int getColour() {
-		return 0x00ff00;
+		return 0xFF8C00;
 	}
 
 	public int getKeybind() {
-		return Keyboard.KEY_L;
+		return Keyboard.KEY_B;
 	}
 
 	public void onEnabled() {
@@ -30,11 +28,11 @@ public class AutoSwastika extends Hack {
 	}
 
 	public boolean isEnabled() {
-		return Variables.autoSwas;
+		return Variables.fullBright;
 	}
 
 	public void toggle() {
-		Variables.autoSwas = !Variables.autoSwas;
+		Variables.fullBright = !Variables.fullBright;
 	}
 
 }

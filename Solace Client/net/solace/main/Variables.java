@@ -6,5 +6,6 @@ public class Variables {
 	public static boolean chestESP = false;
 	public static boolean tracer = false;
 	public static boolean autoSwas = false;
+	public static boolean fullBright = false;
 	
 }	

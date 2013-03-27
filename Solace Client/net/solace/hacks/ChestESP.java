@@ -23,16 +23,8 @@ public class ChestESP extends Hack {
 		return Keyboard.KEY_C;
 	}
 
-	public void onEnabled() {
-		
-	}
-
 	public boolean isEnabled() {
 		return Variables.chestESP;
-	}
-
-	public void onDisable() {
-
 	}
 
 	public void toggle() {

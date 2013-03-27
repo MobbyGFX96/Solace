@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.client.Minecraft;
-import net.solace.hacks.AutoSwastika;
 import net.solace.hacks.ChestESP;
+import net.solace.hacks.FullBright;
 import net.solace.hacks.KillAura;
 import net.solace.hacks.Tracer;
 
@@ -22,7 +22,7 @@ public class HackManager {
 		main.getHacks().add(new KillAura());
 		main.getHacks().add(new ChestESP());
 		main.getHacks().add(new Tracer());
-		main.getHacks().add(new AutoSwastika());
+		main.getHacks().add(new FullBright());
 	}
 
 	private void toggleArray(String s) {
