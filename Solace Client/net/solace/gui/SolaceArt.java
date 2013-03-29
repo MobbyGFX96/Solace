@@ -14,17 +14,16 @@ import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.opengl.Texture;
 
-public class ReliantArt
+public class SolaceArt
 {
     private static Minecraft mc;
     private static UnicodeFont baseFont;
     Texture texture;
 
-    public ReliantArt()
+    public SolaceArt()
     {
         baseFont = new UnicodeFont(new Font("Lucida Sans Typewriter", Font.TRUETYPE_FONT, 16));
     }
-
     
     public static void drawBorderedRect(int i, int j, int k, int l, int i1, float f, int j1)
     {

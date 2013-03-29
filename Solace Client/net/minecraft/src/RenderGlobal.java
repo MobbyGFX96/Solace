@@ -393,9 +393,6 @@ public class RenderGlobal implements IWorldAccess
      */
     public void renderEntities(Vec3 par1Vec3, ICamera par2ICamera, float par3)
     {
-    	if (Variables.tracer) {
-    		Tracer.tracerLine(true);
-    	}
         if (this.renderEntitiesStartupCounter > 0)
         {
             --this.renderEntitiesStartupCounter;

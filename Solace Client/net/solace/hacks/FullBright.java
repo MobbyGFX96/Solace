@@ -19,14 +19,6 @@ public class FullBright extends Hack {
 		return Keyboard.KEY_B;
 	}
 
-	public void onEnabled() {
-		
-	}
-
-	public void onDisable() {
-		
-	}
-
 	public boolean isEnabled() {
 		return Variables.fullBright;
 	}

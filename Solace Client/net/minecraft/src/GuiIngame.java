@@ -4,22 +4,22 @@ import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
 import net.minecraft.client.Minecraft;
-import net.solace.gui.ReliantArt;
+import net.solace.gui.SolaceGui;
 import net.solace.main.Hack;
 import net.solace.main.HackManager;
-import net.solace.main.Main;
 
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
-import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.UnicodeFont;
+import org.newdawn.slick.font.effects.ColorEffect;
 
 public class GuiIngame extends Gui {
 	private static final RenderItem itemRenderer = new RenderItem();
@@ -42,14 +42,25 @@ public class GuiIngame extends Gui {
 	private int field_92017_k;
 	private ItemStack field_92016_l;
 	public static ArrayList<String> hackList = new ArrayList<String>();
-	public UnicodeFont font;
 	public HackManager hackManager;
+	private boolean[] keyStates;
 	public static HashMap<String, Integer> colourMap = new HashMap<String, Integer>();
+	public UnicodeFont font;
 
 	public GuiIngame(Minecraft par1Minecraft) {
 		this.mc = par1Minecraft;
 		this.persistantChatGUI = new GuiNewChat(par1Minecraft);
+		keyStates = new boolean[256];
 		hackManager = new HackManager();
+		font = new UnicodeFont(new Font("Verdana Bold", Font.TRUETYPE_FONT, 15));
+		font.addAsciiGlyphs();
+		font.getEffects().add(new ColorEffect(java.awt.Color.white));
+		try {
+			font.loadGlyphs();
+		}catch(SlickException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -540,6 +551,9 @@ public class GuiIngame extends Gui {
 					loc += 10;
 				}
 			}
+			if (checkKey(Keyboard.KEY_GRAVE)) {
+				mc.displayGuiScreen(new SolaceGui());
+			}
 			hackManager.loadHacks();
 		}
 
@@ -941,4 +955,13 @@ public class GuiIngame extends Gui {
 		else
 			hackList.add(s);
 	}
+	
+	public boolean checkKey(int i) {
+		if (Keyboard.isKeyDown(i) != keyStates[i]) {
+			return keyStates[i] = !keyStates[i];
+		} else {
+			return false;
+		}
+	}
+	
 }

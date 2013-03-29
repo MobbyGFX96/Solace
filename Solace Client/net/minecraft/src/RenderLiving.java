@@ -2,6 +2,8 @@ package net.minecraft.src;
 
 import java.util.Random;
 import net.minecraft.client.Minecraft;
+import net.solace.main.Variables;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
