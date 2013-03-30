@@ -5,6 +5,9 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
+
+import net.solace.main.Variables;
+
 import org.lwjgl.opengl.ARBVertexBufferObject;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLContext;
@@ -123,6 +126,8 @@ public class Tessellator
 
     /** The size of the buffers used (in integers). */
     private int bufferSize;
+    
+    public static int opacity = 70;
 
     private Tessellator(int par1)
     {
@@ -362,6 +367,8 @@ public class Tessellator
     public void setColorOpaque(int par1, int par2, int par3)
     {
         this.setColorRGBA(par1, par2, par3, 255);
+    	if (Variables.opacity)
+    		setColorRGBA(par1, par2, par3, opacity);
     }
 
     /**

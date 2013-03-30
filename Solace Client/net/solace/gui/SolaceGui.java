@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import net.minecraft.src.GuiScreen;
-import net.solace.gui.windows.WindowModes;
+import net.solace.gui.windows.WindowInfo;
+import net.solace.gui.windows.WindowKillAura;
+import net.solace.gui.windows.WindowValues;
 
 public class SolaceGui extends GuiScreen {
 	
@@ -18,7 +20,6 @@ public class SolaceGui extends GuiScreen {
 	 */
 	public void drawScreen(int i, int j, float f) {
 		drawDefaultBackground();
-
 		for (int k = windows.size(); k > 0; k--) {
 			if (((SolaceGuiWindow) windows.get(k - 1)).isOpen()) {
 				((SolaceGuiWindow) windows.get(k - 1)).drawScreen(i, j, f);
@@ -104,6 +105,8 @@ public class SolaceGui extends GuiScreen {
 
 	static {
 		windows = new ArrayList<SolaceGuiWindow>();
-		windows.add(new WindowModes(2, 2));
+		windows.add(new WindowKillAura(2, 2));
+		windows.add(new WindowInfo(110, 2));
+		windows.add(new WindowValues(110 + 108, 2));
 	}
 }

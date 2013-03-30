@@ -10,7 +10,9 @@ import java.util.List;
 import java.util.Random;
 
 import net.minecraft.client.Minecraft;
+import net.solace.gui.SolaceArt;
 import net.solace.gui.SolaceGui;
+import net.solace.gui.SolaceGuiWindow;
 import net.solace.main.Hack;
 import net.solace.main.HackManager;
 
@@ -57,9 +59,58 @@ public class GuiIngame extends Gui {
 		font.getEffects().add(new ColorEffect(java.awt.Color.white));
 		try {
 			font.loadGlyphs();
-		}catch(SlickException e)
-		{
+		} catch (SlickException e) {
 			e.printStackTrace();
+		}
+	}
+
+	public void renderCompass() {
+		ScaledResolution scaledresolution = new ScaledResolution(
+				mc.gameSettings, mc.displayWidth, mc.displayHeight);
+		int i = scaledresolution.getScaledWidth();
+		int j = scaledresolution.getScaledHeight();
+		FontRenderer fontrenderer = mc.fontRenderer;
+		//drawBorderedRect(i / 2 - 94, 2, i / 2 + 94, 13, 1, 0xffffffff, 0xff000000);
+		this.drawGradientBorderedRect(i/2-94, 2, i / 2 + 94, 13, 0xbb363636, 0xff5e5e5e, 0xff5e5e5e);
+		//SolaceArt.drawBRect(i / 2 - 94, 2, i / 2 + 94, 13, 0xbb585858, 0xff5e5e5e);
+		int r = 0;
+		if (mc.thePlayer.rotationYaw < 0) {
+			r = -MathHelper.floor_double(mc.thePlayer.rotationYaw % 360);
+		} else {
+			r = MathHelper.floor_double(mc.thePlayer.rotationYaw % 360);
+		}
+		boolean flag1 = (r > 0 && r < 180);
+		boolean flag2 = (r <= 270 && r >= 90);
+		boolean flag3 = (r <= 180 && r >= 0);
+		boolean flag4 = mc.thePlayer.rotationYaw < 0;
+		if (r == 0) {
+			drawCenteredString(fontrenderer, "S", i / 2, 4, 0xffffff);
+			drawCenteredString(fontrenderer, "E", (i / 2) - 90, 4, 0xffffff);
+			drawCenteredString(fontrenderer, "W", (i / 2) + 90, 4, 0xffffff);
+		} else if (!flag4) {
+			drawCenteredString(fontrenderer, flag2 ? "N" : "",
+					(i / 2 - r) + 180, 4, 0xffffff);
+			if (!flag1) {
+				r = r - 360;
+			}
+			drawCenteredString(fontrenderer, !flag2 ? "S" : "", i / 2 - r, 4,
+					0xffffff);
+			drawCenteredString(fontrenderer, !flag3 ? "E" : "",
+					(i / 2 - r) - 90, 4, 0xffffff);
+			drawCenteredString(fontrenderer, flag3 ? "W" : "",
+					(i / 2 - r) + 90, 4, 0xffffff);
+		} else if (flag4) {
+			drawCenteredString(fontrenderer, flag2 ? "N" : "",
+					(i / 2 + r) - 180, 4, 0xffffff);
+			if (!flag1) {
+				r = r - 360;
+			}
+			drawCenteredString(fontrenderer, !flag2 ? "S" : "", i / 2 + r, 4,
+					0xffffff);
+			drawCenteredString(fontrenderer, !flag3 ? "W" : "",
+					(i / 2 + r) + 90, 4, 0xffffff);
+			drawCenteredString(fontrenderer, flag3 ? "E" : "",
+					(i / 2 + r) - 90, 4, 0xffffff);
 		}
 	}
 
@@ -554,6 +605,7 @@ public class GuiIngame extends Gui {
 			if (checkKey(Keyboard.KEY_GRAVE)) {
 				mc.displayGuiScreen(new SolaceGui());
 			}
+			renderCompass();
 			hackManager.loadHacks();
 		}
 
@@ -955,13 +1007,16 @@ public class GuiIngame extends Gui {
 		else
 			hackList.add(s);
 	}
-	
+
 	public boolean checkKey(int i) {
+		if (mc.currentScreen != null) {
+			return false;
+		}
 		if (Keyboard.isKeyDown(i) != keyStates[i]) {
 			return keyStates[i] = !keyStates[i];
 		} else {
 			return false;
 		}
 	}
-	
+
 }

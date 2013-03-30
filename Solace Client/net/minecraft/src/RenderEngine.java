@@ -140,7 +140,7 @@ public class RenderEngine
         this.boundTexture = -1;
     }
 
-    private int getTexture(String par1Str)
+    public int getTexture(String par1Str)
     {
         if (par1Str.equals("/terrain.png"))
         {

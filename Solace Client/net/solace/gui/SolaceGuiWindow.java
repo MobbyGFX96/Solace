@@ -12,6 +12,7 @@ import org.newdawn.slick.TrueTypeFont;
 public abstract class SolaceGuiWindow extends GuiScreen {
 	public String title;
 	public boolean enabled;
+	public static boolean stuck;
 	public boolean open;
 	public boolean focused;
 	public boolean dragging;
@@ -20,12 +21,14 @@ public abstract class SolaceGuiWindow extends GuiScreen {
 	public int pointX;
 	public int pointY;
 	protected java.util.List<SolaceButton> buttonList;
-	// protected java.util.List<GuiCustomSlider> sliderList;
+	protected java.util.List<GuiCustomSlider> sliderList;
 	private SolaceButton selectedButton;
 	public TrueTypeFont font3;
 	public TrueTypeFont font1;
 	public static TrueTypeFont font4 = new TrueTypeFont(new Font(
-			"Lucida Console", Font.TRUETYPE_FONT, 18), true); // - and +
+			"Lucida Console", Font.TRUETYPE_FONT, 18), true); // - and +#
+	public static TrueTypeFont infoFont = new TrueTypeFont(new Font("Verdana",
+			Font.BOLD, 18), true); // - and +
 	public static TrueTypeFont font2 = new TrueTypeFont(new Font(
 			"Lucida Console", Font.PLAIN, 19), true); // title
 	public static TrueTypeFont font5 = new TrueTypeFont(new Font(
@@ -41,7 +44,7 @@ public abstract class SolaceGuiWindow extends GuiScreen {
 		posY = j;
 		title = s;
 		buttonList = new ArrayList<SolaceButton>();
-		// controlList2 = new ArrayList<GuiCustomSlider>();
+		sliderList = new ArrayList<GuiCustomSlider>();
 		open = true;
 	}
 
@@ -54,6 +57,10 @@ public abstract class SolaceGuiWindow extends GuiScreen {
 					SolaceButton solaceButton = buttonList.get(k1);
 					solaceButton.drawButton(mc, posX + i, posY + j, posX,
 							posY + 12);
+				}
+				for (int l = 0; l < sliderList.size(); l++) {
+					GuiCustomSlider slider = sliderList.get(l);
+					slider.mouseDragged(mc, i, j);
 				}
 			}
 		}
@@ -74,6 +81,8 @@ public abstract class SolaceGuiWindow extends GuiScreen {
 				Color.white);
 		SolaceArt.drawBRect(posX + getWidth() - 11, posY + 2, posX + getWidth()
 				- 2, posY + 11, 0xbb585858, 0xff5e5e5e);
+		//SolaceArt.drawBRect(posX + getWidth() - 23, posY + 2, posX + getWidth()
+		//		- 14, posY + 11, 0xbb585858, 0xff5e5e5e);
 		SolaceArt.drawButtonString(font3, enabled ? "-" : "+", (float) posX
 				+ getWidth() - 9.65F, posY + 1.25F, Color.white);
 	}
@@ -89,6 +98,11 @@ public abstract class SolaceGuiWindow extends GuiScreen {
 			enabled = !enabled;
 			return true;
 		}
+
+		//if (checkBounds(posX + i, posY + j, posX + getWidth() - 23, posY + 2,
+		//		posX + getWidth() - 14, posY + 11)) {
+		//	stuck = !stuck;
+		//}
 
 		if (checkBounds(posX + i, posY + j, posX, posY, posX + getWidth(),
 				posY + 11)) {
@@ -127,14 +141,14 @@ public abstract class SolaceGuiWindow extends GuiScreen {
 			selectedButton = null;
 		}
 	}
-	
+
 	public void mouseDragged(int i, int j) {
 		if (dragging) {
 			posX += i - pointX;
 			posY += j - pointY;
 			pointX = i;
 			pointY = j;
-			}
+		}
 	}
 
 	public void keyTyped(char c, int i) {

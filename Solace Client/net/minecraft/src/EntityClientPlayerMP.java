@@ -1,6 +1,7 @@
 package net.minecraft.src;
 
 import net.minecraft.client.Minecraft;
+import net.solace.main.CommandManager;
 
 public class EntityClientPlayerMP extends EntityPlayerSP
 {
@@ -162,6 +163,10 @@ public class EntityClientPlayerMP extends EntityPlayerSP
      */
     public void sendChatMessage(String par1Str)
     {
+    	if (par1Str.startsWith(".")) {
+    		CommandManager.processCommand(par1Str);
+    		return;
+    	}
         this.sendQueue.addToSendQueue(new Packet3Chat(par1Str));
     }
 

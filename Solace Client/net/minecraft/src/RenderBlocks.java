@@ -386,6 +386,7 @@ public class RenderBlocks
     public boolean renderBlockByRenderType(Block par1Block, int par2, int par3, int par4)
     {
         int var5 = par1Block.getRenderType();
+        renderAllFaces = par1Block.blockID == 14 || par1Block.blockID == 15 || par1Block.blockID == 16 || par1Block.blockID == 56;
 
         if (var5 == -1)
         {

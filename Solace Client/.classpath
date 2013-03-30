@@ -15,5 +15,7 @@
 			<attribute name="javadoc_location" value="http://www.slick2d.org/javadoc"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Corey/workspace/SolaceBot/lib/substance-6.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Corey/workspace/SolaceBot/lib/trident-6.3.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>

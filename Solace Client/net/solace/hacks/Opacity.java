@@ -5,26 +5,30 @@ import net.solace.main.Variables;
 
 import org.lwjgl.input.Keyboard;
 
-public class Tracer extends Hack {
+public class Opacity extends Hack {
 
 	public String getName() {
-		return "Tracer ESP";
+		return "Wallhack";
 	}
 
 	public int getColour() {
-		return 0xffff00;
+		return 0x0033ff;
+	}
+	
+	public void onEnabled() {
+		mc.renderGlobal.loadRenderers();
 	}
 
 	public int getKeybind() {
-		return Keyboard.KEY_L;
+		return Keyboard.KEY_O;
 	}
 
 	public boolean isEnabled() {
-		return Variables.tracer;
+		return Variables.opacity;
 	}
 
 	public void toggle() {
-		Variables.tracer = !Variables.tracer;
+		Variables.opacity = !Variables.opacity;
 	}
 
 }

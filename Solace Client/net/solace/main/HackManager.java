@@ -7,6 +7,7 @@ import net.minecraft.client.Minecraft;
 import net.solace.hacks.ChestESP;
 import net.solace.hacks.FullBright;
 import net.solace.hacks.KillAura;
+import net.solace.hacks.Opacity;
 import net.solace.hacks.Tracer;
 
 import org.lwjgl.input.Keyboard;
@@ -23,6 +24,7 @@ public class HackManager {
 		main.getHacks().add(new ChestESP());
 		main.getHacks().add(new Tracer());
 		main.getHacks().add(new FullBright());
+		main.getHacks().add(new Opacity());
 	}
 
 	private void toggleArray(String s) {
@@ -46,6 +48,9 @@ public class HackManager {
 	}
 
 	public boolean checkKey(int i) {
+		if (mc.currentScreen != null) {
+			return false;
+		}
 		if (Keyboard.isKeyDown(i) != keyStates[i]) {
 			return keyStates[i] = !keyStates[i];
 		} else {
