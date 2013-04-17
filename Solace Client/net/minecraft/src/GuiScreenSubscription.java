@@ -1,13 +1,13 @@
 package net.minecraft.src;
 
+import org.lwjgl.input.Keyboard;
+
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
-import org.lwjgl.input.Keyboard;
 
-public class GuiScreenSubscription extends GuiScreen
-{
+public class GuiScreenSubscription extends GuiScreen {
     private final GuiScreen field_98067_a;
     private final McoServer field_98065_b;
     private final int field_98066_c = 0;
@@ -15,8 +15,7 @@ public class GuiScreenSubscription extends GuiScreen
     private int field_98068_n;
     private String field_98069_o;
 
-    public GuiScreenSubscription(GuiScreen par1GuiScreen, McoServer par2McoServer)
-    {
+    public GuiScreenSubscription(GuiScreen par1GuiScreen, McoServer par2McoServer) {
         this.field_98067_a = par1GuiScreen;
         this.field_98065_b = par2McoServer;
     }
@@ -24,41 +23,34 @@ public class GuiScreenSubscription extends GuiScreen
     /**
      * Called from the main game loop to update the screen.
      */
-    public void updateScreen() {}
+    public void updateScreen() {
+    }
 
     /**
      * Adds the buttons (and other controls) to the screen in question.
      */
-    public void initGui()
-    {
+    public void initGui() {
         this.func_98063_a(this.field_98065_b.field_96408_a);
         StringTranslate var1 = StringTranslate.getInstance();
         Keyboard.enableRepeatEvents(true);
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 4 + 120 + 12, var1.translateKey("gui.cancel")));
     }
 
-    private void func_98063_a(long par1)
-    {
+    private void func_98063_a(long par1) {
         McoClient var3 = new McoClient(this.mc.session);
 
-        try
-        {
+        try {
             ValueObjectSubscription var4 = var3.func_98177_f(par1);
             this.field_98068_n = var4.field_98170_b;
             this.field_98069_o = this.func_98062_b(var4.field_98171_a);
-        }
-        catch (ExceptionMcoService var5)
-        {
+        } catch (ExceptionMcoService var5) {
             ;
-        }
-        catch (IOException var6)
-        {
+        } catch (IOException var6) {
             ;
         }
     }
 
-    private String func_98062_b(long par1)
-    {
+    private String func_98062_b(long par1) {
         GregorianCalendar var3 = new GregorianCalendar(TimeZone.getDefault());
         var3.setTimeInMillis(par1);
         return SimpleDateFormat.getDateTimeInstance().format(var3.getTime());
@@ -67,24 +59,18 @@ public class GuiScreenSubscription extends GuiScreen
     /**
      * Called when the screen is unloaded. Used to disable keyboard repeat events
      */
-    public void onGuiClosed()
-    {
+    public void onGuiClosed() {
         Keyboard.enableRepeatEvents(false);
     }
 
     /**
      * Fired when a control is clicked. This is the equivalent of ActionListener.actionPerformed(ActionEvent e).
      */
-    protected void actionPerformed(GuiButton par1GuiButton)
-    {
-        if (par1GuiButton.enabled)
-        {
-            if (par1GuiButton.id == 0)
-            {
+    protected void actionPerformed(GuiButton par1GuiButton) {
+        if (par1GuiButton.enabled) {
+            if (par1GuiButton.id == 0) {
                 this.mc.displayGuiScreen(this.field_98067_a);
-            }
-            else if (par1GuiButton.id == 1)
-            {
+            } else if (par1GuiButton.id == 1) {
                 ;
             }
         }
@@ -93,21 +79,20 @@ public class GuiScreenSubscription extends GuiScreen
     /**
      * Fired when a key is typed. This is the equivalent of KeyListener.keyTyped(KeyEvent e).
      */
-    protected void keyTyped(char par1, int par2) {}
+    protected void keyTyped(char par1, int par2) {
+    }
 
     /**
      * Called when the mouse is clicked.
      */
-    protected void mouseClicked(int par1, int par2, int par3)
-    {
+    protected void mouseClicked(int par1, int par2, int par3) {
         super.mouseClicked(par1, par2, par3);
     }
 
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
-    {
+    public void drawScreen(int par1, int par2, float par3) {
         StringTranslate var4 = StringTranslate.getInstance();
         this.drawDefaultBackground();
         this.drawCenteredString(this.fontRenderer, var4.translateKey("mco.configure.world.subscription.title"), this.width / 2, 17, 16777215);

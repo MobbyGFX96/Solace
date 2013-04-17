@@ -4,8 +4,7 @@ import org.lwjgl.opengl.ARBMultitexture;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GLContext;
 
-public class OpenGlHelper
-{
+public class OpenGlHelper {
     /**
      * An OpenGL constant corresponding to GL_TEXTURE0, used when setting data pertaining to auxiliary OpenGL texture
      * units.
@@ -26,17 +25,13 @@ public class OpenGlHelper
     /**
      * Initializes the texture constants to be used when rendering lightmap values
      */
-    public static void initializeTextures()
-    {
+    public static void initializeTextures() {
         useMultitextureARB = GLContext.getCapabilities().GL_ARB_multitexture && !GLContext.getCapabilities().OpenGL13;
 
-        if (useMultitextureARB)
-        {
+        if (useMultitextureARB) {
             defaultTexUnit = 33984;
             lightmapTexUnit = 33985;
-        }
-        else
-        {
+        } else {
             defaultTexUnit = 33984;
             lightmapTexUnit = 33985;
         }
@@ -45,14 +40,10 @@ public class OpenGlHelper
     /**
      * Sets the current lightmap texture to the specified OpenGL constant
      */
-    public static void setActiveTexture(int par0)
-    {
-        if (useMultitextureARB)
-        {
+    public static void setActiveTexture(int par0) {
+        if (useMultitextureARB) {
             ARBMultitexture.glActiveTextureARB(par0);
-        }
-        else
-        {
+        } else {
             GL13.glActiveTexture(par0);
         }
     }
@@ -60,14 +51,10 @@ public class OpenGlHelper
     /**
      * Sets the current lightmap texture to the specified OpenGL constant
      */
-    public static void setClientActiveTexture(int par0)
-    {
-        if (useMultitextureARB)
-        {
+    public static void setClientActiveTexture(int par0) {
+        if (useMultitextureARB) {
             ARBMultitexture.glClientActiveTextureARB(par0);
-        }
-        else
-        {
+        } else {
             GL13.glClientActiveTexture(par0);
         }
     }
@@ -75,14 +62,10 @@ public class OpenGlHelper
     /**
      * Sets the current coordinates of the given lightmap texture
      */
-    public static void setLightmapTextureCoords(int par0, float par1, float par2)
-    {
-        if (useMultitextureARB)
-        {
+    public static void setLightmapTextureCoords(int par0, float par1, float par2) {
+        if (useMultitextureARB) {
             ARBMultitexture.glMultiTexCoord2fARB(par0, par1, par2);
-        }
-        else
-        {
+        } else {
             GL13.glMultiTexCoord2f(par0, par1, par2);
         }
     }

@@ -1,14 +1,11 @@
 package net.minecraft.src;
 
-public class ModelSkeleton extends ModelZombie
-{
-    public ModelSkeleton()
-    {
+public class ModelSkeleton extends ModelZombie {
+    public ModelSkeleton() {
         this(0.0F);
     }
 
-    public ModelSkeleton(float par1)
-    {
+    public ModelSkeleton(float par1) {
         super(par1, 0.0F, 64, 32);
         this.bipedRightArm = new ModelRenderer(this, 40, 16);
         this.bipedRightArm.addBox(-1.0F, -2.0F, -1.0F, 2, 12, 2, par1);
@@ -30,9 +27,8 @@ public class ModelSkeleton extends ModelZombie
      * Used for easily adding entity-dependent animations. The second and third float params here are the same second
      * and third as in the setRotationAngles method.
      */
-    public void setLivingAnimations(EntityLiving par1EntityLiving, float par2, float par3, float par4)
-    {
-        this.aimedBow = ((EntitySkeleton)par1EntityLiving).getSkeletonType() == 1;
+    public void setLivingAnimations(EntityLiving par1EntityLiving, float par2, float par3, float par4) {
+        this.aimedBow = ((EntitySkeleton) par1EntityLiving).getSkeletonType() == 1;
         super.setLivingAnimations(par1EntityLiving, par2, par3, par4);
     }
 
@@ -41,8 +37,7 @@ public class ModelSkeleton extends ModelZombie
      * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
      * "far" arms and legs can swing at most.
      */
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity)
-    {
+    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity) {
         super.setRotationAngles(par1, par2, par3, par4, par5, par6, par7Entity);
     }
 }

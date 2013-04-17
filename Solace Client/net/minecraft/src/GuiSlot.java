@@ -1,12 +1,12 @@
 package net.minecraft.src;
 
-import java.util.List;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
-public abstract class GuiSlot
-{
+import java.util.List;
+
+public abstract class GuiSlot {
     private final Minecraft mc;
 
     /**
@@ -19,30 +19,46 @@ public abstract class GuiSlot
      */
     private int height;
 
-    /** The top of the slot container. Affects the overlays and scrolling. */
+    /**
+     * The top of the slot container. Affects the overlays and scrolling.
+     */
     protected int top;
 
-    /** The bottom of the slot container. Affects the overlays and scrolling. */
+    /**
+     * The bottom of the slot container. Affects the overlays and scrolling.
+     */
     protected int bottom;
     private int right;
     private int left;
 
-    /** The height of a slot. */
+    /**
+     * The height of a slot.
+     */
     protected final int slotHeight;
 
-    /** button id of the button used to scroll up */
+    /**
+     * button id of the button used to scroll up
+     */
     private int scrollUpButtonID;
 
-    /** the buttonID of the button used to scroll down */
+    /**
+     * the buttonID of the button used to scroll down
+     */
     private int scrollDownButtonID;
 
-    /** X axis position of the mouse */
+    /**
+     * X axis position of the mouse
+     */
     protected int mouseX;
 
-    /** Y axis position of the mouse */
+    /**
+     * Y axis position of the mouse
+     */
     protected int mouseY;
 
-    /** where the mouse was in the window when you first clicked to scroll */
+    /**
+     * where the mouse was in the window when you first clicked to scroll
+     */
     private float initialClickY = -2.0F;
 
     /**
@@ -51,22 +67,29 @@ public abstract class GuiSlot
      */
     private float scrollMultiplier;
 
-    /** how far down this slot has been scrolled */
+    /**
+     * how far down this slot has been scrolled
+     */
     private float amountScrolled;
 
-    /** the element in the list that was selected */
+    /**
+     * the element in the list that was selected
+     */
     private int selectedElement = -1;
 
-    /** the time when this button was last clicked. */
+    /**
+     * the time when this button was last clicked.
+     */
     private long lastClicked = 0L;
 
-    /** true if a selected element in this gui will show an outline box */
+    /**
+     * true if a selected element in this gui will show an outline box
+     */
     private boolean showSelectionBox = true;
     private boolean field_77243_s;
     private int field_77242_t;
 
-    public GuiSlot(Minecraft par1Minecraft, int par2, int par3, int par4, int par5, int par6)
-    {
+    public GuiSlot(Minecraft par1Minecraft, int par2, int par3, int par4, int par5, int par6) {
         this.mc = par1Minecraft;
         this.width = par2;
         this.height = par3;
@@ -77,8 +100,7 @@ public abstract class GuiSlot
         this.right = par2;
     }
 
-    public void func_77207_a(int par1, int par2, int par3, int par4)
-    {
+    public void func_77207_a(int par1, int par2, int par3, int par4) {
         this.width = par1;
         this.height = par2;
         this.top = par3;
@@ -87,18 +109,15 @@ public abstract class GuiSlot
         this.right = par1;
     }
 
-    public void setShowSelectionBox(boolean par1)
-    {
+    public void setShowSelectionBox(boolean par1) {
         this.showSelectionBox = par1;
     }
 
-    protected void func_77223_a(boolean par1, int par2)
-    {
+    protected void func_77223_a(boolean par1, int par2) {
         this.field_77243_s = par1;
         this.field_77242_t = par2;
 
-        if (!par1)
-        {
+        if (!par1) {
             this.field_77242_t = 0;
         }
     }
@@ -121,8 +140,7 @@ public abstract class GuiSlot
     /**
      * return the height of the content being scrolled
      */
-    protected int getContentHeight()
-    {
+    protected int getContentHeight() {
         return this.getSize() * this.slotHeight + this.field_77242_t;
     }
 
@@ -130,17 +148,19 @@ public abstract class GuiSlot
 
     protected abstract void drawSlot(int var1, int var2, int var3, int var4, Tessellator var5);
 
-    protected void func_77222_a(int par1, int par2, Tessellator par3Tessellator) {}
+    protected void func_77222_a(int par1, int par2, Tessellator par3Tessellator) {
+    }
 
-    protected void func_77224_a(int par1, int par2) {}
+    protected void func_77224_a(int par1, int par2) {
+    }
 
-    protected void func_77215_b(int par1, int par2) {}
+    protected void func_77215_b(int par1, int par2) {
+    }
 
-    public int func_77210_c(int par1, int par2)
-    {
+    public int func_77210_c(int par1, int par2) {
         int var3 = this.width / 2 - 110;
         int var4 = this.width / 2 + 110;
-        int var5 = par2 - this.top - this.field_77242_t + (int)this.amountScrolled - 4;
+        int var5 = par2 - this.top - this.field_77242_t + (int) this.amountScrolled - 4;
         int var6 = var5 / this.slotHeight;
         return par1 >= var3 && par1 <= var4 && var6 >= 0 && var5 >= 0 && var6 < this.getSize() ? var6 : -1;
     }
@@ -148,8 +168,7 @@ public abstract class GuiSlot
     /**
      * Registers the IDs that can be used for the scrollbar's buttons.
      */
-    public void registerScrollButtons(List par1List, int par2, int par3)
-    {
+    public void registerScrollButtons(List par1List, int par2, int par3) {
         this.scrollUpButtonID = par2;
         this.scrollDownButtonID = par3;
     }
@@ -157,51 +176,40 @@ public abstract class GuiSlot
     /**
      * stop the thing from scrolling out of bounds
      */
-    private void bindAmountScrolled()
-    {
+    private void bindAmountScrolled() {
         int var1 = this.func_77209_d();
 
-        if (var1 < 0)
-        {
+        if (var1 < 0) {
             var1 /= 2;
         }
 
-        if (this.amountScrolled < 0.0F)
-        {
+        if (this.amountScrolled < 0.0F) {
             this.amountScrolled = 0.0F;
         }
 
-        if (this.amountScrolled > (float)var1)
-        {
-            this.amountScrolled = (float)var1;
+        if (this.amountScrolled > (float) var1) {
+            this.amountScrolled = (float) var1;
         }
     }
 
-    public int func_77209_d()
-    {
+    public int func_77209_d() {
         return this.getContentHeight() - (this.bottom - this.top - 4);
     }
 
-    public void func_77208_b(int par1)
-    {
-        this.amountScrolled += (float)par1;
+    public void func_77208_b(int par1) {
+        this.amountScrolled += (float) par1;
         this.bindAmountScrolled();
         this.initialClickY = -2.0F;
     }
 
-    public void actionPerformed(GuiButton par1GuiButton)
-    {
-        if (par1GuiButton.enabled)
-        {
-            if (par1GuiButton.id == this.scrollUpButtonID)
-            {
-                this.amountScrolled -= (float)(this.slotHeight * 2 / 3);
+    public void actionPerformed(GuiButton par1GuiButton) {
+        if (par1GuiButton.enabled) {
+            if (par1GuiButton.id == this.scrollUpButtonID) {
+                this.amountScrolled -= (float) (this.slotHeight * 2 / 3);
                 this.initialClickY = -2.0F;
                 this.bindAmountScrolled();
-            }
-            else if (par1GuiButton.id == this.scrollDownButtonID)
-            {
-                this.amountScrolled += (float)(this.slotHeight * 2 / 3);
+            } else if (par1GuiButton.id == this.scrollDownButtonID) {
+                this.amountScrolled += (float) (this.slotHeight * 2 / 3);
                 this.initialClickY = -2.0F;
                 this.bindAmountScrolled();
             }
@@ -211,8 +219,7 @@ public abstract class GuiSlot
     /**
      * draws the slot to the screen, pass in mouse's current x and y and partial ticks
      */
-    public void drawScreen(int par1, int par2, float par3)
-    {
+    public void drawScreen(int par1, int par2, float par3) {
         this.mouseX = par1;
         this.mouseY = par2;
         this.drawBackground();
@@ -225,99 +232,73 @@ public abstract class GuiSlot
         int var13;
         int var19;
 
-        if (Mouse.isButtonDown(0))
-        {
-            if (this.initialClickY == -1.0F)
-            {
+        if (Mouse.isButtonDown(0)) {
+            if (this.initialClickY == -1.0F) {
                 boolean var7 = true;
 
-                if (par2 >= this.top && par2 <= this.bottom)
-                {
+                if (par2 >= this.top && par2 <= this.bottom) {
                     int var8 = this.width / 2 - 110;
                     var9 = this.width / 2 + 110;
-                    var10 = par2 - this.top - this.field_77242_t + (int)this.amountScrolled - 4;
+                    var10 = par2 - this.top - this.field_77242_t + (int) this.amountScrolled - 4;
                     var11 = var10 / this.slotHeight;
 
-                    if (par1 >= var8 && par1 <= var9 && var11 >= 0 && var10 >= 0 && var11 < var4)
-                    {
+                    if (par1 >= var8 && par1 <= var9 && var11 >= 0 && var10 >= 0 && var11 < var4) {
                         boolean var12 = var11 == this.selectedElement && Minecraft.getSystemTime() - this.lastClicked < 250L;
                         this.elementClicked(var11, var12);
                         this.selectedElement = var11;
                         this.lastClicked = Minecraft.getSystemTime();
-                    }
-                    else if (par1 >= var8 && par1 <= var9 && var10 < 0)
-                    {
-                        this.func_77224_a(par1 - var8, par2 - this.top + (int)this.amountScrolled - 4);
+                    } else if (par1 >= var8 && par1 <= var9 && var10 < 0) {
+                        this.func_77224_a(par1 - var8, par2 - this.top + (int) this.amountScrolled - 4);
                         var7 = false;
                     }
 
-                    if (par1 >= var5 && par1 <= var6)
-                    {
+                    if (par1 >= var5 && par1 <= var6) {
                         this.scrollMultiplier = -1.0F;
                         var19 = this.func_77209_d();
 
-                        if (var19 < 1)
-                        {
+                        if (var19 < 1) {
                             var19 = 1;
                         }
 
-                        var13 = (int)((float)((this.bottom - this.top) * (this.bottom - this.top)) / (float)this.getContentHeight());
+                        var13 = (int) ((float) ((this.bottom - this.top) * (this.bottom - this.top)) / (float) this.getContentHeight());
 
-                        if (var13 < 32)
-                        {
+                        if (var13 < 32) {
                             var13 = 32;
                         }
 
-                        if (var13 > this.bottom - this.top - 8)
-                        {
+                        if (var13 > this.bottom - this.top - 8) {
                             var13 = this.bottom - this.top - 8;
                         }
 
-                        this.scrollMultiplier /= (float)(this.bottom - this.top - var13) / (float)var19;
-                    }
-                    else
-                    {
+                        this.scrollMultiplier /= (float) (this.bottom - this.top - var13) / (float) var19;
+                    } else {
                         this.scrollMultiplier = 1.0F;
                     }
 
-                    if (var7)
-                    {
-                        this.initialClickY = (float)par2;
-                    }
-                    else
-                    {
+                    if (var7) {
+                        this.initialClickY = (float) par2;
+                    } else {
                         this.initialClickY = -2.0F;
                     }
-                }
-                else
-                {
+                } else {
                     this.initialClickY = -2.0F;
                 }
+            } else if (this.initialClickY >= 0.0F) {
+                this.amountScrolled -= ((float) par2 - this.initialClickY) * this.scrollMultiplier;
+                this.initialClickY = (float) par2;
             }
-            else if (this.initialClickY >= 0.0F)
-            {
-                this.amountScrolled -= ((float)par2 - this.initialClickY) * this.scrollMultiplier;
-                this.initialClickY = (float)par2;
-            }
-        }
-        else
-        {
-            while (!this.mc.gameSettings.touchscreen && Mouse.next())
-            {
+        } else {
+            while (!this.mc.gameSettings.touchscreen && Mouse.next()) {
                 int var16 = Mouse.getEventDWheel();
 
-                if (var16 != 0)
-                {
-                    if (var16 > 0)
-                    {
+                if (var16 != 0) {
+                    if (var16 > 0) {
                         var16 = -1;
-                    }
-                    else if (var16 < 0)
-                    {
+                    } else if (var16 < 0) {
                         var16 = 1;
                     }
 
-                    this.amountScrolled += (float)(var16 * this.slotHeight / 2);
+                    this.amountScrolled += (float) (var16 * this.slotHeight / 2);
                 }
             }
 
@@ -333,45 +314,41 @@ public abstract class GuiSlot
         float var17 = 32.0F;
         var18.startDrawingQuads();
         var18.setColorOpaque_I(2105376);
-        var18.addVertexWithUV((double)this.left, (double)this.bottom, 0.0D, (double)((float)this.left / var17), (double)((float)(this.bottom + (int)this.amountScrolled) / var17));
-        var18.addVertexWithUV((double)this.right, (double)this.bottom, 0.0D, (double)((float)this.right / var17), (double)((float)(this.bottom + (int)this.amountScrolled) / var17));
-        var18.addVertexWithUV((double)this.right, (double)this.top, 0.0D, (double)((float)this.right / var17), (double)((float)(this.top + (int)this.amountScrolled) / var17));
-        var18.addVertexWithUV((double)this.left, (double)this.top, 0.0D, (double)((float)this.left / var17), (double)((float)(this.top + (int)this.amountScrolled) / var17));
+        var18.addVertexWithUV((double) this.left, (double) this.bottom, 0.0D, (double) ((float) this.left / var17), (double) ((float) (this.bottom + (int) this.amountScrolled) / var17));
+        var18.addVertexWithUV((double) this.right, (double) this.bottom, 0.0D, (double) ((float) this.right / var17), (double) ((float) (this.bottom + (int) this.amountScrolled) / var17));
+        var18.addVertexWithUV((double) this.right, (double) this.top, 0.0D, (double) ((float) this.right / var17), (double) ((float) (this.top + (int) this.amountScrolled) / var17));
+        var18.addVertexWithUV((double) this.left, (double) this.top, 0.0D, (double) ((float) this.left / var17), (double) ((float) (this.top + (int) this.amountScrolled) / var17));
         var18.draw();
         var9 = this.width / 2 - 92 - 16;
-        var10 = this.top + 4 - (int)this.amountScrolled;
+        var10 = this.top + 4 - (int) this.amountScrolled;
 
-        if (this.field_77243_s)
-        {
+        if (this.field_77243_s) {
             this.func_77222_a(var9, var10, var18);
         }
 
         int var14;
 
-        for (var11 = 0; var11 < var4; ++var11)
-        {
+        for (var11 = 0; var11 < var4; ++var11) {
             var19 = var10 + var11 * this.slotHeight + this.field_77242_t;
             var13 = this.slotHeight - 4;
 
-            if (var19 <= this.bottom && var19 + var13 >= this.top)
-            {
-                if (this.showSelectionBox && this.isSelected(var11))
-                {
+            if (var19 <= this.bottom && var19 + var13 >= this.top) {
+                if (this.showSelectionBox && this.isSelected(var11)) {
                     var14 = this.width / 2 - 110;
                     int var15 = this.width / 2 + 110;
                     GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
                     GL11.glDisable(GL11.GL_TEXTURE_2D);
                     var18.startDrawingQuads();
                     var18.setColorOpaque_I(8421504);
-                    var18.addVertexWithUV((double)var14, (double)(var19 + var13 + 2), 0.0D, 0.0D, 1.0D);
-                    var18.addVertexWithUV((double)var15, (double)(var19 + var13 + 2), 0.0D, 1.0D, 1.0D);
-                    var18.addVertexWithUV((double)var15, (double)(var19 - 2), 0.0D, 1.0D, 0.0D);
-                    var18.addVertexWithUV((double)var14, (double)(var19 - 2), 0.0D, 0.0D, 0.0D);
+                    var18.addVertexWithUV((double) var14, (double) (var19 + var13 + 2), 0.0D, 0.0D, 1.0D);
+                    var18.addVertexWithUV((double) var15, (double) (var19 + var13 + 2), 0.0D, 1.0D, 1.0D);
+                    var18.addVertexWithUV((double) var15, (double) (var19 - 2), 0.0D, 1.0D, 0.0D);
+                    var18.addVertexWithUV((double) var14, (double) (var19 - 2), 0.0D, 0.0D, 0.0D);
                     var18.setColorOpaque_I(0);
-                    var18.addVertexWithUV((double)(var14 + 1), (double)(var19 + var13 + 1), 0.0D, 0.0D, 1.0D);
-                    var18.addVertexWithUV((double)(var15 - 1), (double)(var19 + var13 + 1), 0.0D, 1.0D, 1.0D);
-                    var18.addVertexWithUV((double)(var15 - 1), (double)(var19 - 1), 0.0D, 1.0D, 0.0D);
-                    var18.addVertexWithUV((double)(var14 + 1), (double)(var19 - 1), 0.0D, 0.0D, 0.0D);
+                    var18.addVertexWithUV((double) (var14 + 1), (double) (var19 + var13 + 1), 0.0D, 0.0D, 1.0D);
+                    var18.addVertexWithUV((double) (var15 - 1), (double) (var19 + var13 + 1), 0.0D, 1.0D, 1.0D);
+                    var18.addVertexWithUV((double) (var15 - 1), (double) (var19 - 1), 0.0D, 1.0D, 0.0D);
+                    var18.addVertexWithUV((double) (var14 + 1), (double) (var19 - 1), 0.0D, 0.0D, 0.0D);
                     var18.draw();
                     GL11.glEnable(GL11.GL_TEXTURE_2D);
                 }
@@ -391,63 +368,59 @@ public abstract class GuiSlot
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         var18.startDrawingQuads();
         var18.setColorRGBA_I(0, 0);
-        var18.addVertexWithUV((double)this.left, (double)(this.top + var20), 0.0D, 0.0D, 1.0D);
-        var18.addVertexWithUV((double)this.right, (double)(this.top + var20), 0.0D, 1.0D, 1.0D);
+        var18.addVertexWithUV((double) this.left, (double) (this.top + var20), 0.0D, 0.0D, 1.0D);
+        var18.addVertexWithUV((double) this.right, (double) (this.top + var20), 0.0D, 1.0D, 1.0D);
         var18.setColorRGBA_I(0, 255);
-        var18.addVertexWithUV((double)this.right, (double)this.top, 0.0D, 1.0D, 0.0D);
-        var18.addVertexWithUV((double)this.left, (double)this.top, 0.0D, 0.0D, 0.0D);
+        var18.addVertexWithUV((double) this.right, (double) this.top, 0.0D, 1.0D, 0.0D);
+        var18.addVertexWithUV((double) this.left, (double) this.top, 0.0D, 0.0D, 0.0D);
         var18.draw();
         var18.startDrawingQuads();
         var18.setColorRGBA_I(0, 255);
-        var18.addVertexWithUV((double)this.left, (double)this.bottom, 0.0D, 0.0D, 1.0D);
-        var18.addVertexWithUV((double)this.right, (double)this.bottom, 0.0D, 1.0D, 1.0D);
+        var18.addVertexWithUV((double) this.left, (double) this.bottom, 0.0D, 0.0D, 1.0D);
+        var18.addVertexWithUV((double) this.right, (double) this.bottom, 0.0D, 1.0D, 1.0D);
         var18.setColorRGBA_I(0, 0);
-        var18.addVertexWithUV((double)this.right, (double)(this.bottom - var20), 0.0D, 1.0D, 0.0D);
-        var18.addVertexWithUV((double)this.left, (double)(this.bottom - var20), 0.0D, 0.0D, 0.0D);
+        var18.addVertexWithUV((double) this.right, (double) (this.bottom - var20), 0.0D, 1.0D, 0.0D);
+        var18.addVertexWithUV((double) this.left, (double) (this.bottom - var20), 0.0D, 0.0D, 0.0D);
         var18.draw();
         var19 = this.func_77209_d();
 
-        if (var19 > 0)
-        {
+        if (var19 > 0) {
             var13 = (this.bottom - this.top) * (this.bottom - this.top) / this.getContentHeight();
 
-            if (var13 < 32)
-            {
+            if (var13 < 32) {
                 var13 = 32;
             }
 
-            if (var13 > this.bottom - this.top - 8)
-            {
+            if (var13 > this.bottom - this.top - 8) {
                 var13 = this.bottom - this.top - 8;
             }
 
-            var14 = (int)this.amountScrolled * (this.bottom - this.top - var13) / var19 + this.top;
+            var14 = (int) this.amountScrolled * (this.bottom - this.top - var13) / var19 + this.top;
 
-            if (var14 < this.top)
-            {
+            if (var14 < this.top) {
                 var14 = this.top;
             }
 
             var18.startDrawingQuads();
             var18.setColorRGBA_I(0, 255);
-            var18.addVertexWithUV((double)var5, (double)this.bottom, 0.0D, 0.0D, 1.0D);
-            var18.addVertexWithUV((double)var6, (double)this.bottom, 0.0D, 1.0D, 1.0D);
-            var18.addVertexWithUV((double)var6, (double)this.top, 0.0D, 1.0D, 0.0D);
-            var18.addVertexWithUV((double)var5, (double)this.top, 0.0D, 0.0D, 0.0D);
+            var18.addVertexWithUV((double) var5, (double) this.bottom, 0.0D, 0.0D, 1.0D);
+            var18.addVertexWithUV((double) var6, (double) this.bottom, 0.0D, 1.0D, 1.0D);
+            var18.addVertexWithUV((double) var6, (double) this.top, 0.0D, 1.0D, 0.0D);
+            var18.addVertexWithUV((double) var5, (double) this.top, 0.0D, 0.0D, 0.0D);
             var18.draw();
             var18.startDrawingQuads();
             var18.setColorRGBA_I(8421504, 255);
-            var18.addVertexWithUV((double)var5, (double)(var14 + var13), 0.0D, 0.0D, 1.0D);
-            var18.addVertexWithUV((double)var6, (double)(var14 + var13), 0.0D, 1.0D, 1.0D);
-            var18.addVertexWithUV((double)var6, (double)var14, 0.0D, 1.0D, 0.0D);
-            var18.addVertexWithUV((double)var5, (double)var14, 0.0D, 0.0D, 0.0D);
+            var18.addVertexWithUV((double) var5, (double) (var14 + var13), 0.0D, 0.0D, 1.0D);
+            var18.addVertexWithUV((double) var6, (double) (var14 + var13), 0.0D, 1.0D, 1.0D);
+            var18.addVertexWithUV((double) var6, (double) var14, 0.0D, 1.0D, 0.0D);
+            var18.addVertexWithUV((double) var5, (double) var14, 0.0D, 0.0D, 0.0D);
             var18.draw();
             var18.startDrawingQuads();
             var18.setColorRGBA_I(12632256, 255);
-            var18.addVertexWithUV((double)var5, (double)(var14 + var13 - 1), 0.0D, 0.0D, 1.0D);
-            var18.addVertexWithUV((double)(var6 - 1), (double)(var14 + var13 - 1), 0.0D, 1.0D, 1.0D);
-            var18.addVertexWithUV((double)(var6 - 1), (double)var14, 0.0D, 1.0D, 0.0D);
-            var18.addVertexWithUV((double)var5, (double)var14, 0.0D, 0.0D, 0.0D);
+            var18.addVertexWithUV((double) var5, (double) (var14 + var13 - 1), 0.0D, 0.0D, 1.0D);
+            var18.addVertexWithUV((double) (var6 - 1), (double) (var14 + var13 - 1), 0.0D, 1.0D, 1.0D);
+            var18.addVertexWithUV((double) (var6 - 1), (double) var14, 0.0D, 1.0D, 0.0D);
+            var18.addVertexWithUV((double) var5, (double) var14, 0.0D, 0.0D, 0.0D);
             var18.draw();
         }
 
@@ -458,27 +431,25 @@ public abstract class GuiSlot
         GL11.glDisable(GL11.GL_BLEND);
     }
 
-    protected int getScrollBarX()
-    {
+    protected int getScrollBarX() {
         return this.width / 2 + 124;
     }
 
     /**
      * Overlays the background to hide scrolled items
      */
-    private void overlayBackground(int par1, int par2, int par3, int par4)
-    {
+    private void overlayBackground(int par1, int par2, int par3, int par4) {
         Tessellator var5 = Tessellator.instance;
         this.mc.renderEngine.bindTexture("/gui/background.png");
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         float var6 = 32.0F;
         var5.startDrawingQuads();
         var5.setColorRGBA_I(4210752, par4);
-        var5.addVertexWithUV(0.0D, (double)par2, 0.0D, 0.0D, (double)((float)par2 / var6));
-        var5.addVertexWithUV((double)this.width, (double)par2, 0.0D, (double)((float)this.width / var6), (double)((float)par2 / var6));
+        var5.addVertexWithUV(0.0D, (double) par2, 0.0D, 0.0D, (double) ((float) par2 / var6));
+        var5.addVertexWithUV((double) this.width, (double) par2, 0.0D, (double) ((float) this.width / var6), (double) ((float) par2 / var6));
         var5.setColorRGBA_I(4210752, par3);
-        var5.addVertexWithUV((double)this.width, (double)par1, 0.0D, (double)((float)this.width / var6), (double)((float)par1 / var6));
-        var5.addVertexWithUV(0.0D, (double)par1, 0.0D, 0.0D, (double)((float)par1 / var6));
+        var5.addVertexWithUV((double) this.width, (double) par1, 0.0D, (double) ((float) this.width / var6), (double) ((float) par1 / var6));
+        var5.addVertexWithUV(0.0D, (double) par1, 0.0D, 0.0D, (double) ((float) par1 / var6));
         var5.draw();
     }
 }

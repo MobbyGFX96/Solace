@@ -1,10 +1,10 @@
 package net.minecraft.src;
 
-import java.nio.FloatBuffer;
 import org.lwjgl.opengl.GL11;
 
-public class ClippingHelperImpl extends ClippingHelper
-{
+import java.nio.FloatBuffer;
+
+public class ClippingHelperImpl extends ClippingHelper {
     private static ClippingHelperImpl instance = new ClippingHelperImpl();
     private FloatBuffer projectionMatrixBuffer = GLAllocation.createDirectFloatBuffer(16);
     private FloatBuffer modelviewMatrixBuffer = GLAllocation.createDirectFloatBuffer(16);
@@ -13,8 +13,7 @@ public class ClippingHelperImpl extends ClippingHelper
     /**
      * Initialises the ClippingHelper object then returns an instance of it.
      */
-    public static ClippingHelper getInstance()
-    {
+    public static ClippingHelper getInstance() {
         instance.init();
         return instance;
     }
@@ -22,8 +21,7 @@ public class ClippingHelperImpl extends ClippingHelper
     /**
      * Normalize the frustum.
      */
-    private void normalize(float[][] par1ArrayOfFloat, int par2)
-    {
+    private void normalize(float[][] par1ArrayOfFloat, int par2) {
         float var3 = MathHelper.sqrt_float(par1ArrayOfFloat[par2][0] * par1ArrayOfFloat[par2][0] + par1ArrayOfFloat[par2][1] * par1ArrayOfFloat[par2][1] + par1ArrayOfFloat[par2][2] * par1ArrayOfFloat[par2][2]);
         par1ArrayOfFloat[par2][0] /= var3;
         par1ArrayOfFloat[par2][1] /= var3;
@@ -31,8 +29,7 @@ public class ClippingHelperImpl extends ClippingHelper
         par1ArrayOfFloat[par2][3] /= var3;
     }
 
-    private void init()
-    {
+    private void init() {
         this.projectionMatrixBuffer.clear();
         this.modelviewMatrixBuffer.clear();
         this.field_78564_h.clear();

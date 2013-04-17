@@ -2,8 +2,7 @@ package net.minecraft.src;
 
 import org.lwjgl.opengl.GL11;
 
-public abstract class TileEntitySpecialRenderer
-{
+public abstract class TileEntitySpecialRenderer {
     /**
      * The TileEntityRenderer instance associated with this TileEntitySpecialRenderer
      */
@@ -14,12 +13,10 @@ public abstract class TileEntitySpecialRenderer
     /**
      * Binds a texture to the renderEngine given a filename from the JAR.
      */
-    protected void bindTextureByName(String par1Str)
-    {
+    protected void bindTextureByName(String par1Str) {
         RenderEngine var2 = this.tileEntityRenderer.renderEngine;
 
-        if (var2 != null)
-        {
+        if (var2 != null) {
             var2.bindTexture(par1Str);
         }
     }
@@ -27,12 +24,10 @@ public abstract class TileEntitySpecialRenderer
     /**
      * Binds a texture that Minecraft will attempt to load from the given URL.  (arguments: url, localFallback)
      */
-    protected void bindTextureByURL(String par1Str, String par2Str)
-    {
+    protected void bindTextureByURL(String par1Str, String par2Str) {
         RenderEngine var3 = this.tileEntityRenderer.renderEngine;
 
-        if (var3 != null)
-        {
+        if (var3 != null) {
             GL11.glBindTexture(GL11.GL_TEXTURE_2D, var3.getTextureForDownloadableImage(par1Str, par2Str));
         }
 
@@ -42,8 +37,7 @@ public abstract class TileEntitySpecialRenderer
     /**
      * Associate a TileEntityRenderer with this TileEntitySpecialRenderer
      */
-    public void setTileEntityRenderer(TileEntityRenderer par1TileEntityRenderer)
-    {
+    public void setTileEntityRenderer(TileEntityRenderer par1TileEntityRenderer) {
         this.tileEntityRenderer = par1TileEntityRenderer;
     }
 
@@ -51,10 +45,10 @@ public abstract class TileEntitySpecialRenderer
      * Called when the ingame world being rendered changes (e.g. on world -> nether travel) due to using one renderer
      * per tile entity type, rather than instance
      */
-    public void onWorldChange(World par1World) {}
+    public void onWorldChange(World par1World) {
+    }
 
-    public FontRenderer getFontRenderer()
-    {
+    public FontRenderer getFontRenderer() {
         return this.tileEntityRenderer.getFontRenderer();
     }
 }

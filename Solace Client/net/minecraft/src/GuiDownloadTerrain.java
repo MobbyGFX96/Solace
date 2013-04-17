@@ -1,45 +1,44 @@
 package net.minecraft.src;
 
-public class GuiDownloadTerrain extends GuiScreen
-{
-    /** Network object that downloads the terrain data. */
+public class GuiDownloadTerrain extends GuiScreen {
+    /**
+     * Network object that downloads the terrain data.
+     */
     private NetClientHandler netHandler;
 
-    /** Counts the number of screen updates. */
+    /**
+     * Counts the number of screen updates.
+     */
     private int updateCounter = 0;
 
-    public GuiDownloadTerrain(NetClientHandler par1NetClientHandler)
-    {
+    public GuiDownloadTerrain(NetClientHandler par1NetClientHandler) {
         this.netHandler = par1NetClientHandler;
     }
 
     /**
      * Fired when a key is typed. This is the equivalent of KeyListener.keyTyped(KeyEvent e).
      */
-    protected void keyTyped(char par1, int par2) {}
+    protected void keyTyped(char par1, int par2) {
+    }
 
     /**
      * Adds the buttons (and other controls) to the screen in question.
      */
-    public void initGui()
-    {
+    public void initGui() {
         this.buttonList.clear();
     }
 
     /**
      * Called from the main game loop to update the screen.
      */
-    public void updateScreen()
-    {
+    public void updateScreen() {
         ++this.updateCounter;
 
-        if (this.updateCounter % 20 == 0)
-        {
+        if (this.updateCounter % 20 == 0) {
             this.netHandler.addToSendQueue(new Packet0KeepAlive());
         }
 
-        if (this.netHandler != null)
-        {
+        if (this.netHandler != null) {
             this.netHandler.processReadPackets();
         }
     }
@@ -47,8 +46,7 @@ public class GuiDownloadTerrain extends GuiScreen
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
-    {
+    public void drawScreen(int par1, int par2, float par3) {
         this.drawBackground(0);
         StringTranslate var4 = StringTranslate.getInstance();
         this.drawCenteredString(this.fontRenderer, var4.translateKey("multiplayer.downloadingTerrain"), this.width / 2, this.height / 2 - 50, 16777215);

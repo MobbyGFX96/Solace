@@ -1,37 +1,45 @@
 package net.minecraft.src;
 
-public class ModelIronGolem extends ModelBase
-{
-    /** The head model for the iron golem. */
+public class ModelIronGolem extends ModelBase {
+    /**
+     * The head model for the iron golem.
+     */
     public ModelRenderer ironGolemHead;
 
-    /** The body model for the iron golem. */
+    /**
+     * The body model for the iron golem.
+     */
     public ModelRenderer ironGolemBody;
 
-    /** The right arm model for the iron golem. */
+    /**
+     * The right arm model for the iron golem.
+     */
     public ModelRenderer ironGolemRightArm;
 
-    /** The left arm model for the iron golem. */
+    /**
+     * The left arm model for the iron golem.
+     */
     public ModelRenderer ironGolemLeftArm;
 
-    /** The left leg model for the Iron Golem. */
+    /**
+     * The left leg model for the Iron Golem.
+     */
     public ModelRenderer ironGolemLeftLeg;
 
-    /** The right leg model for the Iron Golem. */
+    /**
+     * The right leg model for the Iron Golem.
+     */
     public ModelRenderer ironGolemRightLeg;
 
-    public ModelIronGolem()
-    {
+    public ModelIronGolem() {
         this(0.0F);
     }
 
-    public ModelIronGolem(float par1)
-    {
+    public ModelIronGolem(float par1) {
         this(par1, -7.0F);
     }
 
-    public ModelIronGolem(float par1, float par2)
-    {
+    public ModelIronGolem(float par1, float par2) {
         short var3 = 128;
         short var4 = 128;
         this.ironGolemHead = (new ModelRenderer(this)).setTextureSize(var3, var4);
@@ -60,8 +68,7 @@ public class ModelIronGolem extends ModelBase
     /**
      * Sets the models various rotation angles then renders the model.
      */
-    public void render(Entity par1Entity, float par2, float par3, float par4, float par5, float par6, float par7)
-    {
+    public void render(Entity par1Entity, float par2, float par3, float par4, float par5, float par6, float par7) {
         this.setRotationAngles(par2, par3, par4, par5, par6, par7, par1Entity);
         this.ironGolemHead.render(par7);
         this.ironGolemBody.render(par7);
@@ -76,10 +83,9 @@ public class ModelIronGolem extends ModelBase
      * and legs, where par1 represents the time(so that arms and legs swing back and forth) and par2 represents how
      * "far" arms and legs can swing at most.
      */
-    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity)
-    {
-        this.ironGolemHead.rotateAngleY = par4 / (180F / (float)Math.PI);
-        this.ironGolemHead.rotateAngleX = par5 / (180F / (float)Math.PI);
+    public void setRotationAngles(float par1, float par2, float par3, float par4, float par5, float par6, Entity par7Entity) {
+        this.ironGolemHead.rotateAngleY = par4 / (180F / (float) Math.PI);
+        this.ironGolemHead.rotateAngleX = par5 / (180F / (float) Math.PI);
         this.ironGolemLeftLeg.rotateAngleX = -1.5F * this.func_78172_a(par1, 13.0F) * par2;
         this.ironGolemRightLeg.rotateAngleX = 1.5F * this.func_78172_a(par1, 13.0F) * par2;
         this.ironGolemLeftLeg.rotateAngleY = 0.0F;
@@ -90,35 +96,27 @@ public class ModelIronGolem extends ModelBase
      * Used for easily adding entity-dependent animations. The second and third float params here are the same second
      * and third as in the setRotationAngles method.
      */
-    public void setLivingAnimations(EntityLiving par1EntityLiving, float par2, float par3, float par4)
-    {
-        EntityIronGolem var5 = (EntityIronGolem)par1EntityLiving;
+    public void setLivingAnimations(EntityLiving par1EntityLiving, float par2, float par3, float par4) {
+        EntityIronGolem var5 = (EntityIronGolem) par1EntityLiving;
         int var6 = var5.getAttackTimer();
 
-        if (var6 > 0)
-        {
-            this.ironGolemRightArm.rotateAngleX = -2.0F + 1.5F * this.func_78172_a((float)var6 - par4, 10.0F);
-            this.ironGolemLeftArm.rotateAngleX = -2.0F + 1.5F * this.func_78172_a((float)var6 - par4, 10.0F);
-        }
-        else
-        {
+        if (var6 > 0) {
+            this.ironGolemRightArm.rotateAngleX = -2.0F + 1.5F * this.func_78172_a((float) var6 - par4, 10.0F);
+            this.ironGolemLeftArm.rotateAngleX = -2.0F + 1.5F * this.func_78172_a((float) var6 - par4, 10.0F);
+        } else {
             int var7 = var5.getHoldRoseTick();
 
-            if (var7 > 0)
-            {
-                this.ironGolemRightArm.rotateAngleX = -0.8F + 0.025F * this.func_78172_a((float)var7, 70.0F);
+            if (var7 > 0) {
+                this.ironGolemRightArm.rotateAngleX = -0.8F + 0.025F * this.func_78172_a((float) var7, 70.0F);
                 this.ironGolemLeftArm.rotateAngleX = 0.0F;
-            }
-            else
-            {
+            } else {
                 this.ironGolemRightArm.rotateAngleX = (-0.2F + 1.5F * this.func_78172_a(par2, 13.0F)) * par3;
                 this.ironGolemLeftArm.rotateAngleX = (-0.2F - 1.5F * this.func_78172_a(par2, 13.0F)) * par3;
             }
         }
     }
 
-    private float func_78172_a(float par1, float par2)
-    {
+    private float func_78172_a(float par1, float par2) {
         return (Math.abs(par1 % par2 - par2 * 0.5F) - par2 * 0.25F) / (par2 * 0.25F);
     }
 }

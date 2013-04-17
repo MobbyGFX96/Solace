@@ -2,10 +2,8 @@ package net.minecraft.src;
 
 import java.util.Random;
 
-public class BiomeGenSwamp extends BiomeGenBase
-{
-    protected BiomeGenSwamp(int par1)
-    {
+public class BiomeGenSwamp extends BiomeGenBase {
+    protected BiomeGenSwamp(int par1) {
         super(par1);
         this.theBiomeDecorator.treesPerChunk = 2;
         this.theBiomeDecorator.flowersPerChunk = -999;
@@ -21,28 +19,25 @@ public class BiomeGenSwamp extends BiomeGenBase
     /**
      * Gets a WorldGen appropriate for this biome.
      */
-    public WorldGenerator getRandomWorldGenForTrees(Random par1Random)
-    {
+    public WorldGenerator getRandomWorldGenForTrees(Random par1Random) {
         return this.worldGeneratorSwamp;
     }
 
     /**
      * Provides the basic grass color based on the biome temperature and rainfall
      */
-    public int getBiomeGrassColor()
-    {
-        double var1 = (double)this.getFloatTemperature();
-        double var3 = (double)this.getFloatRainfall();
+    public int getBiomeGrassColor() {
+        double var1 = (double) this.getFloatTemperature();
+        double var3 = (double) this.getFloatRainfall();
         return ((ColorizerGrass.getGrassColor(var1, var3) & 16711422) + 5115470) / 2;
     }
 
     /**
      * Provides the basic foliage color based on the biome temperature and rainfall
      */
-    public int getBiomeFoliageColor()
-    {
-        double var1 = (double)this.getFloatTemperature();
-        double var3 = (double)this.getFloatRainfall();
+    public int getBiomeFoliageColor() {
+        double var1 = (double) this.getFloatTemperature();
+        double var3 = (double) this.getFloatRainfall();
         return ((ColorizerFoliage.getFoliageColor(var1, var3) & 16711422) + 5115470) / 2;
     }
 }

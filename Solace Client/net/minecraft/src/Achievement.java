@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public class Achievement extends StatBase
-{
+public class Achievement extends StatBase {
     /**
      * Is the column (related to center of achievement gui, in 24 pixels unit) that the achievement will be displayed.
      */
@@ -39,41 +38,34 @@ public class Achievement extends StatBase
      */
     private boolean isSpecial;
 
-    public Achievement(int par1, String par2Str, int par3, int par4, Item par5Item, Achievement par6Achievement)
-    {
+    public Achievement(int par1, String par2Str, int par3, int par4, Item par5Item, Achievement par6Achievement) {
         this(par1, par2Str, par3, par4, new ItemStack(par5Item), par6Achievement);
     }
 
-    public Achievement(int par1, String par2Str, int par3, int par4, Block par5Block, Achievement par6Achievement)
-    {
+    public Achievement(int par1, String par2Str, int par3, int par4, Block par5Block, Achievement par6Achievement) {
         this(par1, par2Str, par3, par4, new ItemStack(par5Block), par6Achievement);
     }
 
-    public Achievement(int par1, String par2Str, int par3, int par4, ItemStack par5ItemStack, Achievement par6Achievement)
-    {
+    public Achievement(int par1, String par2Str, int par3, int par4, ItemStack par5ItemStack, Achievement par6Achievement) {
         super(5242880 + par1, "achievement." + par2Str);
         this.theItemStack = par5ItemStack;
         this.achievementDescription = "achievement." + par2Str + ".desc";
         this.displayColumn = par3;
         this.displayRow = par4;
 
-        if (par3 < AchievementList.minDisplayColumn)
-        {
+        if (par3 < AchievementList.minDisplayColumn) {
             AchievementList.minDisplayColumn = par3;
         }
 
-        if (par4 < AchievementList.minDisplayRow)
-        {
+        if (par4 < AchievementList.minDisplayRow) {
             AchievementList.minDisplayRow = par4;
         }
 
-        if (par3 > AchievementList.maxDisplayColumn)
-        {
+        if (par3 > AchievementList.maxDisplayColumn) {
             AchievementList.maxDisplayColumn = par3;
         }
 
-        if (par4 > AchievementList.maxDisplayRow)
-        {
+        if (par4 > AchievementList.maxDisplayRow) {
             AchievementList.maxDisplayRow = par4;
         }
 
@@ -84,8 +76,7 @@ public class Achievement extends StatBase
      * Indicates whether or not the given achievement or statistic is independent (i.e., lacks prerequisites for being
      * update).
      */
-    public Achievement setIndependent()
-    {
+    public Achievement setIndependent() {
         this.isIndependent = true;
         return this;
     }
@@ -94,8 +85,7 @@ public class Achievement extends StatBase
      * Special achievements have a 'spiked' (on normal texture pack) frame, special achievements are the hardest ones to
      * achieve.
      */
-    public Achievement setSpecial()
-    {
+    public Achievement setSpecial() {
         this.isSpecial = true;
         return this;
     }
@@ -103,8 +93,7 @@ public class Achievement extends StatBase
     /**
      * Adds the achievement on the internal list of registered achievements, also, it's check for duplicated id's.
      */
-    public Achievement registerAchievement()
-    {
+    public Achievement registerAchievement() {
         super.registerStat();
         AchievementList.achievementList.add(this);
         return this;
@@ -113,24 +102,21 @@ public class Achievement extends StatBase
     /**
      * Returns whether or not the StatBase-derived class is a statistic (running counter) or an achievement (one-shot).
      */
-    public boolean isAchievement()
-    {
+    public boolean isAchievement() {
         return true;
     }
 
     /**
      * Returns the fully description of the achievement - ready to be displayed on screen.
      */
-    public String getDescription()
-    {
+    public String getDescription() {
         return this.statStringFormatter != null ? this.statStringFormatter.formatString(StatCollector.translateToLocal(this.achievementDescription)) : StatCollector.translateToLocal(this.achievementDescription);
     }
 
     /**
      * Defines a string formatter for the achievement.
      */
-    public Achievement setStatStringFormatter(IStatStringFormat par1IStatStringFormat)
-    {
+    public Achievement setStatStringFormatter(IStatStringFormat par1IStatStringFormat) {
         this.statStringFormatter = par1IStatStringFormat;
         return this;
     }
@@ -139,16 +125,14 @@ public class Achievement extends StatBase
      * Special achievements have a 'spiked' (on normal texture pack) frame, special achievements are the hardest ones to
      * achieve.
      */
-    public boolean getSpecial()
-    {
+    public boolean getSpecial() {
         return this.isSpecial;
     }
 
     /**
      * Register the stat into StatList.
      */
-    public StatBase registerStat()
-    {
+    public StatBase registerStat() {
         return this.registerAchievement();
     }
 
@@ -156,8 +140,7 @@ public class Achievement extends StatBase
      * Initializes the current stat as independent (i.e., lacking prerequisites for being updated) and returns the
      * current instance.
      */
-    public StatBase initIndependentStat()
-    {
+    public StatBase initIndependentStat() {
         return this.setIndependent();
     }
 }

@@ -1,9 +1,7 @@
 package net.minecraft.src;
 
-public class EntityAuraFX extends EntityFX
-{
-    public EntityAuraFX(World par1World, double par2, double par4, double par6, double par8, double par10, double par12)
-    {
+public class EntityAuraFX extends EntityFX {
+    public EntityAuraFX(World par1World, double par2, double par4, double par6, double par8, double par10, double par12) {
         super(par1World, par2, par4, par6, par8, par10, par12);
         float var14 = this.rand.nextFloat() * 0.1F + 0.2F;
         this.particleRed = var14;
@@ -15,15 +13,14 @@ public class EntityAuraFX extends EntityFX
         this.motionX *= 0.019999999552965164D;
         this.motionY *= 0.019999999552965164D;
         this.motionZ *= 0.019999999552965164D;
-        this.particleMaxAge = (int)(20.0D / (Math.random() * 0.8D + 0.2D));
+        this.particleMaxAge = (int) (20.0D / (Math.random() * 0.8D + 0.2D));
         this.noClip = true;
     }
 
     /**
      * Called to update the entity's position/logic.
      */
-    public void onUpdate()
-    {
+    public void onUpdate() {
         this.prevPosX = this.posX;
         this.prevPosY = this.posY;
         this.prevPosZ = this.posZ;
@@ -32,8 +29,7 @@ public class EntityAuraFX extends EntityFX
         this.motionY *= 0.99D;
         this.motionZ *= 0.99D;
 
-        if (this.particleMaxAge-- <= 0)
-        {
+        if (this.particleMaxAge-- <= 0) {
             this.setDead();
         }
     }

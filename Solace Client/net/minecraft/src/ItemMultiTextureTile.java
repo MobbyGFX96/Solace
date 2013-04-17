@@ -1,12 +1,10 @@
 package net.minecraft.src;
 
-public class ItemMultiTextureTile extends ItemBlock
-{
+public class ItemMultiTextureTile extends ItemBlock {
     private final Block theBlock;
     private final String[] field_82804_b;
 
-    public ItemMultiTextureTile(int par1, Block par2Block, String[] par3ArrayOfStr)
-    {
+    public ItemMultiTextureTile(int par1, Block par2Block, String[] par3ArrayOfStr) {
         super(par1);
         this.theBlock = par2Block;
         this.field_82804_b = par3ArrayOfStr;
@@ -17,16 +15,14 @@ public class ItemMultiTextureTile extends ItemBlock
     /**
      * Gets an icon index based on an item's damage value
      */
-    public Icon getIconFromDamage(int par1)
-    {
+    public Icon getIconFromDamage(int par1) {
         return this.theBlock.getBlockTextureFromSideAndMetadata(2, par1);
     }
 
     /**
      * Returns the metadata of the block which this Item (ItemBlock) can place
      */
-    public int getMetadata(int par1)
-    {
+    public int getMetadata(int par1) {
         return par1;
     }
 
@@ -34,12 +30,10 @@ public class ItemMultiTextureTile extends ItemBlock
      * Returns the unlocalized name of this item. This version accepts an ItemStack so different stacks can have
      * different names based on their damage or NBT.
      */
-    public String getUnlocalizedName(ItemStack par1ItemStack)
-    {
+    public String getUnlocalizedName(ItemStack par1ItemStack) {
         int var2 = par1ItemStack.getItemDamage();
 
-        if (var2 < 0 || var2 >= this.field_82804_b.length)
-        {
+        if (var2 < 0 || var2 >= this.field_82804_b.length) {
             var2 = 0;
         }
 

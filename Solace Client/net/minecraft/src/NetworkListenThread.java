@@ -1,22 +1,25 @@
 package net.minecraft.src;
 
+import net.minecraft.server.MinecraftServer;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import net.minecraft.server.MinecraftServer;
 
-public abstract class NetworkListenThread
-{
-    /** Reference to the MinecraftServer object. */
+public abstract class NetworkListenThread {
+    /**
+     * Reference to the MinecraftServer object.
+     */
     private final MinecraftServer mcServer;
     private final List connections = Collections.synchronizedList(new ArrayList());
 
-    /** Whether the network listener object is listening. */
+    /**
+     * Whether the network listener object is listening.
+     */
     public volatile boolean isListening = false;
 
-    public NetworkListenThread(MinecraftServer par1MinecraftServer) throws IOException
-    {
+    public NetworkListenThread(MinecraftServer par1MinecraftServer) throws IOException {
         this.mcServer = par1MinecraftServer;
         this.isListening = true;
     }
@@ -24,33 +27,25 @@ public abstract class NetworkListenThread
     /**
      * adds this connection to the list of currently connected players
      */
-    public void addPlayer(NetServerHandler par1NetServerHandler)
-    {
+    public void addPlayer(NetServerHandler par1NetServerHandler) {
         this.connections.add(par1NetServerHandler);
     }
 
-    public void stopListening()
-    {
+    public void stopListening() {
         this.isListening = false;
     }
 
     /**
      * processes packets and pending connections
      */
-    public void networkTick()
-    {
-        for (int var1 = 0; var1 < this.connections.size(); ++var1)
-        {
-            NetServerHandler var2 = (NetServerHandler)this.connections.get(var1);
+    public void networkTick() {
+        for (int var1 = 0; var1 < this.connections.size(); ++var1) {
+            NetServerHandler var2 = (NetServerHandler) this.connections.get(var1);
 
-            try
-            {
+            try {
                 var2.networkTick();
-            }
-            catch (Exception var5)
-            {
-                if (var2.netManager instanceof MemoryConnection)
-                {
+            } catch (Exception var5) {
+                if (var2.netManager instanceof MemoryConnection) {
                     CrashReport var4 = CrashReport.makeCrashReport(var5, "Ticking memory connection");
                     throw new ReportedException(var4);
                 }
@@ -59,8 +54,7 @@ public abstract class NetworkListenThread
                 var2.kickPlayerFromServer("Internal server error");
             }
 
-            if (var2.connectionClosed)
-            {
+            if (var2.connectionClosed) {
                 this.connections.remove(var1--);
             }
 
@@ -68,8 +62,7 @@ public abstract class NetworkListenThread
         }
     }
 
-    public MinecraftServer getServer()
-    {
+    public MinecraftServer getServer() {
         return this.mcServer;
     }
 }

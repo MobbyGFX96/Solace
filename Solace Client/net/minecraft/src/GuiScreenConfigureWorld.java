@@ -1,11 +1,11 @@
 package net.minecraft.src;
 
-import java.io.IOException;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
 
-public class GuiScreenConfigureWorld extends GuiScreen
-{
+import java.io.IOException;
+
+public class GuiScreenConfigureWorld extends GuiScreen {
     private final GuiScreen field_96285_a;
     private McoServer field_96280_b;
     private SelectionListInvited field_96282_c;
@@ -23,8 +23,7 @@ public class GuiScreenConfigureWorld extends GuiScreen
     private GuiButton field_98129_x;
     private boolean field_102020_y;
 
-    public GuiScreenConfigureWorld(GuiScreen par1, McoServer par2)
-    {
+    public GuiScreenConfigureWorld(GuiScreen par1, McoServer par2) {
         this.field_96285_a = par1;
         this.field_96280_b = par2;
     }
@@ -32,13 +31,13 @@ public class GuiScreenConfigureWorld extends GuiScreen
     /**
      * Called from the main game loop to update the screen.
      */
-    public void updateScreen() {}
+    public void updateScreen() {
+    }
 
     /**
      * Adds the buttons (and other controls) to the screen in question.
      */
-    public void initGui()
-    {
+    public void initGui() {
         StringTranslate var1 = StringTranslate.getInstance();
         this.field_96277_d = this.width / 2 - 200;
         this.field_96286_n = 180;
@@ -46,13 +45,10 @@ public class GuiScreenConfigureWorld extends GuiScreen
         Keyboard.enableRepeatEvents(true);
         this.buttonList.clear();
 
-        if (this.field_96280_b.field_96404_d.equals("CLOSED"))
-        {
+        if (this.field_96280_b.field_96404_d.equals("CLOSED")) {
             this.buttonList.add(this.field_96281_r = new GuiButton(0, this.field_96277_d, this.func_96264_a(12), this.field_96286_n / 2 - 2, 20, var1.translateKey("mco.configure.world.buttons.open")));
             this.field_96281_r.enabled = !this.field_96280_b.field_98166_h;
-        }
-        else
-        {
+        } else {
             this.buttonList.add(this.field_96279_s = new GuiButton(1, this.field_96277_d, this.func_96264_a(12), this.field_96286_n / 2 - 2, 20, var1.translateKey("mco.configure.world.buttons.close")));
             this.field_96279_s.enabled = !this.field_96280_b.field_98166_h;
         }
@@ -70,144 +66,102 @@ public class GuiScreenConfigureWorld extends GuiScreen
         this.field_98127_w.enabled = !this.field_96280_b.field_98166_h;
     }
 
-    private int func_96264_a(int par1)
-    {
+    private int func_96264_a(int par1) {
         return 40 + par1 * 13;
     }
 
     /**
      * Called when the screen is unloaded. Used to disable keyboard repeat events
      */
-    public void onGuiClosed()
-    {
+    public void onGuiClosed() {
         Keyboard.enableRepeatEvents(false);
     }
 
     /**
      * Fired when a control is clicked. This is the equivalent of ActionListener.actionPerformed(ActionEvent e).
      */
-    protected void actionPerformed(GuiButton par1GuiButton)
-    {
-        if (par1GuiButton.enabled)
-        {
-            if (par1GuiButton.id == 10)
-            {
-                if (this.field_102020_y)
-                {
-                    ((GuiScreenOnlineServers)this.field_96285_a).func_102018_a(this.field_96280_b.field_96408_a);
+    protected void actionPerformed(GuiButton par1GuiButton) {
+        if (par1GuiButton.enabled) {
+            if (par1GuiButton.id == 10) {
+                if (this.field_102020_y) {
+                    ((GuiScreenOnlineServers) this.field_96285_a).func_102018_a(this.field_96280_b.field_96408_a);
                 }
 
                 this.mc.displayGuiScreen(this.field_96285_a);
-            }
-            else if (par1GuiButton.id == 5)
-            {
+            } else if (par1GuiButton.id == 5) {
                 this.mc.displayGuiScreen(new GuiScreenEditOnlineWorld(this, this.field_96285_a, this.field_96280_b));
-            }
-            else if (par1GuiButton.id == 1)
-            {
+            } else if (par1GuiButton.id == 1) {
                 StringTranslate var2 = StringTranslate.getInstance();
                 String var3 = var2.translateKey("mco.configure.world.close.question.line1");
                 String var4 = var2.translateKey("mco.configure.world.close.question.line2");
                 this.mc.displayGuiScreen(new GuiScreenConfirmation(this, "Warning!", var3, var4, 1));
-            }
-            else if (par1GuiButton.id == 0)
-            {
+            } else if (par1GuiButton.id == 0) {
                 this.func_96268_g();
-            }
-            else if (par1GuiButton.id == 4)
-            {
+            } else if (par1GuiButton.id == 4) {
                 this.mc.displayGuiScreen(new GuiScreenInvite(this.field_96285_a, this, this.field_96280_b));
-            }
-            else if (par1GuiButton.id == 3)
-            {
+            } else if (par1GuiButton.id == 3) {
                 this.func_96272_i();
-            }
-            else if (par1GuiButton.id == 6)
-            {
+            } else if (par1GuiButton.id == 6) {
                 this.mc.displayGuiScreen(new GuiScreenResetWorld(this, this.field_96280_b));
-            }
-            else if (par1GuiButton.id == 7)
-            {
+            } else if (par1GuiButton.id == 7) {
                 this.mc.displayGuiScreen(new GuiScreenSubscription(this, this.field_96280_b));
             }
         }
     }
 
-    private void func_96268_g()
-    {
+    private void func_96268_g() {
         McoClient var1 = new McoClient(this.mc.session);
 
-        try
-        {
+        try {
             Boolean var2 = var1.func_96383_b(this.field_96280_b.field_96408_a);
 
-            if (var2.booleanValue())
-            {
+            if (var2.booleanValue()) {
                 this.field_102020_y = true;
                 this.field_96280_b.field_96404_d = "OPEN";
                 this.initGui();
             }
-        }
-        catch (ExceptionMcoService var3)
-        {
+        } catch (ExceptionMcoService var3) {
             ;
-        }
-        catch (IOException var4)
-        {
+        } catch (IOException var4) {
             ;
         }
     }
 
-    private void func_96275_h()
-    {
+    private void func_96275_h() {
         McoClient var1 = new McoClient(this.mc.session);
 
-        try
-        {
+        try {
             boolean var2 = var1.func_96378_c(this.field_96280_b.field_96408_a).booleanValue();
 
-            if (var2)
-            {
+            if (var2) {
                 this.field_102020_y = true;
                 this.field_96280_b.field_96404_d = "CLOSED";
                 this.initGui();
             }
-        }
-        catch (ExceptionMcoService var3)
-        {
+        } catch (ExceptionMcoService var3) {
             ;
-        }
-        catch (IOException var4)
-        {
+        } catch (IOException var4) {
             ;
         }
     }
 
-    private void func_96272_i()
-    {
-        if (this.field_96284_p >= 0 && this.field_96284_p < this.field_96280_b.field_96402_f.size())
-        {
-            this.field_96283_q = (String)this.field_96280_b.field_96402_f.get(this.field_96284_p);
+    private void func_96272_i() {
+        if (this.field_96284_p >= 0 && this.field_96284_p < this.field_96280_b.field_96402_f.size()) {
+            this.field_96283_q = (String) this.field_96280_b.field_96402_f.get(this.field_96284_p);
             StringTranslate var1 = StringTranslate.getInstance();
             GuiYesNo var2 = new GuiYesNo(this, "Warning!", var1.translateKey("mco.configure.world.uninvite.question") + " \'" + this.field_96283_q + "\'", 3);
             this.mc.displayGuiScreen(var2);
         }
     }
 
-    public void confirmClicked(boolean par1, int par2)
-    {
-        if (par2 == 3)
-        {
-            if (par1)
-            {
+    public void confirmClicked(boolean par1, int par2) {
+        if (par2 == 3) {
+            if (par1) {
                 McoClient var3 = new McoClient(this.mc.session);
 
-                try
-                {
+                try {
                     var3.func_96381_a(this.field_96280_b.field_96408_a, this.field_96283_q);
-                }
-                catch (ExceptionMcoService var5)
-                {
+                } catch (ExceptionMcoService var5) {
                     System.err.println("Could not uninvite the selected user");
                 }
 
@@ -217,10 +171,8 @@ public class GuiScreenConfigureWorld extends GuiScreen
             this.mc.displayGuiScreen(new GuiScreenConfigureWorld(this.field_96285_a, this.field_96280_b));
         }
 
-        if (par2 == 1)
-        {
-            if (par1)
-            {
+        if (par2 == 1) {
+            if (par1) {
                 this.func_96275_h();
             }
 
@@ -228,29 +180,27 @@ public class GuiScreenConfigureWorld extends GuiScreen
         }
     }
 
-    private void func_96267_d(int par1)
-    {
+    private void func_96267_d(int par1) {
         this.field_96280_b.field_96402_f.remove(par1);
     }
 
     /**
      * Fired when a key is typed. This is the equivalent of KeyListener.keyTyped(KeyEvent e).
      */
-    protected void keyTyped(char par1, int par2) {}
+    protected void keyTyped(char par1, int par2) {
+    }
 
     /**
      * Called when the mouse is clicked.
      */
-    protected void mouseClicked(int par1, int par2, int par3)
-    {
+    protected void mouseClicked(int par1, int par2, int par3) {
         super.mouseClicked(par1, par2, par3);
     }
 
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
-    {
+    public void drawScreen(int par1, int par2, float par3) {
         StringTranslate var4 = StringTranslate.getInstance();
         this.drawDefaultBackground();
         this.field_96282_c.func_96612_a(par1, par2, par3);
@@ -265,43 +215,35 @@ public class GuiScreenConfigureWorld extends GuiScreen
         super.drawScreen(par1, par2, par3);
     }
 
-    static Minecraft func_96265_a(GuiScreenConfigureWorld par0GuiScreenConfigureWorld)
-    {
+    static Minecraft func_96265_a(GuiScreenConfigureWorld par0GuiScreenConfigureWorld) {
         return par0GuiScreenConfigureWorld.mc;
     }
 
-    static int func_96271_b(GuiScreenConfigureWorld par0GuiScreenConfigureWorld)
-    {
+    static int func_96271_b(GuiScreenConfigureWorld par0GuiScreenConfigureWorld) {
         return par0GuiScreenConfigureWorld.field_96287_o;
     }
 
-    static int func_96274_a(GuiScreenConfigureWorld par0GuiScreenConfigureWorld, int par1)
-    {
+    static int func_96274_a(GuiScreenConfigureWorld par0GuiScreenConfigureWorld, int par1) {
         return par0GuiScreenConfigureWorld.func_96264_a(par1);
     }
 
-    static int func_96269_c(GuiScreenConfigureWorld par0GuiScreenConfigureWorld)
-    {
+    static int func_96269_c(GuiScreenConfigureWorld par0GuiScreenConfigureWorld) {
         return par0GuiScreenConfigureWorld.field_96286_n;
     }
 
-    static McoServer func_96266_d(GuiScreenConfigureWorld par0GuiScreenConfigureWorld)
-    {
+    static McoServer func_96266_d(GuiScreenConfigureWorld par0GuiScreenConfigureWorld) {
         return par0GuiScreenConfigureWorld.field_96280_b;
     }
 
-    static int func_96270_b(GuiScreenConfigureWorld par0GuiScreenConfigureWorld, int par1)
-    {
+    static int func_96270_b(GuiScreenConfigureWorld par0GuiScreenConfigureWorld, int par1) {
         return par0GuiScreenConfigureWorld.field_96284_p = par1;
     }
 
-    static int func_96263_e(GuiScreenConfigureWorld par0GuiScreenConfigureWorld)
-    {
+    static int func_96263_e(GuiScreenConfigureWorld par0GuiScreenConfigureWorld) {
         return par0GuiScreenConfigureWorld.field_96284_p;
     }
 
-    static FontRenderer func_96273_f(GuiScreenConfigureWorld par0GuiScreenConfigureWorld)
-    {
+    static FontRenderer func_96273_f(GuiScreenConfigureWorld par0GuiScreenConfigureWorld) {
         return par0GuiScreenConfigureWorld.fontRenderer;
     }
 }

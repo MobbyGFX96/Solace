@@ -2,8 +2,7 @@ package net.minecraft.src;
 
 import java.util.List;
 
-public class CreativeTabs
-{
+public class CreativeTabs {
     public static final CreativeTabs[] creativeTabArray = new CreativeTabs[12];
     public static final CreativeTabs tabBlock = new CreativeTabBlock(0, "buildingBlocks");
     public static final CreativeTabs tabDecorations = new CreativeTabDeco(1, "decorations");
@@ -20,80 +19,72 @@ public class CreativeTabs
     private final int tabIndex;
     private final String tabLabel;
 
-    /** Texture to use. */
+    /**
+     * Texture to use.
+     */
     private String backgroundImageName = "list_items.png";
     private boolean hasScrollbar = true;
 
-    /** Whether to draw the title in the foreground of the creative GUI */
+    /**
+     * Whether to draw the title in the foreground of the creative GUI
+     */
     private boolean drawTitle = true;
 
-    public CreativeTabs(int par1, String par2Str)
-    {
+    public CreativeTabs(int par1, String par2Str) {
         this.tabIndex = par1;
         this.tabLabel = par2Str;
         creativeTabArray[par1] = this;
     }
 
-    public int getTabIndex()
-    {
+    public int getTabIndex() {
         return this.tabIndex;
     }
 
-    public String getTabLabel()
-    {
+    public String getTabLabel() {
         return this.tabLabel;
     }
 
     /**
      * Gets the translated Label.
      */
-    public String getTranslatedTabLabel()
-    {
+    public String getTranslatedTabLabel() {
         return StringTranslate.getInstance().translateKey("itemGroup." + this.getTabLabel());
     }
 
-    public Item getTabIconItem()
-    {
+    public Item getTabIconItem() {
         return Item.itemsList[this.getTabIconItemIndex()];
     }
 
     /**
      * the itemID for the item to be displayed on the tab
      */
-    public int getTabIconItemIndex()
-    {
+    public int getTabIconItemIndex() {
         return 1;
     }
 
-    public String getBackgroundImageName()
-    {
+    public String getBackgroundImageName() {
         return this.backgroundImageName;
     }
 
-    public CreativeTabs setBackgroundImageName(String par1Str)
-    {
+    public CreativeTabs setBackgroundImageName(String par1Str) {
         this.backgroundImageName = par1Str;
         return this;
     }
 
-    public boolean drawInForegroundOfTab()
-    {
+    public boolean drawInForegroundOfTab() {
         return this.drawTitle;
     }
 
-    public CreativeTabs setNoTitle()
-    {
+    public CreativeTabs setNoTitle() {
         this.drawTitle = false;
         return this;
     }
 
-    public boolean shouldHidePlayerInventory()
-    {
+    public boolean shouldHidePlayerInventory() {
         return this.hasScrollbar;
     }
 
-    public CreativeTabs setNoScrollbar()
-    {
+    public CreativeTabs setNoScrollbar() {
         this.hasScrollbar = false;
         return this;
     }
@@ -101,61 +92,50 @@ public class CreativeTabs
     /**
      * returns index % 6
      */
-    public int getTabColumn()
-    {
+    public int getTabColumn() {
         return this.tabIndex % 6;
     }
 
     /**
      * returns tabIndex < 6
      */
-    public boolean isTabInFirstRow()
-    {
+    public boolean isTabInFirstRow() {
         return this.tabIndex < 6;
     }
 
     /**
      * only shows items which have tabToDisplayOn == this
      */
-    public void displayAllReleventItems(List par1List)
-    {
+    public void displayAllReleventItems(List par1List) {
         Item[] var2 = Item.itemsList;
         int var3 = var2.length;
 
-        for (int var4 = 0; var4 < var3; ++var4)
-        {
+        for (int var4 = 0; var4 < var3; ++var4) {
             Item var5 = var2[var4];
 
-            if (var5 != null && var5.getCreativeTab() == this)
-            {
+            if (var5 != null && var5.getCreativeTab() == this) {
                 var5.getSubItems(var5.itemID, this, par1List);
             }
         }
     }
 
-    public void func_92116_a(List par1List, EnumEnchantmentType ... par2ArrayOfEnumEnchantmentType)
-    {
+    public void func_92116_a(List par1List, EnumEnchantmentType... par2ArrayOfEnumEnchantmentType) {
         Enchantment[] var3 = Enchantment.enchantmentsList;
         int var4 = var3.length;
 
-        for (int var5 = 0; var5 < var4; ++var5)
-        {
+        for (int var5 = 0; var5 < var4; ++var5) {
             Enchantment var6 = var3[var5];
 
-            if (var6 != null && var6.type != null)
-            {
+            if (var6 != null && var6.type != null) {
                 boolean var7 = false;
 
-                for (int var8 = 0; var8 < par2ArrayOfEnumEnchantmentType.length && !var7; ++var8)
-                {
-                    if (var6.type == par2ArrayOfEnumEnchantmentType[var8])
-                    {
+                for (int var8 = 0; var8 < par2ArrayOfEnumEnchantmentType.length && !var7; ++var8) {
+                    if (var6.type == par2ArrayOfEnumEnchantmentType[var8]) {
                         var7 = true;
                     }
                 }
 
-                if (var7)
-                {
+                if (var7) {
                     par1List.add(Item.enchantedBook.func_92111_a(new EnchantmentData(var6, var6.getMaxLevel())));
                 }
             }

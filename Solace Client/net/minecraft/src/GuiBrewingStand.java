@@ -2,12 +2,10 @@ package net.minecraft.src;
 
 import org.lwjgl.opengl.GL11;
 
-public class GuiBrewingStand extends GuiContainer
-{
+public class GuiBrewingStand extends GuiContainer {
     private TileEntityBrewingStand brewingStand;
 
-    public GuiBrewingStand(InventoryPlayer par1InventoryPlayer, TileEntityBrewingStand par2TileEntityBrewingStand)
-    {
+    public GuiBrewingStand(InventoryPlayer par1InventoryPlayer, TileEntityBrewingStand par2TileEntityBrewingStand) {
         super(new ContainerBrewingStand(par1InventoryPlayer, par2TileEntityBrewingStand));
         this.brewingStand = par2TileEntityBrewingStand;
     }
@@ -15,8 +13,7 @@ public class GuiBrewingStand extends GuiContainer
     /**
      * Draw the foreground layer for the GuiContainer (everything in front of the items)
      */
-    protected void drawGuiContainerForegroundLayer(int par1, int par2)
-    {
+    protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         String var3 = this.brewingStand.isInvNameLocalized() ? this.brewingStand.getInvName() : StatCollector.translateToLocal(this.brewingStand.getInvName());
         this.fontRenderer.drawString(var3, this.xSize / 2 - this.fontRenderer.getStringWidth(var3) / 2, 6, 4210752);
         this.fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
@@ -25,8 +22,7 @@ public class GuiBrewingStand extends GuiContainer
     /**
      * Draw the background layer for the GuiContainer (everything behind the items)
      */
-    protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
-    {
+    protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.renderEngine.bindTexture("/gui/alchemy.png");
         int var4 = (this.width - this.xSize) / 2;
@@ -34,19 +30,16 @@ public class GuiBrewingStand extends GuiContainer
         this.drawTexturedModalRect(var4, var5, 0, 0, this.xSize, this.ySize);
         int var6 = this.brewingStand.getBrewTime();
 
-        if (var6 > 0)
-        {
-            int var7 = (int)(28.0F * (1.0F - (float)var6 / 400.0F));
+        if (var6 > 0) {
+            int var7 = (int) (28.0F * (1.0F - (float) var6 / 400.0F));
 
-            if (var7 > 0)
-            {
+            if (var7 > 0) {
                 this.drawTexturedModalRect(var4 + 97, var5 + 16, 176, 0, 9, var7);
             }
 
             int var8 = var6 / 2 % 7;
 
-            switch (var8)
-            {
+            switch (var8) {
                 case 0:
                     var7 = 29;
                     break;
@@ -75,8 +68,7 @@ public class GuiBrewingStand extends GuiContainer
                     var7 = 0;
             }
 
-            if (var7 > 0)
-            {
+            if (var7 > 0) {
                 this.drawTexturedModalRect(var4 + 65, var5 + 14 + 29 - var7, 185, 29 - var7, 12, var7);
             }
         }

@@ -1,12 +1,11 @@
 package net.minecraft.src;
 
-import java.util.Iterator;
 import net.minecraft.server.MinecraftServer;
 
-public class ServerCommandManager extends CommandHandler implements IAdminCommand
-{
-    public ServerCommandManager()
-    {
+import java.util.Iterator;
+
+public class ServerCommandManager extends CommandHandler implements IAdminCommand {
+    public ServerCommandManager() {
         this.registerCommand(new CommandTime());
         this.registerCommand(new CommandGameMode());
         this.registerCommand(new CommandDifficulty());
@@ -31,8 +30,7 @@ public class ServerCommandManager extends CommandHandler implements IAdminComman
         this.registerCommand(new ServerCommandTestFor());
         this.registerCommand(new ServerCommandScoreboard());
 
-        if (MinecraftServer.getServer().isDedicatedServer())
-        {
+        if (MinecraftServer.getServer().isDedicatedServer()) {
             this.registerCommand(new CommandServerOp());
             this.registerCommand(new CommandServerDeop());
             this.registerCommand(new CommandServerStop());
@@ -47,9 +45,7 @@ public class ServerCommandManager extends CommandHandler implements IAdminComman
             this.registerCommand(new CommandServerKick());
             this.registerCommand(new CommandServerList());
             this.registerCommand(new CommandServerWhitelist());
-        }
-        else
-        {
+        } else {
             this.registerCommand(new CommandServerPublishLocal());
         }
 
@@ -60,37 +56,30 @@ public class ServerCommandManager extends CommandHandler implements IAdminComman
      * Sends a message to the admins of the server from a given CommandSender with the given resource string and given
      * extra srings. If the int par2 is even or zero, the original sender is also notified.
      */
-    public void notifyAdmins(ICommandSender par1ICommandSender, int par2, String par3Str, Object ... par4ArrayOfObj)
-    {
+    public void notifyAdmins(ICommandSender par1ICommandSender, int par2, String par3Str, Object... par4ArrayOfObj) {
         boolean var5 = true;
 
-        if (par1ICommandSender instanceof TileEntityCommandBlock && !MinecraftServer.getServer().worldServers[0].getGameRules().getGameRuleBooleanValue("commandBlockOutput"))
-        {
+        if (par1ICommandSender instanceof TileEntityCommandBlock && !MinecraftServer.getServer().worldServers[0].getGameRules().getGameRuleBooleanValue("commandBlockOutput")) {
             var5 = false;
         }
 
-        if (var5)
-        {
+        if (var5) {
             Iterator var6 = MinecraftServer.getServer().getConfigurationManager().playerEntityList.iterator();
 
-            while (var6.hasNext())
-            {
-                EntityPlayerMP var7 = (EntityPlayerMP)var6.next();
+            while (var6.hasNext()) {
+                EntityPlayerMP var7 = (EntityPlayerMP) var6.next();
 
-                if (var7 != par1ICommandSender && MinecraftServer.getServer().getConfigurationManager().areCommandsAllowed(var7.username))
-                {
+                if (var7 != par1ICommandSender && MinecraftServer.getServer().getConfigurationManager().areCommandsAllowed(var7.username)) {
                     var7.sendChatToPlayer("" + EnumChatFormatting.GRAY + "" + EnumChatFormatting.ITALIC + "[" + par1ICommandSender.getCommandSenderName() + ": " + var7.translateString(par3Str, par4ArrayOfObj) + "]");
                 }
             }
         }
 
-        if (par1ICommandSender != MinecraftServer.getServer())
-        {
+        if (par1ICommandSender != MinecraftServer.getServer()) {
             MinecraftServer.getServer().getLogAgent().logInfo("[" + par1ICommandSender.getCommandSenderName() + ": " + MinecraftServer.getServer().translateString(par3Str, par4ArrayOfObj) + "]");
         }
 
-        if ((par2 & 1) != 1)
-        {
+        if ((par2 & 1) != 1) {
             par1ICommandSender.sendChatToPlayer(par1ICommandSender.translateString(par3Str, par4ArrayOfObj));
         }
     }

@@ -2,23 +2,21 @@ package net.minecraft.src;
 
 import java.util.concurrent.Callable;
 
-class CallableType3 implements Callable
-{
-    /** Reference to the IntegratedServer object. */
+class CallableType3 implements Callable {
+    /**
+     * Reference to the IntegratedServer object.
+     */
     final IntegratedServer theIntegratedServer;
 
-    CallableType3(IntegratedServer par1IntegratedServer)
-    {
+    CallableType3(IntegratedServer par1IntegratedServer) {
         this.theIntegratedServer = par1IntegratedServer;
     }
 
-    public String getType()
-    {
+    public String getType() {
         return "Integrated Server (map_client.txt)";
     }
 
-    public Object call()
-    {
+    public Object call() {
         return this.getType();
     }
 }

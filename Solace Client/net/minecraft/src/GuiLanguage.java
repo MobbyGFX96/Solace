@@ -1,8 +1,9 @@
 package net.minecraft.src;
 
-public class GuiLanguage extends GuiScreen
-{
-    /** This GUI's parent GUI. */
+public class GuiLanguage extends GuiScreen {
+    /**
+     * This GUI's parent GUI.
+     */
     protected GuiScreen parentGui;
 
     /**
@@ -11,17 +12,22 @@ public class GuiLanguage extends GuiScreen
      */
     private int updateTimer = -1;
 
-    /** This GUI's language list. */
+    /**
+     * This GUI's language list.
+     */
     private GuiSlotLanguage languageList;
 
-    /** For saving the user's language selection to disk. */
+    /**
+     * For saving the user's language selection to disk.
+     */
     private final GameSettings theGameSettings;
 
-    /** This GUI's 'Done' button. */
+    /**
+     * This GUI's 'Done' button.
+     */
     private GuiSmallButton doneButton;
 
-    public GuiLanguage(GuiScreen par1GuiScreen, GameSettings par2GameSettings)
-    {
+    public GuiLanguage(GuiScreen par1GuiScreen, GameSettings par2GameSettings) {
         this.parentGui = par1GuiScreen;
         this.theGameSettings = par2GameSettings;
     }
@@ -29,8 +35,7 @@ public class GuiLanguage extends GuiScreen
     /**
      * Adds the buttons (and other controls) to the screen in question.
      */
-    public void initGui()
-    {
+    public void initGui() {
         StringTranslate var1 = StringTranslate.getInstance();
         this.buttonList.add(this.doneButton = new GuiSmallButton(6, this.width / 2 - 75, this.height - 38, var1.translateKey("gui.done")));
         this.languageList = new GuiSlotLanguage(this);
@@ -40,12 +45,9 @@ public class GuiLanguage extends GuiScreen
     /**
      * Fired when a control is clicked. This is the equivalent of ActionListener.actionPerformed(ActionEvent e).
      */
-    protected void actionPerformed(GuiButton par1GuiButton)
-    {
-        if (par1GuiButton.enabled)
-        {
-            switch (par1GuiButton.id)
-            {
+    protected void actionPerformed(GuiButton par1GuiButton) {
+        if (par1GuiButton.enabled) {
+            switch (par1GuiButton.id) {
                 case 5:
                     break;
 
@@ -62,12 +64,10 @@ public class GuiLanguage extends GuiScreen
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
-    {
+    public void drawScreen(int par1, int par2, float par3) {
         this.languageList.drawScreen(par1, par2, par3);
 
-        if (this.updateTimer <= 0)
-        {
+        if (this.updateTimer <= 0) {
             this.mc.texturePackList.updateAvaliableTexturePacks();
             this.updateTimer += 20;
         }
@@ -81,8 +81,7 @@ public class GuiLanguage extends GuiScreen
     /**
      * Called from the main game loop to update the screen.
      */
-    public void updateScreen()
-    {
+    public void updateScreen() {
         super.updateScreen();
         --this.updateTimer;
     }
@@ -90,16 +89,14 @@ public class GuiLanguage extends GuiScreen
     /**
      * Gets the relevant instance of GameSettings. Synthetic method for use in GuiSlotLanguage
      */
-    static GameSettings getGameSettings(GuiLanguage par0GuiLanguage)
-    {
+    static GameSettings getGameSettings(GuiLanguage par0GuiLanguage) {
         return par0GuiLanguage.theGameSettings;
     }
 
     /**
      * Returns the private doneButton field.
      */
-    static GuiSmallButton getDoneButton(GuiLanguage par0GuiLanguage)
-    {
+    static GuiSmallButton getDoneButton(GuiLanguage par0GuiLanguage) {
         return par0GuiLanguage.doneButton;
     }
 }

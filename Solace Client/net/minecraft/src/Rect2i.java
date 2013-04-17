@@ -1,22 +1,19 @@
 package net.minecraft.src;
 
-public class Rect2i
-{
+public class Rect2i {
     private int rectX;
     private int rectY;
     private int rectWidth;
     private int rectHeight;
 
-    public Rect2i(int par1, int par2, int par3, int par4)
-    {
+    public Rect2i(int par1, int par2, int par3, int par4) {
         this.rectX = par1;
         this.rectY = par2;
         this.rectWidth = par3;
         this.rectHeight = par4;
     }
 
-    public Rect2i intersection(Rect2i par1Rect2i)
-    {
+    public Rect2i intersection(Rect2i par1Rect2i) {
         int var2 = this.rectX;
         int var3 = this.rectY;
         int var4 = this.rectX + this.rectWidth;
@@ -32,23 +29,19 @@ public class Rect2i
         return this;
     }
 
-    public int getRectX()
-    {
+    public int getRectX() {
         return this.rectX;
     }
 
-    public int getRectY()
-    {
+    public int getRectY() {
         return this.rectY;
     }
 
-    public int getRectWidth()
-    {
+    public int getRectWidth() {
         return this.rectWidth;
     }
 
-    public int getRectHeight()
-    {
+    public int getRectHeight() {
         return this.rectHeight;
     }
 }

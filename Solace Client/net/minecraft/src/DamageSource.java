@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public class DamageSource
-{
+public class DamageSource {
     public static DamageSource inFire = (new DamageSource("inFire")).setFireDamage();
     public static DamageSource onFire = (new DamageSource("onFire")).setDamageBypassesArmor().setFireDamage();
     public static DamageSource lava = (new DamageSource("lava")).setFireDamage();
@@ -17,15 +16,21 @@ public class DamageSource
     public static DamageSource anvil = new DamageSource("anvil");
     public static DamageSource fallingBlock = new DamageSource("fallingBlock");
 
-    /** This kind of damage can be blocked or not. */
+    /**
+     * This kind of damage can be blocked or not.
+     */
     private boolean isUnblockable = false;
     private boolean isDamageAllowedInCreativeMode = false;
     private float hungerDamage = 0.3F;
 
-    /** This kind of damage is based on fire or not. */
+    /**
+     * This kind of damage is based on fire or not.
+     */
     private boolean fireDamage;
 
-    /** This kind of damage is based on a projectile or not. */
+    /**
+     * This kind of damage is based on a projectile or not.
+     */
     private boolean projectile;
 
     /**
@@ -36,125 +41,105 @@ public class DamageSource
     private boolean explosion = false;
     public String damageType;
 
-    public static DamageSource causeMobDamage(EntityLiving par0EntityLiving)
-    {
+    public static DamageSource causeMobDamage(EntityLiving par0EntityLiving) {
         return new EntityDamageSource("mob", par0EntityLiving);
     }
 
     /**
      * returns an EntityDamageSource of type player
      */
-    public static DamageSource causePlayerDamage(EntityPlayer par0EntityPlayer)
-    {
+    public static DamageSource causePlayerDamage(EntityPlayer par0EntityPlayer) {
         return new EntityDamageSource("player", par0EntityPlayer);
     }
 
     /**
      * returns EntityDamageSourceIndirect of an arrow
      */
-    public static DamageSource causeArrowDamage(EntityArrow par0EntityArrow, Entity par1Entity)
-    {
+    public static DamageSource causeArrowDamage(EntityArrow par0EntityArrow, Entity par1Entity) {
         return (new EntityDamageSourceIndirect("arrow", par0EntityArrow, par1Entity)).setProjectile();
     }
 
     /**
      * returns EntityDamageSourceIndirect of a fireball
      */
-    public static DamageSource causeFireballDamage(EntityFireball par0EntityFireball, Entity par1Entity)
-    {
+    public static DamageSource causeFireballDamage(EntityFireball par0EntityFireball, Entity par1Entity) {
         return par1Entity == null ? (new EntityDamageSourceIndirect("onFire", par0EntityFireball, par0EntityFireball)).setFireDamage().setProjectile() : (new EntityDamageSourceIndirect("fireball", par0EntityFireball, par1Entity)).setFireDamage().setProjectile();
     }
 
-    public static DamageSource causeThrownDamage(Entity par0Entity, Entity par1Entity)
-    {
+    public static DamageSource causeThrownDamage(Entity par0Entity, Entity par1Entity) {
         return (new EntityDamageSourceIndirect("thrown", par0Entity, par1Entity)).setProjectile();
     }
 
-    public static DamageSource causeIndirectMagicDamage(Entity par0Entity, Entity par1Entity)
-    {
+    public static DamageSource causeIndirectMagicDamage(Entity par0Entity, Entity par1Entity) {
         return (new EntityDamageSourceIndirect("indirectMagic", par0Entity, par1Entity)).setDamageBypassesArmor().setMagicDamage();
     }
 
-    public static DamageSource func_92087_a(Entity par0Entity)
-    {
+    public static DamageSource func_92087_a(Entity par0Entity) {
         return (new EntityDamageSource("thorns", par0Entity)).setMagicDamage();
     }
 
-    public static DamageSource setExplosionSource(Explosion par0Explosion)
-    {
+    public static DamageSource setExplosionSource(Explosion par0Explosion) {
         return par0Explosion != null && par0Explosion.func_94613_c() != null ? (new EntityDamageSource("explosion.player", par0Explosion.func_94613_c())).setDifficultyScaled().setExplosion() : (new DamageSource("explosion")).setDifficultyScaled().setExplosion();
     }
 
     /**
      * Returns true if the damage is projectile based.
      */
-    public boolean isProjectile()
-    {
+    public boolean isProjectile() {
         return this.projectile;
     }
 
     /**
      * Define the damage type as projectile based.
      */
-    public DamageSource setProjectile()
-    {
+    public DamageSource setProjectile() {
         this.projectile = true;
         return this;
     }
 
-    public boolean isExplosion()
-    {
+    public boolean isExplosion() {
         return this.explosion;
     }
 
-    public DamageSource setExplosion()
-    {
+    public DamageSource setExplosion() {
         this.explosion = true;
         return this;
     }
 
-    public boolean isUnblockable()
-    {
+    public boolean isUnblockable() {
         return this.isUnblockable;
     }
 
     /**
      * How much satiate(food) is consumed by this DamageSource
      */
-    public float getHungerDamage()
-    {
+    public float getHungerDamage() {
         return this.hungerDamage;
     }
 
-    public boolean canHarmInCreative()
-    {
+    public boolean canHarmInCreative() {
         return this.isDamageAllowedInCreativeMode;
     }
 
-    protected DamageSource(String par1Str)
-    {
+    protected DamageSource(String par1Str) {
         this.damageType = par1Str;
     }
 
-    public Entity getSourceOfDamage()
-    {
+    public Entity getSourceOfDamage() {
         return this.getEntity();
     }
 
-    public Entity getEntity()
-    {
+    public Entity getEntity() {
         return null;
     }
 
-    protected DamageSource setDamageBypassesArmor()
-    {
+    protected DamageSource setDamageBypassesArmor() {
         this.isUnblockable = true;
         this.hungerDamage = 0.0F;
         return this;
     }
 
-    protected DamageSource setDamageAllowedInCreativeMode()
-    {
+    protected DamageSource setDamageAllowedInCreativeMode() {
         this.isDamageAllowedInCreativeMode = true;
         return this;
     }
@@ -162,8 +147,7 @@ public class DamageSource
     /**
      * Define the damage type as fire based.
      */
-    protected DamageSource setFireDamage()
-    {
+    protected DamageSource setFireDamage() {
         this.fireDamage = true;
         return this;
     }
@@ -171,35 +155,31 @@ public class DamageSource
     /**
      * Returns the message to be displayed on player death.
      */
-    public String getDeathMessage(EntityLiving par1EntityLiving)
-    {
+    public String getDeathMessage(EntityLiving par1EntityLiving) {
         EntityLiving var2 = par1EntityLiving.func_94060_bK();
         String var3 = "death.attack." + this.damageType;
         String var4 = var3 + ".player";
-        return var2 != null && StatCollector.func_94522_b(var4) ? StatCollector.translateToLocalFormatted(var4, new Object[] {par1EntityLiving.func_96090_ax(), var2.func_96090_ax()}): StatCollector.translateToLocalFormatted(var3, new Object[] {par1EntityLiving.func_96090_ax()});
+        return var2 != null && StatCollector.func_94522_b(var4) ? StatCollector.translateToLocalFormatted(var4, new Object[]{par1EntityLiving.func_96090_ax(), var2.func_96090_ax()}) : StatCollector.translateToLocalFormatted(var3, new Object[]{par1EntityLiving.func_96090_ax()});
     }
 
     /**
      * Returns true if the damage is fire based.
      */
-    public boolean isFireDamage()
-    {
+    public boolean isFireDamage() {
         return this.fireDamage;
     }
 
     /**
      * Return the name of damage type.
      */
-    public String getDamageType()
-    {
+    public String getDamageType() {
         return this.damageType;
     }
 
     /**
      * Set whether this damage source will have its damage amount scaled based on the current difficulty.
      */
-    public DamageSource setDifficultyScaled()
-    {
+    public DamageSource setDifficultyScaled() {
         this.difficultyScaled = true;
         return this;
     }
@@ -207,24 +187,21 @@ public class DamageSource
     /**
      * Return whether this damage source will have its damage amount scaled based on the current difficulty.
      */
-    public boolean isDifficultyScaled()
-    {
+    public boolean isDifficultyScaled() {
         return this.difficultyScaled;
     }
 
     /**
      * Returns true if the damage is magic based.
      */
-    public boolean isMagicDamage()
-    {
+    public boolean isMagicDamage() {
         return this.magicDamage;
     }
 
     /**
      * Define the damage type as magic based.
      */
-    public DamageSource setMagicDamage()
-    {
+    public DamageSource setMagicDamage() {
         this.magicDamage = true;
         return this;
     }

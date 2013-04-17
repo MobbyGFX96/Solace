@@ -1,11 +1,12 @@
 package net.minecraft.src;
 
-public class ItemArmor extends Item
-{
-    /** Holds the 'base' maxDamage that each armorType have. */
-    private static final int[] maxDamageArray = new int[] {11, 16, 15, 13};
-    private static final String[] field_94606_cu = new String[] {"helmetCloth_overlay", "chestplateCloth_overlay", "leggingsCloth_overlay", "bootsCloth_overlay"};
-    public static final String[] field_94603_a = new String[] {"slot_empty_helmet", "slot_empty_chestplate", "slot_empty_leggings", "slot_empty_boots"};
+public class ItemArmor extends Item {
+    /**
+     * Holds the 'base' maxDamage that each armorType have.
+     */
+    private static final int[] maxDamageArray = new int[]{11, 16, 15, 13};
+    private static final String[] field_94606_cu = new String[]{"helmetCloth_overlay", "chestplateCloth_overlay", "leggingsCloth_overlay", "bootsCloth_overlay"};
+    public static final String[] field_94603_a = new String[]{"slot_empty_helmet", "slot_empty_chestplate", "slot_empty_leggings", "slot_empty_boots"};
     private static final IBehaviorDispenseItem field_96605_cw = new BehaviorDispenseArmor();
 
     /**
@@ -13,7 +14,9 @@ public class ItemArmor extends Item
      */
     public final int armorType;
 
-    /** Holds the amount of damage that the armor reduces at full durability. */
+    /**
+     * Holds the amount of damage that the armor reduces at full durability.
+     */
     public final int damageReduceAmount;
 
     /**
@@ -22,13 +25,14 @@ public class ItemArmor extends Item
      */
     public final int renderIndex;
 
-    /** The EnumArmorMaterial used for this ItemArmor */
+    /**
+     * The EnumArmorMaterial used for this ItemArmor
+     */
     private final EnumArmorMaterial material;
     private Icon field_94605_cw;
     private Icon field_94604_cx;
 
-    public ItemArmor(int par1, EnumArmorMaterial par2EnumArmorMaterial, int par3, int par4)
-    {
+    public ItemArmor(int par1, EnumArmorMaterial par2EnumArmorMaterial, int par3, int par4) {
         super(par1);
         this.material = par2EnumArmorMaterial;
         this.armorType = par4;
@@ -40,18 +44,13 @@ public class ItemArmor extends Item
         BlockDispenser.dispenseBehaviorRegistry.putObject(this, field_96605_cw);
     }
 
-    public int getColorFromItemStack(ItemStack par1ItemStack, int par2)
-    {
-        if (par2 > 0)
-        {
+    public int getColorFromItemStack(ItemStack par1ItemStack, int par2) {
+        if (par2 > 0) {
             return 16777215;
-        }
-        else
-        {
+        } else {
             int var3 = this.getColor(par1ItemStack);
 
-            if (var3 < 0)
-            {
+            if (var3 < 0) {
                 var3 = 16777215;
             }
 
@@ -59,54 +58,43 @@ public class ItemArmor extends Item
         }
     }
 
-    public boolean requiresMultipleRenderPasses()
-    {
+    public boolean requiresMultipleRenderPasses() {
         return this.material == EnumArmorMaterial.CLOTH;
     }
 
     /**
      * Return the enchantability factor of the item, most of the time is based on material.
      */
-    public int getItemEnchantability()
-    {
+    public int getItemEnchantability() {
         return this.material.getEnchantability();
     }
 
     /**
      * Return the armor material for this armor item.
      */
-    public EnumArmorMaterial getArmorMaterial()
-    {
+    public EnumArmorMaterial getArmorMaterial() {
         return this.material;
     }
 
     /**
      * Return whether the specified armor ItemStack has a color.
      */
-    public boolean hasColor(ItemStack par1ItemStack)
-    {
+    public boolean hasColor(ItemStack par1ItemStack) {
         return this.material != EnumArmorMaterial.CLOTH ? false : (!par1ItemStack.hasTagCompound() ? false : (!par1ItemStack.getTagCompound().hasKey("display") ? false : par1ItemStack.getTagCompound().getCompoundTag("display").hasKey("color")));
     }
 
     /**
      * Return the color for the specified armor ItemStack.
      */
-    public int getColor(ItemStack par1ItemStack)
-    {
-        if (this.material != EnumArmorMaterial.CLOTH)
-        {
+    public int getColor(ItemStack par1ItemStack) {
+        if (this.material != EnumArmorMaterial.CLOTH) {
             return -1;
-        }
-        else
-        {
+        } else {
             NBTTagCompound var2 = par1ItemStack.getTagCompound();
 
-            if (var2 == null)
-            {
+            if (var2 == null) {
                 return 10511680;
-            }
-            else
-            {
+            } else {
                 NBTTagCompound var3 = var2.getCompoundTag("display");
                 return var3 == null ? 10511680 : (var3.hasKey("color") ? var3.getInteger("color") : 10511680);
             }
@@ -116,52 +104,41 @@ public class ItemArmor extends Item
     /**
      * Gets an icon index based on an item's damage value and the given render pass
      */
-    public Icon getIconFromDamageForRenderPass(int par1, int par2)
-    {
+    public Icon getIconFromDamageForRenderPass(int par1, int par2) {
         return par2 == 1 ? this.field_94605_cw : super.getIconFromDamageForRenderPass(par1, par2);
     }
 
     /**
      * Remove the color from the specified armor ItemStack.
      */
-    public void removeColor(ItemStack par1ItemStack)
-    {
-        if (this.material == EnumArmorMaterial.CLOTH)
-        {
+    public void removeColor(ItemStack par1ItemStack) {
+        if (this.material == EnumArmorMaterial.CLOTH) {
             NBTTagCompound var2 = par1ItemStack.getTagCompound();
 
-            if (var2 != null)
-            {
+            if (var2 != null) {
                 NBTTagCompound var3 = var2.getCompoundTag("display");
 
-                if (var3.hasKey("color"))
-                {
+                if (var3.hasKey("color")) {
                     var3.removeTag("color");
                 }
             }
         }
     }
 
-    public void func_82813_b(ItemStack par1ItemStack, int par2)
-    {
-        if (this.material != EnumArmorMaterial.CLOTH)
-        {
+    public void func_82813_b(ItemStack par1ItemStack, int par2) {
+        if (this.material != EnumArmorMaterial.CLOTH) {
             throw new UnsupportedOperationException("Can\'t dye non-leather!");
-        }
-        else
-        {
+        } else {
             NBTTagCompound var3 = par1ItemStack.getTagCompound();
 
-            if (var3 == null)
-            {
+            if (var3 == null) {
                 var3 = new NBTTagCompound();
                 par1ItemStack.setTagCompound(var3);
             }
 
             NBTTagCompound var4 = var3.getCompoundTag("display");
 
-            if (!var3.hasKey("display"))
-            {
+            if (!var3.hasKey("display")) {
                 var3.setCompoundTag("display", var4);
             }
 
@@ -172,17 +149,14 @@ public class ItemArmor extends Item
     /**
      * Return whether this item is repairable in an anvil.
      */
-    public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack)
-    {
+    public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack) {
         return this.material.getArmorCraftingMaterial() == par2ItemStack.itemID ? true : super.getIsRepairable(par1ItemStack, par2ItemStack);
     }
 
-    public void updateIcons(IconRegister par1IconRegister)
-    {
+    public void updateIcons(IconRegister par1IconRegister) {
         super.updateIcons(par1IconRegister);
 
-        if (this.material == EnumArmorMaterial.CLOTH)
-        {
+        if (this.material == EnumArmorMaterial.CLOTH) {
             this.field_94605_cw = par1IconRegister.registerIcon(field_94606_cu[this.armorType]);
         }
 
@@ -192,13 +166,11 @@ public class ItemArmor extends Item
     /**
      * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
      */
-    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
-    {
+    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
         int var4 = EntityLiving.getArmorPosition(par1ItemStack) - 1;
         ItemStack var5 = par3EntityPlayer.getCurrentArmor(var4);
 
-        if (var5 == null)
-        {
+        if (var5 == null) {
             par3EntityPlayer.setCurrentItemOrArmor(var4, par1ItemStack.copy());
             par1ItemStack.stackSize = 0;
         }
@@ -206,10 +178,8 @@ public class ItemArmor extends Item
         return par1ItemStack;
     }
 
-    public static Icon func_94602_b(int par0)
-    {
-        switch (par0)
-        {
+    public static Icon func_94602_b(int par0) {
+        switch (par0) {
             case 0:
                 return Item.helmetDiamond.field_94604_cx;
 
@@ -231,8 +201,7 @@ public class ItemArmor extends Item
      * Returns the 'max damage' factor array for the armor, each piece of armor have a durability factor (that gets
      * multiplied by armor material factor)
      */
-    static int[] getMaxDamageArray()
-    {
+    static int[] getMaxDamageArray() {
         return maxDamageArray;
     }
 }

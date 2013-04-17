@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public interface ICamera
-{
+public interface ICamera {
     /**
      * Returns true if the bounding box is inside all 6 clipping planes, otherwise returns false.
      */

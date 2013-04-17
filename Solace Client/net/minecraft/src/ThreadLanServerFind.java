@@ -1,25 +1,30 @@
 package net.minecraft.src;
 
+import net.minecraft.client.Minecraft;
+
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 import java.net.SocketTimeoutException;
-import net.minecraft.client.Minecraft;
 
-public class ThreadLanServerFind extends Thread
-{
-    /** The LanServerList */
+public class ThreadLanServerFind extends Thread {
+    /**
+     * The LanServerList
+     */
     private final LanServerList localServerList;
 
-    /** InetAddress for 224.0.2.60 */
+    /**
+     * InetAddress for 224.0.2.60
+     */
     private final InetAddress broadcastAddress;
 
-    /** The socket we're using to receive packets on. */
+    /**
+     * The socket we're using to receive packets on.
+     */
     private final MulticastSocket socket;
 
-    public ThreadLanServerFind(LanServerList par1LanServerList) throws IOException
-    {
+    public ThreadLanServerFind(LanServerList par1LanServerList) throws IOException {
         super("LanServerDetector");
         this.localServerList = par1LanServerList;
         this.setDaemon(true);
@@ -29,24 +34,17 @@ public class ThreadLanServerFind extends Thread
         this.socket.joinGroup(this.broadcastAddress);
     }
 
-    public void run()
-    {
+    public void run() {
         byte[] var2 = new byte[1024];
 
-        while (!this.isInterrupted())
-        {
+        while (!this.isInterrupted()) {
             DatagramPacket var1 = new DatagramPacket(var2, var2.length);
 
-            try
-            {
+            try {
                 this.socket.receive(var1);
-            }
-            catch (SocketTimeoutException var5)
-            {
+            } catch (SocketTimeoutException var5) {
                 continue;
-            }
-            catch (IOException var6)
-            {
+            } catch (IOException var6) {
                 var6.printStackTrace();
                 break;
             }
@@ -56,12 +54,9 @@ public class ThreadLanServerFind extends Thread
             this.localServerList.func_77551_a(var3, var1.getAddress());
         }
 
-        try
-        {
+        try {
             this.socket.leaveGroup(this.broadcastAddress);
-        }
-        catch (IOException var4)
-        {
+        } catch (IOException var4) {
             ;
         }
 

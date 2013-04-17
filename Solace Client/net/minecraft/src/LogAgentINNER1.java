@@ -1,5 +1,4 @@
 package net.minecraft.src;
 
-class LogAgentINNER1
-{
+class LogAgentINNER1 {
 }

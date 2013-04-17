@@ -2,19 +2,19 @@ package net.minecraft.src;
 
 import net.minecraft.server.MinecraftServer;
 
-public class TileEntityCommandBlock extends TileEntity implements ICommandSender
-{
+public class TileEntityCommandBlock extends TileEntity implements ICommandSender {
     private int field_96106_a = 0;
 
-    /** The command this block will execute when powered. */
+    /**
+     * The command this block will execute when powered.
+     */
     private String command = "";
     private String field_96105_c = "@";
 
     /**
      * Sets the command this block will execute when powered.
      */
-    public void setCommand(String par1Str)
-    {
+    public void setCommand(String par1Str) {
         this.command = par1Str;
         this.onInventoryChanged();
     }
@@ -22,31 +22,23 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
     /**
      * Return the command this command block is set to execute.
      */
-    public String getCommand()
-    {
+    public String getCommand() {
         return this.command;
     }
 
     /**
      * Execute the command, called when the command block is powered.
      */
-    public int executeCommandOnPowered(World par1World)
-    {
-        if (par1World.isRemote)
-        {
+    public int executeCommandOnPowered(World par1World) {
+        if (par1World.isRemote) {
             return 0;
-        }
-        else
-        {
+        } else {
             MinecraftServer var2 = MinecraftServer.getServer();
 
-            if (var2 != null && var2.isCommandBlockEnabled())
-            {
+            if (var2 != null && var2.isCommandBlockEnabled()) {
                 ICommandManager var3 = var2.getCommandManager();
                 return var3.executeCommand(this, this.command);
-            }
-            else
-            {
+            } else {
                 return 0;
             }
         }
@@ -55,39 +47,35 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
     /**
      * Gets the name of this command sender (usually username, but possibly "Rcon")
      */
-    public String getCommandSenderName()
-    {
+    public String getCommandSenderName() {
         return this.field_96105_c;
     }
 
-    public void func_96104_c(String par1Str)
-    {
+    public void func_96104_c(String par1Str) {
         this.field_96105_c = par1Str;
     }
 
-    public void sendChatToPlayer(String par1Str) {}
+    public void sendChatToPlayer(String par1Str) {
+    }
 
     /**
      * Returns true if the command sender is allowed to use the given command.
      */
-    public boolean canCommandSenderUseCommand(int par1, String par2Str)
-    {
+    public boolean canCommandSenderUseCommand(int par1, String par2Str) {
         return par1 <= 2;
     }
 
     /**
      * Translates and formats the given string key with the given arguments.
      */
-    public String translateString(String par1Str, Object ... par2ArrayOfObj)
-    {
+    public String translateString(String par1Str, Object... par2ArrayOfObj) {
         return par1Str;
     }
 
     /**
      * Writes a tile entity to NBT.
      */
-    public void writeToNBT(NBTTagCompound par1NBTTagCompound)
-    {
+    public void writeToNBT(NBTTagCompound par1NBTTagCompound) {
         super.writeToNBT(par1NBTTagCompound);
         par1NBTTagCompound.setString("Command", this.command);
         par1NBTTagCompound.setInteger("SuccessCount", this.field_96106_a);
@@ -97,14 +85,12 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
     /**
      * Reads a tile entity from NBT.
      */
-    public void readFromNBT(NBTTagCompound par1NBTTagCompound)
-    {
+    public void readFromNBT(NBTTagCompound par1NBTTagCompound) {
         super.readFromNBT(par1NBTTagCompound);
         this.command = par1NBTTagCompound.getString("Command");
         this.field_96106_a = par1NBTTagCompound.getInteger("SuccessCount");
 
-        if (par1NBTTagCompound.hasKey("CustomName"))
-        {
+        if (par1NBTTagCompound.hasKey("CustomName")) {
             this.field_96105_c = par1NBTTagCompound.getString("CustomName");
         }
     }
@@ -112,28 +98,24 @@ public class TileEntityCommandBlock extends TileEntity implements ICommandSender
     /**
      * Return the position for this command sender.
      */
-    public ChunkCoordinates getPlayerCoordinates()
-    {
+    public ChunkCoordinates getPlayerCoordinates() {
         return new ChunkCoordinates(this.xCoord, this.yCoord, this.zCoord);
     }
 
     /**
      * Overriden in a sign to provide the text.
      */
-    public Packet getDescriptionPacket()
-    {
+    public Packet getDescriptionPacket() {
         NBTTagCompound var1 = new NBTTagCompound();
         this.writeToNBT(var1);
         return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 2, var1);
     }
 
-    public int func_96103_d()
-    {
+    public int func_96103_d() {
         return this.field_96106_a;
     }
 
-    public void func_96102_a(int par1)
-    {
+    public void func_96102_a(int par1) {
         this.field_96106_a = par1;
     }
 }

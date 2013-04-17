@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-class ScheduledSound
-{
+class ScheduledSound {
     String field_92069_a;
     float field_92067_b;
     float field_92068_c;
@@ -10,8 +9,7 @@ class ScheduledSound
     float field_92063_f;
     int field_92064_g;
 
-    public ScheduledSound(String par1Str, float par2, float par3, float par4, float par5, float par6, int par7)
-    {
+    public ScheduledSound(String par1Str, float par2, float par3, float par4, float par5, float par6, int par7) {
         this.field_92069_a = par1Str;
         this.field_92067_b = par2;
         this.field_92068_c = par3;

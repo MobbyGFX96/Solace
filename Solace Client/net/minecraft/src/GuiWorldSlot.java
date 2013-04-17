@@ -2,12 +2,10 @@ package net.minecraft.src;
 
 import java.util.Date;
 
-class GuiWorldSlot extends GuiSlot
-{
+class GuiWorldSlot extends GuiSlot {
     final GuiSelectWorld parentWorldGui;
 
-    public GuiWorldSlot(GuiSelectWorld par1GuiSelectWorld)
-    {
+    public GuiWorldSlot(GuiSelectWorld par1GuiSelectWorld) {
         super(par1GuiSelectWorld.mc, par1GuiSelectWorld.width, par1GuiSelectWorld.height, 32, par1GuiSelectWorld.height - 64, 36);
         this.parentWorldGui = par1GuiSelectWorld;
     }
@@ -15,16 +13,14 @@ class GuiWorldSlot extends GuiSlot
     /**
      * Gets the size of the current slot list.
      */
-    protected int getSize()
-    {
+    protected int getSize() {
         return GuiSelectWorld.getSize(this.parentWorldGui).size();
     }
 
     /**
      * the element in the slot that was clicked, boolean for wether it was double clicked or not
      */
-    protected void elementClicked(int par1, boolean par2)
-    {
+    protected void elementClicked(int par1, boolean par2) {
         GuiSelectWorld.onElementSelected(this.parentWorldGui, par1);
         boolean var3 = GuiSelectWorld.getSelectedWorld(this.parentWorldGui) >= 0 && GuiSelectWorld.getSelectedWorld(this.parentWorldGui) < this.getSize();
         GuiSelectWorld.getSelectButton(this.parentWorldGui).enabled = var3;
@@ -32,8 +28,7 @@ class GuiWorldSlot extends GuiSlot
         GuiSelectWorld.getDeleteButton(this.parentWorldGui).enabled = var3;
         GuiSelectWorld.func_82312_f(this.parentWorldGui).enabled = var3;
 
-        if (par2 && var3)
-        {
+        if (par2 && var3) {
             this.parentWorldGui.selectWorld(par1);
         }
     }
@@ -41,31 +36,26 @@ class GuiWorldSlot extends GuiSlot
     /**
      * returns true if the element passed in is currently selected
      */
-    protected boolean isSelected(int par1)
-    {
+    protected boolean isSelected(int par1) {
         return par1 == GuiSelectWorld.getSelectedWorld(this.parentWorldGui);
     }
 
     /**
      * return the height of the content being scrolled
      */
-    protected int getContentHeight()
-    {
+    protected int getContentHeight() {
         return GuiSelectWorld.getSize(this.parentWorldGui).size() * 36;
     }
 
-    protected void drawBackground()
-    {
+    protected void drawBackground() {
         this.parentWorldGui.drawDefaultBackground();
     }
 
-    protected void drawSlot(int par1, int par2, int par3, int par4, Tessellator par5Tessellator)
-    {
-        SaveFormatComparator var6 = (SaveFormatComparator)GuiSelectWorld.getSize(this.parentWorldGui).get(par1);
+    protected void drawSlot(int par1, int par2, int par3, int par4, Tessellator par5Tessellator) {
+        SaveFormatComparator var6 = (SaveFormatComparator) GuiSelectWorld.getSize(this.parentWorldGui).get(par1);
         String var7 = var6.getDisplayName();
 
-        if (var7 == null || MathHelper.stringNullOrLengthZero(var7))
-        {
+        if (var7 == null || MathHelper.stringNullOrLengthZero(var7)) {
             var7 = GuiSelectWorld.func_82313_g(this.parentWorldGui) + " " + (par1 + 1);
         }
 
@@ -74,21 +64,16 @@ class GuiWorldSlot extends GuiSlot
         var8 = var8 + ")";
         String var9 = "";
 
-        if (var6.requiresConversion())
-        {
+        if (var6.requiresConversion()) {
             var9 = GuiSelectWorld.func_82311_i(this.parentWorldGui) + " " + var9;
-        }
-        else
-        {
+        } else {
             var9 = GuiSelectWorld.func_82314_j(this.parentWorldGui)[var6.getEnumGameType().getID()];
 
-            if (var6.isHardcoreModeEnabled())
-            {
+            if (var6.isHardcoreModeEnabled()) {
                 var9 = EnumChatFormatting.DARK_RED + StatCollector.translateToLocal("gameMode.hardcore") + EnumChatFormatting.RESET;
             }
 
-            if (var6.getCheatsEnabled())
-            {
+            if (var6.getCheatsEnabled()) {
                 var9 = var9 + ", " + StatCollector.translateToLocal("selectWorld.cheats");
             }
         }

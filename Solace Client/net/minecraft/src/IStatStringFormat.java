@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public interface IStatStringFormat
-{
+public interface IStatStringFormat {
     /**
      * Formats the strings based on 'IStatStringFormat' interface.
      */

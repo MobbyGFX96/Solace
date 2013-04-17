@@ -2,13 +2,13 @@ package net.minecraft.src;
 
 import java.util.List;
 
-public class BlockWall extends Block
-{
-    /** The types of the wall. */
-    public static final String[] types = new String[] {"normal", "mossy"};
+public class BlockWall extends Block {
+    /**
+     * The types of the wall.
+     */
+    public static final String[] types = new String[]{"normal", "mossy"};
 
-    public BlockWall(int par1, Block par2Block)
-    {
+    public BlockWall(int par1, Block par2Block) {
         super(par1, par2Block.blockMaterial);
         this.setHardness(par2Block.blockHardness);
         this.setResistance(par2Block.blockResistance / 3.0F);
@@ -19,29 +19,25 @@ public class BlockWall extends Block
     /**
      * From the specified side and block metadata retrieves the blocks texture. Args: side, metadata
      */
-    public Icon getBlockTextureFromSideAndMetadata(int par1, int par2)
-    {
+    public Icon getBlockTextureFromSideAndMetadata(int par1, int par2) {
         return par2 == 1 ? Block.cobblestoneMossy.getBlockTextureFromSide(par1) : Block.cobblestone.getBlockTextureFromSide(par1);
     }
 
     /**
      * The type of render function that is called for this block
      */
-    public int getRenderType()
-    {
+    public int getRenderType() {
         return 32;
     }
 
     /**
      * If this block doesn't render as an ordinary block it will return False (examples: signs, buttons, stairs, etc)
      */
-    public boolean renderAsNormalBlock()
-    {
+    public boolean renderAsNormalBlock() {
         return false;
     }
 
-    public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
-    {
+    public boolean getBlocksMovement(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         return false;
     }
 
@@ -49,16 +45,14 @@ public class BlockWall extends Block
      * Is this block (a) opaque and (b) a full 1m cube?  This determines whether or not to render the shared face of two
      * adjacent blocks and also whether the player can attach torches, redstone wire, etc to this block.
      */
-    public boolean isOpaqueCube()
-    {
+    public boolean isOpaqueCube() {
         return false;
     }
 
     /**
      * Updates the blocks bounds based on its current state. Args: world, x, y, z
      */
-    public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
-    {
+    public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         boolean var5 = this.canConnectWallTo(par1IBlockAccess, par2, par3, par4 - 1);
         boolean var6 = this.canConnectWallTo(par1IBlockAccess, par2, par3, par4 + 1);
         boolean var7 = this.canConnectWallTo(par1IBlockAccess, par2 - 1, par3, par4);
@@ -69,34 +63,27 @@ public class BlockWall extends Block
         float var12 = 0.75F;
         float var13 = 1.0F;
 
-        if (var5)
-        {
+        if (var5) {
             var11 = 0.0F;
         }
 
-        if (var6)
-        {
+        if (var6) {
             var12 = 1.0F;
         }
 
-        if (var7)
-        {
+        if (var7) {
             var9 = 0.0F;
         }
 
-        if (var8)
-        {
+        if (var8) {
             var10 = 1.0F;
         }
 
-        if (var5 && var6 && !var7 && !var8)
-        {
+        if (var5 && var6 && !var7 && !var8) {
             var13 = 0.8125F;
             var9 = 0.3125F;
             var10 = 0.6875F;
-        }
-        else if (!var5 && !var6 && var7 && var8)
-        {
+        } else if (!var5 && !var6 && var7 && var8) {
             var13 = 0.8125F;
             var11 = 0.3125F;
             var12 = 0.6875F;
@@ -109,8 +96,7 @@ public class BlockWall extends Block
      * Returns a bounding box from the pool of bounding boxes (this means this box can change after the pool has been
      * cleared to be reused)
      */
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
-    {
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
         this.setBlockBoundsBasedOnState(par1World, par2, par3, par4);
         this.maxY = 1.5D;
         return super.getCollisionBoundingBoxFromPool(par1World, par2, par3, par4);
@@ -119,17 +105,13 @@ public class BlockWall extends Block
     /**
      * Return whether an adjacent block can connect to a wall.
      */
-    public boolean canConnectWallTo(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
-    {
+    public boolean canConnectWallTo(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
         int var5 = par1IBlockAccess.getBlockId(par2, par3, par4);
 
-        if (var5 != this.blockID && var5 != Block.fenceGate.blockID)
-        {
+        if (var5 != this.blockID && var5 != Block.fenceGate.blockID) {
             Block var6 = Block.blocksList[var5];
             return var6 != null && var6.blockMaterial.isOpaque() && var6.renderAsNormalBlock() ? var6.blockMaterial != Material.pumpkin : false;
-        }
-        else
-        {
+        } else {
             return true;
         }
     }
@@ -137,8 +119,7 @@ public class BlockWall extends Block
     /**
      * returns a list of blocks with the same ID, but different meta (eg: wood returns 4 blocks)
      */
-    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
-    {
+    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List) {
         par3List.add(new ItemStack(par1, 1, 0));
         par3List.add(new ItemStack(par1, 1, 1));
     }
@@ -146,8 +127,7 @@ public class BlockWall extends Block
     /**
      * Determines the damage on the item the block drops. Used in cloth and wood.
      */
-    public int damageDropped(int par1)
-    {
+    public int damageDropped(int par1) {
         return par1;
     }
 
@@ -155,8 +135,7 @@ public class BlockWall extends Block
      * Returns true if the given side of this block type should be rendered, if the adjacent block is at the given
      * coordinates.  Args: blockAccess, x, y, z, side
      */
-    public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
-    {
+    public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
         return par5 == 0 ? super.shouldSideBeRendered(par1IBlockAccess, par2, par3, par4, par5) : true;
     }
 
@@ -164,5 +143,6 @@ public class BlockWall extends Block
      * When this method is called, your block should register all the icons it needs with the given IconRegister. This
      * is the only chance you get to register icons.
      */
-    public void registerIcons(IconRegister par1IconRegister) {}
+    public void registerIcons(IconRegister par1IconRegister) {
+    }
 }

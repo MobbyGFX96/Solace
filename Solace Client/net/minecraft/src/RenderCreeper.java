@@ -2,31 +2,28 @@ package net.minecraft.src;
 
 import org.lwjgl.opengl.GL11;
 
-public class RenderCreeper extends RenderLiving
-{
-    /** The creeper model. */
+public class RenderCreeper extends RenderLiving {
+    /**
+     * The creeper model.
+     */
     private ModelBase creeperModel = new ModelCreeper(2.0F);
 
-    public RenderCreeper()
-    {
+    public RenderCreeper() {
         super(new ModelCreeper(), 0.5F);
     }
 
     /**
      * Updates creeper scale in prerender callback
      */
-    protected void updateCreeperScale(EntityCreeper par1EntityCreeper, float par2)
-    {
+    protected void updateCreeperScale(EntityCreeper par1EntityCreeper, float par2) {
         float var4 = par1EntityCreeper.getCreeperFlashIntensity(par2);
         float var5 = 1.0F + MathHelper.sin(var4 * 100.0F) * var4 * 0.01F;
 
-        if (var4 < 0.0F)
-        {
+        if (var4 < 0.0F) {
             var4 = 0.0F;
         }
 
-        if (var4 > 1.0F)
-        {
+        if (var4 > 1.0F) {
             var4 = 1.0F;
         }
 
@@ -40,25 +37,19 @@ public class RenderCreeper extends RenderLiving
     /**
      * Updates color multiplier based on creeper state called by getColorMultiplier
      */
-    protected int updateCreeperColorMultiplier(EntityCreeper par1EntityCreeper, float par2, float par3)
-    {
+    protected int updateCreeperColorMultiplier(EntityCreeper par1EntityCreeper, float par2, float par3) {
         float var5 = par1EntityCreeper.getCreeperFlashIntensity(par3);
 
-        if ((int)(var5 * 10.0F) % 2 == 0)
-        {
+        if ((int) (var5 * 10.0F) % 2 == 0) {
             return 0;
-        }
-        else
-        {
-            int var6 = (int)(var5 * 0.2F * 255.0F);
+        } else {
+            int var6 = (int) (var5 * 0.2F * 255.0F);
 
-            if (var6 < 0)
-            {
+            if (var6 < 0) {
                 var6 = 0;
             }
 
-            if (var6 > 255)
-            {
+            if (var6 > 255) {
                 var6 = 255;
             }
 
@@ -72,22 +63,16 @@ public class RenderCreeper extends RenderLiving
     /**
      * A method used to render a creeper's powered form as a pass model.
      */
-    protected int renderCreeperPassModel(EntityCreeper par1EntityCreeper, int par2, float par3)
-    {
-        if (par1EntityCreeper.getPowered())
-        {
-            if (par1EntityCreeper.getHasActivePotion())
-            {
+    protected int renderCreeperPassModel(EntityCreeper par1EntityCreeper, int par2, float par3) {
+        if (par1EntityCreeper.getPowered()) {
+            if (par1EntityCreeper.getHasActivePotion()) {
                 GL11.glDepthMask(false);
-            }
-            else
-            {
+            } else {
                 GL11.glDepthMask(true);
             }
 
-            if (par2 == 1)
-            {
-                float var4 = (float)par1EntityCreeper.ticksExisted + par3;
+            if (par2 == 1) {
+                float var4 = (float) par1EntityCreeper.ticksExisted + par3;
                 this.loadTexture("/armor/power.png");
                 GL11.glMatrixMode(GL11.GL_TEXTURE);
                 GL11.glLoadIdentity();
@@ -104,8 +89,7 @@ public class RenderCreeper extends RenderLiving
                 return 1;
             }
 
-            if (par2 == 2)
-            {
+            if (par2 == 2) {
                 GL11.glMatrixMode(GL11.GL_TEXTURE);
                 GL11.glLoadIdentity();
                 GL11.glMatrixMode(GL11.GL_MODELVIEW);
@@ -117,8 +101,7 @@ public class RenderCreeper extends RenderLiving
         return -1;
     }
 
-    protected int func_77061_b(EntityCreeper par1EntityCreeper, int par2, float par3)
-    {
+    protected int func_77061_b(EntityCreeper par1EntityCreeper, int par2, float par3) {
         return -1;
     }
 
@@ -126,29 +109,25 @@ public class RenderCreeper extends RenderLiving
      * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
      * entityLiving, partialTickTime
      */
-    protected void preRenderCallback(EntityLiving par1EntityLiving, float par2)
-    {
-        this.updateCreeperScale((EntityCreeper)par1EntityLiving, par2);
+    protected void preRenderCallback(EntityLiving par1EntityLiving, float par2) {
+        this.updateCreeperScale((EntityCreeper) par1EntityLiving, par2);
     }
 
     /**
      * Returns an ARGB int color back. Args: entityLiving, lightBrightness, partialTickTime
      */
-    protected int getColorMultiplier(EntityLiving par1EntityLiving, float par2, float par3)
-    {
-        return this.updateCreeperColorMultiplier((EntityCreeper)par1EntityLiving, par2, par3);
+    protected int getColorMultiplier(EntityLiving par1EntityLiving, float par2, float par3) {
+        return this.updateCreeperColorMultiplier((EntityCreeper) par1EntityLiving, par2, par3);
     }
 
     /**
      * Queries whether should render the specified pass or not.
      */
-    protected int shouldRenderPass(EntityLiving par1EntityLiving, int par2, float par3)
-    {
-        return this.renderCreeperPassModel((EntityCreeper)par1EntityLiving, par2, par3);
+    protected int shouldRenderPass(EntityLiving par1EntityLiving, int par2, float par3) {
+        return this.renderCreeperPassModel((EntityCreeper) par1EntityLiving, par2, par3);
     }
 
-    protected int inheritRenderPass(EntityLiving par1EntityLiving, int par2, float par3)
-    {
-        return this.func_77061_b((EntityCreeper)par1EntityLiving, par2, par3);
+    protected int inheritRenderPass(EntityLiving par1EntityLiving, int par2, float par3) {
+        return this.func_77061_b((EntityCreeper) par1EntityLiving, par2, par3);
     }
 }

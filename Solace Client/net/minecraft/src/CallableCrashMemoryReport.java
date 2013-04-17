@@ -2,17 +2,14 @@ package net.minecraft.src;
 
 import java.util.concurrent.Callable;
 
-class CallableCrashMemoryReport implements Callable
-{
+class CallableCrashMemoryReport implements Callable {
     final CrashReport theCrashReport;
 
-    CallableCrashMemoryReport(CrashReport par1CrashReport)
-    {
+    CallableCrashMemoryReport(CrashReport par1CrashReport) {
         this.theCrashReport = par1CrashReport;
     }
 
-    public String func_83003_a()
-    {
+    public String func_83003_a() {
         int var1 = AxisAlignedBB.getAABBPool().getlistAABBsize();
         int var2 = 56 * var1;
         int var3 = var2 / 1024 / 1024;
@@ -22,8 +19,7 @@ class CallableCrashMemoryReport implements Callable
         return var1 + " (" + var2 + " bytes; " + var3 + " MB) allocated, " + var4 + " (" + var5 + " bytes; " + var6 + " MB) used";
     }
 
-    public Object call()
-    {
+    public Object call() {
         return this.func_83003_a();
     }
 }

@@ -5,23 +5,19 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.List;
 
-public class Packet40EntityMetadata extends Packet
-{
+public class Packet40EntityMetadata extends Packet {
     public int entityId;
     private List metadata;
 
-    public Packet40EntityMetadata() {}
+    public Packet40EntityMetadata() {
+    }
 
-    public Packet40EntityMetadata(int par1, DataWatcher par2DataWatcher, boolean par3)
-    {
+    public Packet40EntityMetadata(int par1, DataWatcher par2DataWatcher, boolean par3) {
         this.entityId = par1;
 
-        if (par3)
-        {
+        if (par3) {
             this.metadata = par2DataWatcher.getAllWatched();
-        }
-        else
-        {
+        } else {
             this.metadata = par2DataWatcher.unwatchAndReturnAllWatched();
         }
     }
@@ -29,8 +25,7 @@ public class Packet40EntityMetadata extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInputStream par1DataInputStream) throws IOException
-    {
+    public void readPacketData(DataInputStream par1DataInputStream) throws IOException {
         this.entityId = par1DataInputStream.readInt();
         this.metadata = DataWatcher.readWatchableObjects(par1DataInputStream);
     }
@@ -38,8 +33,7 @@ public class Packet40EntityMetadata extends Packet
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
-    {
+    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException {
         par1DataOutputStream.writeInt(this.entityId);
         DataWatcher.writeObjectsInListToStream(this.metadata, par1DataOutputStream);
     }
@@ -47,21 +41,18 @@ public class Packet40EntityMetadata extends Packet
     /**
      * Passes this Packet on to the NetHandler for processing.
      */
-    public void processPacket(NetHandler par1NetHandler)
-    {
+    public void processPacket(NetHandler par1NetHandler) {
         par1NetHandler.handleEntityMetadata(this);
     }
 
     /**
      * Abstract. Return the size of the packet (not counting the header).
      */
-    public int getPacketSize()
-    {
+    public int getPacketSize() {
         return 5;
     }
 
-    public List getMetadata()
-    {
+    public List getMetadata() {
         return this.metadata;
     }
 }

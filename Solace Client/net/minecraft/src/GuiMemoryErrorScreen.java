@@ -1,12 +1,10 @@
 package net.minecraft.src;
 
-public class GuiMemoryErrorScreen extends GuiScreen
-{
+public class GuiMemoryErrorScreen extends GuiScreen {
     /**
      * Adds the buttons (and other controls) to the screen in question.
      */
-    public void initGui()
-    {
+    public void initGui() {
         StringTranslate var1 = StringTranslate.getInstance();
         this.buttonList.clear();
         this.buttonList.add(new GuiSmallButton(0, this.width / 2 - 155, this.height / 4 + 120 + 12, var1.translateKey("gui.toMenu")));
@@ -16,14 +14,10 @@ public class GuiMemoryErrorScreen extends GuiScreen
     /**
      * Fired when a control is clicked. This is the equivalent of ActionListener.actionPerformed(ActionEvent e).
      */
-    protected void actionPerformed(GuiButton par1GuiButton)
-    {
-        if (par1GuiButton.id == 0)
-        {
+    protected void actionPerformed(GuiButton par1GuiButton) {
+        if (par1GuiButton.id == 0) {
             this.mc.displayGuiScreen(new GuiMainMenu());
-        }
-        else if (par1GuiButton.id == 1)
-        {
+        } else if (par1GuiButton.id == 1) {
             this.mc.shutdown();
         }
     }
@@ -31,13 +25,13 @@ public class GuiMemoryErrorScreen extends GuiScreen
     /**
      * Fired when a key is typed. This is the equivalent of KeyListener.keyTyped(KeyEvent e).
      */
-    protected void keyTyped(char par1, int par2) {}
+    protected void keyTyped(char par1, int par2) {
+    }
 
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
-    {
+    public void drawScreen(int par1, int par2, float par3) {
         this.drawDefaultBackground();
         this.drawCenteredString(this.fontRenderer, "Out of memory!", this.width / 2, this.height / 4 - 60 + 20, 16777215);
         this.drawString(this.fontRenderer, "Minecraft has run out of memory.", this.width / 2 - 140, this.height / 4 - 60 + 60 + 0, 10526880);

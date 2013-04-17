@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public class GuiCreateFlatWorld extends GuiScreen
-{
+public class GuiCreateFlatWorld extends GuiScreen {
     private static RenderItem theRenderItem = new RenderItem();
     private final GuiCreateWorld createWorldGui;
     private FlatGeneratorInfo theFlatGeneratorInfo = FlatGeneratorInfo.getDefaultFlatGenerator();
@@ -13,27 +12,23 @@ public class GuiCreateFlatWorld extends GuiScreen
     private GuiButton buttonEditLayer;
     private GuiButton buttonRemoveLayer;
 
-    public GuiCreateFlatWorld(GuiCreateWorld par1GuiCreateWorld, String par2Str)
-    {
+    public GuiCreateFlatWorld(GuiCreateWorld par1GuiCreateWorld, String par2Str) {
         this.createWorldGui = par1GuiCreateWorld;
         this.setFlatGeneratorInfo(par2Str);
     }
 
-    public String getFlatGeneratorInfo()
-    {
+    public String getFlatGeneratorInfo() {
         return this.theFlatGeneratorInfo.toString();
     }
 
-    public void setFlatGeneratorInfo(String par1Str)
-    {
+    public void setFlatGeneratorInfo(String par1Str) {
         this.theFlatGeneratorInfo = FlatGeneratorInfo.createFlatGeneratorFromString(par1Str);
     }
 
     /**
      * Adds the buttons (and other controls) to the screen in question.
      */
-    public void initGui()
-    {
+    public void initGui() {
         this.buttonList.clear();
         this.customizationTitle = StatCollector.translateToLocal("createWorld.customize.flat.title");
         this.layerMaterialLabel = StatCollector.translateToLocal("createWorld.customize.flat.tile");
@@ -53,25 +48,17 @@ public class GuiCreateFlatWorld extends GuiScreen
     /**
      * Fired when a control is clicked. This is the equivalent of ActionListener.actionPerformed(ActionEvent e).
      */
-    protected void actionPerformed(GuiButton par1GuiButton)
-    {
+    protected void actionPerformed(GuiButton par1GuiButton) {
         int var2 = this.theFlatGeneratorInfo.getFlatLayers().size() - this.createFlatWorldListSlotGui.field_82454_a - 1;
 
-        if (par1GuiButton.id == 1)
-        {
+        if (par1GuiButton.id == 1) {
             this.mc.displayGuiScreen(this.createWorldGui);
-        }
-        else if (par1GuiButton.id == 0)
-        {
+        } else if (par1GuiButton.id == 0) {
             this.createWorldGui.generatorOptionsToUse = this.getFlatGeneratorInfo();
             this.mc.displayGuiScreen(this.createWorldGui);
-        }
-        else if (par1GuiButton.id == 5)
-        {
+        } else if (par1GuiButton.id == 5) {
             this.mc.displayGuiScreen(new GuiFlatPresets(this));
-        }
-        else if (par1GuiButton.id == 4 && this.func_82272_i())
-        {
+        } else if (par1GuiButton.id == 4 && this.func_82272_i()) {
             this.theFlatGeneratorInfo.getFlatLayers().remove(var2);
             this.createFlatWorldListSlotGui.field_82454_a = Math.min(this.createFlatWorldListSlotGui.field_82454_a, this.theFlatGeneratorInfo.getFlatLayers().size() - 1);
         }
@@ -80,8 +67,7 @@ public class GuiCreateFlatWorld extends GuiScreen
         this.func_82270_g();
     }
 
-    public void func_82270_g()
-    {
+    public void func_82270_g() {
         boolean var1 = this.func_82272_i();
         this.buttonRemoveLayer.enabled = var1;
         this.buttonEditLayer.enabled = var1;
@@ -89,16 +75,14 @@ public class GuiCreateFlatWorld extends GuiScreen
         this.buttonAddLayer.enabled = false;
     }
 
-    private boolean func_82272_i()
-    {
+    private boolean func_82272_i() {
         return this.createFlatWorldListSlotGui.field_82454_a > -1 && this.createFlatWorldListSlotGui.field_82454_a < this.theFlatGeneratorInfo.getFlatLayers().size();
     }
 
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
-    {
+    public void drawScreen(int par1, int par2, float par3) {
         this.drawDefaultBackground();
         this.createFlatWorldListSlotGui.drawScreen(par1, par2, par3);
         this.drawCenteredString(this.fontRenderer, this.customizationTitle, this.width / 2, 8, 16777215);
@@ -108,13 +92,11 @@ public class GuiCreateFlatWorld extends GuiScreen
         super.drawScreen(par1, par2, par3);
     }
 
-    static RenderItem getRenderItem()
-    {
+    static RenderItem getRenderItem() {
         return theRenderItem;
     }
 
-    static FlatGeneratorInfo func_82271_a(GuiCreateFlatWorld par0GuiCreateFlatWorld)
-    {
+    static FlatGeneratorInfo func_82271_a(GuiCreateFlatWorld par0GuiCreateFlatWorld) {
         return par0GuiCreateFlatWorld.theFlatGeneratorInfo;
     }
 }

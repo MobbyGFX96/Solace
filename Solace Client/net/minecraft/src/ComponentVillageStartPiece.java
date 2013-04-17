@@ -3,14 +3,17 @@ package net.minecraft.src;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class ComponentVillageStartPiece extends ComponentVillageWell
-{
+public class ComponentVillageStartPiece extends ComponentVillageWell {
     public final WorldChunkManager worldChunkMngr;
 
-    /** Boolean that determines if the village is in a desert or not. */
+    /**
+     * Boolean that determines if the village is in a desert or not.
+     */
     public final boolean inDesert;
 
-    /** World terrain type, 0 for normal, 1 for flap map */
+    /**
+     * World terrain type, 0 for normal, 1 for flap map
+     */
     public final int terrainType;
     public StructureVillagePieceWeight structVillagePieceWeight;
 
@@ -22,9 +25,8 @@ public class ComponentVillageStartPiece extends ComponentVillageWell
     public ArrayList field_74932_i = new ArrayList();
     public ArrayList field_74930_j = new ArrayList();
 
-    public ComponentVillageStartPiece(WorldChunkManager par1WorldChunkManager, int par2, Random par3Random, int par4, int par5, ArrayList par6ArrayList, int par7)
-    {
-        super((ComponentVillageStartPiece)null, 0, par3Random, par4, par5);
+    public ComponentVillageStartPiece(WorldChunkManager par1WorldChunkManager, int par2, Random par3Random, int par4, int par5, ArrayList par6ArrayList, int par7) {
+        super((ComponentVillageStartPiece) null, 0, par3Random, par4, par5);
         this.worldChunkMngr = par1WorldChunkManager;
         this.structureVillageWeightedPieceList = par6ArrayList;
         this.terrainType = par7;
@@ -33,8 +35,7 @@ public class ComponentVillageStartPiece extends ComponentVillageWell
         this.startPiece = this;
     }
 
-    public WorldChunkManager getWorldChunkManager()
-    {
+    public WorldChunkManager getWorldChunkManager() {
         return this.worldChunkMngr;
     }
 }

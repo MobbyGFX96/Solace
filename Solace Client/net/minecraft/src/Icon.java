@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public interface Icon
-{
+public interface Icon {
     /**
      * Returns the X position of this icon on its texture sheet, in pixels.
      */

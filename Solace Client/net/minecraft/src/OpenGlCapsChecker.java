@@ -2,13 +2,11 @@ package net.minecraft.src;
 
 import org.lwjgl.opengl.GLContext;
 
-public class OpenGlCapsChecker
-{
+public class OpenGlCapsChecker {
     /**
      * Checks if we support OpenGL occlusion.
      */
-    public static boolean checkARBOcclusion()
-    {
+    public static boolean checkARBOcclusion() {
         return GLContext.getCapabilities().GL_ARB_occlusion_query;
     }
 }

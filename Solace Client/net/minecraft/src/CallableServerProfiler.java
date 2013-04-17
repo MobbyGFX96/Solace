@@ -1,20 +1,20 @@
 package net.minecraft.src;
 
-import java.util.concurrent.Callable;
 import net.minecraft.server.MinecraftServer;
 
-public class CallableServerProfiler implements Callable
-{
-    /** Reference to the MinecraftServer object. */
+import java.util.concurrent.Callable;
+
+public class CallableServerProfiler implements Callable {
+    /**
+     * Reference to the MinecraftServer object.
+     */
     final MinecraftServer mcServer;
 
-    public CallableServerProfiler(MinecraftServer par1)
-    {
+    public CallableServerProfiler(MinecraftServer par1) {
         this.mcServer = par1;
     }
 
-    public String callServerProfiler()
-    {
+    public String callServerProfiler() {
         int var1 = this.mcServer.worldServers[0].getWorldVec3Pool().getPoolSize();
         int var2 = 56 * var1;
         int var3 = var2 / 1024 / 1024;
@@ -24,8 +24,7 @@ public class CallableServerProfiler implements Callable
         return var1 + " (" + var2 + " bytes; " + var3 + " MB) allocated, " + var4 + " (" + var5 + " bytes; " + var6 + " MB) used";
     }
 
-    public Object call()
-    {
+    public Object call() {
         return this.callServerProfiler();
     }
 }

@@ -1,42 +1,43 @@
 package net.minecraft.src;
 
-public class GuiControls extends GuiScreen
-{
+public class GuiControls extends GuiScreen {
     /**
      * A reference to the screen object that created this. Used for navigating between screens.
      */
     private GuiScreen parentScreen;
 
-    /** The title string that is displayed in the top-center of the screen. */
+    /**
+     * The title string that is displayed in the top-center of the screen.
+     */
     protected String screenTitle = "Controls";
 
-    /** Reference to the GameSettings object. */
+    /**
+     * Reference to the GameSettings object.
+     */
     private GameSettings options;
 
-    /** The ID of the  button that has been pressed. */
+    /**
+     * The ID of the  button that has been pressed.
+     */
     private int buttonId = -1;
 
-    public GuiControls(GuiScreen par1GuiScreen, GameSettings par2GameSettings)
-    {
+    public GuiControls(GuiScreen par1GuiScreen, GameSettings par2GameSettings) {
         this.parentScreen = par1GuiScreen;
         this.options = par2GameSettings;
     }
 
-    private int func_73907_g()
-    {
+    private int func_73907_g() {
         return this.width / 2 - 155;
     }
 
     /**
      * Adds the buttons (and other controls) to the screen in question.
      */
-    public void initGui()
-    {
+    public void initGui() {
         StringTranslate var1 = StringTranslate.getInstance();
         int var2 = this.func_73907_g();
 
-        for (int var3 = 0; var3 < this.options.keyBindings.length; ++var3)
-        {
+        for (int var3 = 0; var3 < this.options.keyBindings.length; ++var3) {
             this.buttonList.add(new GuiSmallButton(var3, var2 + var3 % 2 * 160, this.height / 6 + 24 * (var3 >> 1), 70, 20, this.options.getOptionDisplayString(var3)));
         }
 
@@ -47,19 +48,14 @@ public class GuiControls extends GuiScreen
     /**
      * Fired when a control is clicked. This is the equivalent of ActionListener.actionPerformed(ActionEvent e).
      */
-    protected void actionPerformed(GuiButton par1GuiButton)
-    {
-        for (int var2 = 0; var2 < this.options.keyBindings.length; ++var2)
-        {
-            ((GuiButton)this.buttonList.get(var2)).displayString = this.options.getOptionDisplayString(var2);
+    protected void actionPerformed(GuiButton par1GuiButton) {
+        for (int var2 = 0; var2 < this.options.keyBindings.length; ++var2) {
+            ((GuiButton) this.buttonList.get(var2)).displayString = this.options.getOptionDisplayString(var2);
         }
 
-        if (par1GuiButton.id == 200)
-        {
+        if (par1GuiButton.id == 200) {
             this.mc.displayGuiScreen(this.parentScreen);
-        }
-        else
-        {
+        } else {
             this.buttonId = par1GuiButton.id;
             par1GuiButton.displayString = "> " + this.options.getOptionDisplayString(par1GuiButton.id) + " <";
         }
@@ -68,17 +64,13 @@ public class GuiControls extends GuiScreen
     /**
      * Called when the mouse is clicked.
      */
-    protected void mouseClicked(int par1, int par2, int par3)
-    {
-        if (this.buttonId >= 0)
-        {
+    protected void mouseClicked(int par1, int par2, int par3) {
+        if (this.buttonId >= 0) {
             this.options.setKeyBinding(this.buttonId, -100 + par3);
-            ((GuiButton)this.buttonList.get(this.buttonId)).displayString = this.options.getOptionDisplayString(this.buttonId);
+            ((GuiButton) this.buttonList.get(this.buttonId)).displayString = this.options.getOptionDisplayString(this.buttonId);
             this.buttonId = -1;
             KeyBinding.resetKeyBindingArrayAndHash();
-        }
-        else
-        {
+        } else {
             super.mouseClicked(par1, par2, par3);
         }
     }
@@ -86,17 +78,13 @@ public class GuiControls extends GuiScreen
     /**
      * Fired when a key is typed. This is the equivalent of KeyListener.keyTyped(KeyEvent e).
      */
-    protected void keyTyped(char par1, int par2)
-    {
-        if (this.buttonId >= 0)
-        {
+    protected void keyTyped(char par1, int par2) {
+        if (this.buttonId >= 0) {
             this.options.setKeyBinding(this.buttonId, par2);
-            ((GuiButton)this.buttonList.get(this.buttonId)).displayString = this.options.getOptionDisplayString(this.buttonId);
+            ((GuiButton) this.buttonList.get(this.buttonId)).displayString = this.options.getOptionDisplayString(this.buttonId);
             this.buttonId = -1;
             KeyBinding.resetKeyBindingArrayAndHash();
-        }
-        else
-        {
+        } else {
             super.keyTyped(par1, par2);
         }
     }
@@ -104,24 +92,19 @@ public class GuiControls extends GuiScreen
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
-    {
+    public void drawScreen(int par1, int par2, float par3) {
         this.drawDefaultBackground();
         this.drawCenteredString(this.fontRenderer, this.screenTitle, this.width / 2, 20, 16777215);
         int var4 = this.func_73907_g();
         int var5 = 0;
 
-        while (var5 < this.options.keyBindings.length)
-        {
+        while (var5 < this.options.keyBindings.length) {
             boolean var6 = false;
             int var7 = 0;
 
-            while (true)
-            {
-                if (var7 < this.options.keyBindings.length)
-                {
-                    if (var7 == var5 || this.options.keyBindings[var5].keyCode != this.options.keyBindings[var7].keyCode)
-                    {
+            while (true) {
+                if (var7 < this.options.keyBindings.length) {
+                    if (var7 == var5 || this.options.keyBindings[var5].keyCode != this.options.keyBindings[var7].keyCode) {
                         ++var7;
                         continue;
                     }
@@ -129,17 +112,12 @@ public class GuiControls extends GuiScreen
                     var6 = true;
                 }
 
-                if (this.buttonId == var5)
-                {
-                    ((GuiButton)this.buttonList.get(var5)).displayString = "" + EnumChatFormatting.WHITE + "> " + EnumChatFormatting.YELLOW + "??? " + EnumChatFormatting.WHITE + "<";
-                }
-                else if (var6)
-                {
-                    ((GuiButton)this.buttonList.get(var5)).displayString = EnumChatFormatting.RED + this.options.getOptionDisplayString(var5);
-                }
-                else
-                {
-                    ((GuiButton)this.buttonList.get(var5)).displayString = this.options.getOptionDisplayString(var5);
+                if (this.buttonId == var5) {
+                    ((GuiButton) this.buttonList.get(var5)).displayString = "" + EnumChatFormatting.WHITE + "> " + EnumChatFormatting.YELLOW + "??? " + EnumChatFormatting.WHITE + "<";
+                } else if (var6) {
+                    ((GuiButton) this.buttonList.get(var5)).displayString = EnumChatFormatting.RED + this.options.getOptionDisplayString(var5);
+                } else {
+                    ((GuiButton) this.buttonList.get(var5)).displayString = this.options.getOptionDisplayString(var5);
                 }
 
                 this.drawString(this.fontRenderer, this.options.getKeyBindingDescription(var5), var4 + var5 % 2 * 160 + 70 + 6, this.height / 6 + 24 * (var5 >> 1) + 7, -1);

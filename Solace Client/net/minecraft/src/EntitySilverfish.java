@@ -1,22 +1,19 @@
 package net.minecraft.src;
 
-public class EntitySilverfish extends EntityMob
-{
+public class EntitySilverfish extends EntityMob {
     /**
      * A cooldown before this entity will search for another Silverfish to join them in battle.
      */
     private int allySummonCooldown;
 
-    public EntitySilverfish(World par1World)
-    {
+    public EntitySilverfish(World par1World) {
         super(par1World);
         this.texture = "/mob/silverfish.png";
         this.setSize(0.3F, 0.7F);
         this.moveSpeed = 0.6F;
     }
 
-    public int getMaxHealth()
-    {
+    public int getMaxHealth() {
         return 8;
     }
 
@@ -24,8 +21,7 @@ public class EntitySilverfish extends EntityMob
      * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
      * prevent them from trampling crops
      */
-    protected boolean canTriggerWalking()
-    {
+    protected boolean canTriggerWalking() {
         return false;
     }
 
@@ -33,8 +29,7 @@ public class EntitySilverfish extends EntityMob
      * Finds the closest player within 16 blocks to attack, or null if this Entity isn't interested in attacking
      * (Animals, Spiders at day, peaceful PigZombies).
      */
-    protected Entity findPlayerToAttack()
-    {
+    protected Entity findPlayerToAttack() {
         double var1 = 8.0D;
         return this.worldObj.getClosestVulnerablePlayerToEntity(this, var1);
     }
@@ -42,40 +37,32 @@ public class EntitySilverfish extends EntityMob
     /**
      * Returns the sound this mob makes while it's alive.
      */
-    protected String getLivingSound()
-    {
+    protected String getLivingSound() {
         return "mob.silverfish.say";
     }
 
     /**
      * Returns the sound this mob makes when it is hurt.
      */
-    protected String getHurtSound()
-    {
+    protected String getHurtSound() {
         return "mob.silverfish.hit";
     }
 
     /**
      * Returns the sound this mob makes on death.
      */
-    protected String getDeathSound()
-    {
+    protected String getDeathSound() {
         return "mob.silverfish.kill";
     }
 
     /**
      * Called when the entity is attacked.
      */
-    public boolean attackEntityFrom(DamageSource par1DamageSource, int par2)
-    {
-        if (this.isEntityInvulnerable())
-        {
+    public boolean attackEntityFrom(DamageSource par1DamageSource, int par2) {
+        if (this.isEntityInvulnerable()) {
             return false;
-        }
-        else
-        {
-            if (this.allySummonCooldown <= 0 && (par1DamageSource instanceof EntityDamageSource || par1DamageSource == DamageSource.magic))
-            {
+        } else {
+            if (this.allySummonCooldown <= 0 && (par1DamageSource instanceof EntityDamageSource || par1DamageSource == DamageSource.magic)) {
                 this.allySummonCooldown = 20;
             }
 
@@ -86,10 +73,8 @@ public class EntitySilverfish extends EntityMob
     /**
      * Basic mob attack. Default to touch of death in EntityCreature. Overridden by each mob to define their attack.
      */
-    protected void attackEntity(Entity par1Entity, float par2)
-    {
-        if (this.attackTime <= 0 && par2 < 1.2F && par1Entity.boundingBox.maxY > this.boundingBox.minY && par1Entity.boundingBox.minY < this.boundingBox.maxY)
-        {
+    protected void attackEntity(Entity par1Entity, float par2) {
+        if (this.attackTime <= 0 && par2 < 1.2F && par1Entity.boundingBox.maxY > this.boundingBox.minY && par1Entity.boundingBox.minY < this.boundingBox.maxY) {
             this.attackTime = 20;
             this.attackEntityAsMob(par1Entity);
         }
@@ -98,65 +83,53 @@ public class EntitySilverfish extends EntityMob
     /**
      * Plays step sound at given x, y, z for the entity
      */
-    protected void playStepSound(int par1, int par2, int par3, int par4)
-    {
+    protected void playStepSound(int par1, int par2, int par3, int par4) {
         this.playSound("mob.silverfish.step", 0.15F, 1.0F);
     }
 
     /**
      * Returns the item ID for the item the mob drops on death.
      */
-    protected int getDropItemId()
-    {
+    protected int getDropItemId() {
         return 0;
     }
 
     /**
      * Called to update the entity's position/logic.
      */
-    public void onUpdate()
-    {
+    public void onUpdate() {
         this.renderYawOffset = this.rotationYaw;
         super.onUpdate();
     }
 
-    protected void updateEntityActionState()
-    {
+    protected void updateEntityActionState() {
         super.updateEntityActionState();
 
-        if (!this.worldObj.isRemote)
-        {
+        if (!this.worldObj.isRemote) {
             int var1;
             int var2;
             int var3;
             int var5;
 
-            if (this.allySummonCooldown > 0)
-            {
+            if (this.allySummonCooldown > 0) {
                 --this.allySummonCooldown;
 
-                if (this.allySummonCooldown == 0)
-                {
+                if (this.allySummonCooldown == 0) {
                     var1 = MathHelper.floor_double(this.posX);
                     var2 = MathHelper.floor_double(this.posY);
                     var3 = MathHelper.floor_double(this.posZ);
                     boolean var4 = false;
 
-                    for (var5 = 0; !var4 && var5 <= 5 && var5 >= -5; var5 = var5 <= 0 ? 1 - var5 : 0 - var5)
-                    {
-                        for (int var6 = 0; !var4 && var6 <= 10 && var6 >= -10; var6 = var6 <= 0 ? 1 - var6 : 0 - var6)
-                        {
-                            for (int var7 = 0; !var4 && var7 <= 10 && var7 >= -10; var7 = var7 <= 0 ? 1 - var7 : 0 - var7)
-                            {
+                    for (var5 = 0; !var4 && var5 <= 5 && var5 >= -5; var5 = var5 <= 0 ? 1 - var5 : 0 - var5) {
+                        for (int var6 = 0; !var4 && var6 <= 10 && var6 >= -10; var6 = var6 <= 0 ? 1 - var6 : 0 - var6) {
+                            for (int var7 = 0; !var4 && var7 <= 10 && var7 >= -10; var7 = var7 <= 0 ? 1 - var7 : 0 - var7) {
                                 int var8 = this.worldObj.getBlockId(var1 + var6, var2 + var5, var3 + var7);
 
-                                if (var8 == Block.silverfish.blockID)
-                                {
+                                if (var8 == Block.silverfish.blockID) {
                                     this.worldObj.destroyBlock(var1 + var6, var2 + var5, var3 + var7, false);
                                     Block.silverfish.onBlockDestroyedByPlayer(this.worldObj, var1 + var6, var2 + var5, var3 + var7, 0);
 
-                                    if (this.rand.nextBoolean())
-                                    {
+                                    if (this.rand.nextBoolean()) {
                                         var4 = true;
                                         break;
                                     }
@@ -167,27 +140,21 @@ public class EntitySilverfish extends EntityMob
                 }
             }
 
-            if (this.entityToAttack == null && !this.hasPath())
-            {
+            if (this.entityToAttack == null && !this.hasPath()) {
                 var1 = MathHelper.floor_double(this.posX);
                 var2 = MathHelper.floor_double(this.posY + 0.5D);
                 var3 = MathHelper.floor_double(this.posZ);
                 int var9 = this.rand.nextInt(6);
                 var5 = this.worldObj.getBlockId(var1 + Facing.offsetsXForSide[var9], var2 + Facing.offsetsYForSide[var9], var3 + Facing.offsetsZForSide[var9]);
 
-                if (BlockSilverfish.getPosingIdByMetadata(var5))
-                {
+                if (BlockSilverfish.getPosingIdByMetadata(var5)) {
                     this.worldObj.setBlock(var1 + Facing.offsetsXForSide[var9], var2 + Facing.offsetsYForSide[var9], var3 + Facing.offsetsZForSide[var9], Block.silverfish.blockID, BlockSilverfish.getMetadataForBlockType(var5), 3);
                     this.spawnExplosionParticle();
                     this.setDead();
-                }
-                else
-                {
+                } else {
                     this.updateWanderPath();
                 }
-            }
-            else if (this.entityToAttack != null && !this.hasPath())
-            {
+            } else if (this.entityToAttack != null && !this.hasPath()) {
                 this.entityToAttack = null;
             }
         }
@@ -197,31 +164,25 @@ public class EntitySilverfish extends EntityMob
      * Takes a coordinate in and returns a weight to determine how likely this creature will try to path to the block.
      * Args: x, y, z
      */
-    public float getBlockPathWeight(int par1, int par2, int par3)
-    {
+    public float getBlockPathWeight(int par1, int par2, int par3) {
         return this.worldObj.getBlockId(par1, par2 - 1, par3) == Block.stone.blockID ? 10.0F : super.getBlockPathWeight(par1, par2, par3);
     }
 
     /**
      * Checks to make sure the light is not too bright where the mob is spawning
      */
-    protected boolean isValidLightLevel()
-    {
+    protected boolean isValidLightLevel() {
         return true;
     }
 
     /**
      * Checks if the entity's current position is a valid location to spawn this entity.
      */
-    public boolean getCanSpawnHere()
-    {
-        if (super.getCanSpawnHere())
-        {
+    public boolean getCanSpawnHere() {
+        if (super.getCanSpawnHere()) {
             EntityPlayer var1 = this.worldObj.getClosestPlayerToEntity(this, 5.0D);
             return var1 == null;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }
@@ -229,16 +190,14 @@ public class EntitySilverfish extends EntityMob
     /**
      * Returns the amount of damage a mob should deal.
      */
-    public int getAttackStrength(Entity par1Entity)
-    {
+    public int getAttackStrength(Entity par1Entity) {
         return 1;
     }
 
     /**
      * Get this Entity's EnumCreatureAttribute
      */
-    public EnumCreatureAttribute getCreatureAttribute()
-    {
+    public EnumCreatureAttribute getCreatureAttribute() {
         return EnumCreatureAttribute.ARTHROPOD;
     }
 }

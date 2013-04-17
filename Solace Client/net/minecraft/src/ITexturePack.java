@@ -3,8 +3,7 @@ package net.minecraft.src;
 import java.io.IOException;
 import java.io.InputStream;
 
-public interface ITexturePack
-{
+public interface ITexturePack {
     /**
      * Delete the OpenGL texture id of the pack's thumbnail image, and close the zip file in case of TexturePackCustom.
      */

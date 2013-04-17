@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="jinput">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Desktop/MCP/jars/bin/jinput.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/MCP/jars/bin/lwjgl.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/MCP/jars/bin/lwjgl_util.jar!/" />
+      <root url="jar://$USER_HOME$/Desktop/MCP/jars/bin/minecraft.jar!/" />
+      <root url="file://$USER_HOME$/Desktop/MCP/jars/bin/natives" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

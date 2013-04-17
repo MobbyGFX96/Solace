@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public class GuiShareToLan extends GuiScreen
-{
+public class GuiShareToLan extends GuiScreen {
     /**
      * A reference to the screen object that created this. Used for navigating between screens.
      */
@@ -14,19 +13,19 @@ public class GuiShareToLan extends GuiScreen
      */
     private String gameMode = "survival";
 
-    /** True if 'Allow Cheats' is currently enabled */
+    /**
+     * True if 'Allow Cheats' is currently enabled
+     */
     private boolean allowCommands = false;
 
-    public GuiShareToLan(GuiScreen par1GuiScreen)
-    {
+    public GuiShareToLan(GuiScreen par1GuiScreen) {
         this.parentScreen = par1GuiScreen;
     }
 
     /**
      * Adds the buttons (and other controls) to the screen in question.
      */
-    public void initGui()
-    {
+    public void initGui() {
         this.buttonList.clear();
         this.buttonList.add(new GuiButton(101, this.width / 2 - 155, this.height - 28, 150, 20, StatCollector.translateToLocal("lanServer.start")));
         this.buttonList.add(new GuiButton(102, this.width / 2 + 5, this.height - 28, 150, 20, StatCollector.translateToLocal("gui.cancel")));
@@ -35,18 +34,14 @@ public class GuiShareToLan extends GuiScreen
         this.func_74088_g();
     }
 
-    private void func_74088_g()
-    {
+    private void func_74088_g() {
         StringTranslate var1 = StringTranslate.getInstance();
         this.buttonGameMode.displayString = var1.translateKey("selectWorld.gameMode") + " " + var1.translateKey("selectWorld.gameMode." + this.gameMode);
         this.buttonAllowCommandsToggle.displayString = var1.translateKey("selectWorld.allowCommands") + " ";
 
-        if (this.allowCommands)
-        {
+        if (this.allowCommands) {
             this.buttonAllowCommandsToggle.displayString = this.buttonAllowCommandsToggle.displayString + var1.translateKey("options.on");
-        }
-        else
-        {
+        } else {
             this.buttonAllowCommandsToggle.displayString = this.buttonAllowCommandsToggle.displayString + var1.translateKey("options.off");
         }
     }
@@ -54,46 +49,30 @@ public class GuiShareToLan extends GuiScreen
     /**
      * Fired when a control is clicked. This is the equivalent of ActionListener.actionPerformed(ActionEvent e).
      */
-    protected void actionPerformed(GuiButton par1GuiButton)
-    {
-        if (par1GuiButton.id == 102)
-        {
+    protected void actionPerformed(GuiButton par1GuiButton) {
+        if (par1GuiButton.id == 102) {
             this.mc.displayGuiScreen(this.parentScreen);
-        }
-        else if (par1GuiButton.id == 104)
-        {
-            if (this.gameMode.equals("survival"))
-            {
+        } else if (par1GuiButton.id == 104) {
+            if (this.gameMode.equals("survival")) {
                 this.gameMode = "creative";
-            }
-            else if (this.gameMode.equals("creative"))
-            {
+            } else if (this.gameMode.equals("creative")) {
                 this.gameMode = "adventure";
-            }
-            else
-            {
+            } else {
                 this.gameMode = "survival";
             }
 
             this.func_74088_g();
-        }
-        else if (par1GuiButton.id == 103)
-        {
+        } else if (par1GuiButton.id == 103) {
             this.allowCommands = !this.allowCommands;
             this.func_74088_g();
-        }
-        else if (par1GuiButton.id == 101)
-        {
-            this.mc.displayGuiScreen((GuiScreen)null);
+        } else if (par1GuiButton.id == 101) {
+            this.mc.displayGuiScreen((GuiScreen) null);
             String var2 = this.mc.getIntegratedServer().shareToLAN(EnumGameType.getByName(this.gameMode), this.allowCommands);
             String var3 = "";
 
-            if (var2 != null)
-            {
-                var3 = this.mc.thePlayer.translateString("commands.publish.started", new Object[] {var2});
-            }
-            else
-            {
+            if (var2 != null) {
+                var3 = this.mc.thePlayer.translateString("commands.publish.started", new Object[]{var2});
+            } else {
                 var3 = this.mc.thePlayer.translateString("commands.publish.failed", new Object[0]);
             }
 
@@ -104,8 +83,7 @@ public class GuiShareToLan extends GuiScreen
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
-    {
+    public void drawScreen(int par1, int par2, float par3) {
         this.drawDefaultBackground();
         this.drawCenteredString(this.fontRenderer, StatCollector.translateToLocal("lanServer.title"), this.width / 2, 50, 16777215);
         this.drawCenteredString(this.fontRenderer, StatCollector.translateToLocal("lanServer.otherPlayers"), this.width / 2, 82, 16777215);

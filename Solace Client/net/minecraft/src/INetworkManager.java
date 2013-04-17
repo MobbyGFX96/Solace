@@ -2,8 +2,7 @@ package net.minecraft.src;
 
 import java.net.SocketAddress;
 
-public interface INetworkManager
-{
+public interface INetworkManager {
     /**
      * Sets the NetHandler for this NetworkManager. Server-only.
      */
@@ -43,7 +42,7 @@ public interface INetworkManager
      * Shuts down the network with the specified reason. Closes all streams and sockets, spawns NetworkMasterThread to
      * stop reading and writing threads.
      */
-    void networkShutdown(String var1, Object ... var2);
+    void networkShutdown(String var1, Object... var2);
 
     void closeConnections();
 }

@@ -2,8 +2,7 @@ package net.minecraft.src;
 
 import org.lwjgl.input.Keyboard;
 
-public class GuiScreenEditOnlineWorld extends GuiScreen
-{
+public class GuiScreenEditOnlineWorld extends GuiScreen {
     private GuiScreen field_96204_a;
     private GuiScreen field_96202_b;
     private GuiTextField field_96203_c;
@@ -11,8 +10,7 @@ public class GuiScreenEditOnlineWorld extends GuiScreen
     private McoServer field_96205_n;
     private GuiButton field_96206_o;
 
-    public GuiScreenEditOnlineWorld(GuiScreen par1GuiScreen, GuiScreen par2GuiScreen, McoServer par3McoServer)
-    {
+    public GuiScreenEditOnlineWorld(GuiScreen par1GuiScreen, GuiScreen par2GuiScreen, McoServer par3McoServer) {
         this.field_96204_a = par1GuiScreen;
         this.field_96202_b = par2GuiScreen;
         this.field_96205_n = par3McoServer;
@@ -21,8 +19,7 @@ public class GuiScreenEditOnlineWorld extends GuiScreen
     /**
      * Called from the main game loop to update the screen.
      */
-    public void updateScreen()
-    {
+    public void updateScreen() {
         this.field_96201_d.updateCursorCounter();
         this.field_96203_c.updateCursorCounter();
     }
@@ -30,8 +27,7 @@ public class GuiScreenEditOnlineWorld extends GuiScreen
     /**
      * Adds the buttons (and other controls) to the screen in question.
      */
-    public void initGui()
-    {
+    public void initGui() {
         StringTranslate var1 = StringTranslate.getInstance();
         Keyboard.enableRepeatEvents(true);
         this.buttonList.clear();
@@ -49,43 +45,33 @@ public class GuiScreenEditOnlineWorld extends GuiScreen
     /**
      * Called when the screen is unloaded. Used to disable keyboard repeat events
      */
-    public void onGuiClosed()
-    {
+    public void onGuiClosed() {
         Keyboard.enableRepeatEvents(false);
     }
 
     /**
      * Fired when a control is clicked. This is the equivalent of ActionListener.actionPerformed(ActionEvent e).
      */
-    protected void actionPerformed(GuiButton par1GuiButton)
-    {
-        if (par1GuiButton.enabled)
-        {
-            if (par1GuiButton.id == 1)
-            {
+    protected void actionPerformed(GuiButton par1GuiButton) {
+        if (par1GuiButton.enabled) {
+            if (par1GuiButton.id == 1) {
                 this.mc.displayGuiScreen(this.field_96204_a);
-            }
-            else if (par1GuiButton.id == 0)
-            {
+            } else if (par1GuiButton.id == 0) {
                 this.func_96200_g();
             }
         }
     }
 
-    private void func_96200_g()
-    {
+    private void func_96200_g() {
         McoClient var1 = new McoClient(this.mc.session);
 
-        try
-        {
+        try {
             String var2 = this.field_96203_c.getText() != null && !this.field_96203_c.getText().trim().equals("") ? this.field_96203_c.getText() : "";
             var1.func_96384_a(this.field_96205_n.field_96408_a, this.field_96201_d.getText(), var2);
             this.field_96205_n.func_96399_a(this.field_96201_d.getText());
             this.field_96205_n.func_96400_b(this.field_96203_c.getText());
             this.mc.displayGuiScreen(new GuiScreenConfigureWorld(this.field_96202_b, this.field_96205_n));
-        }
-        catch (Exception var3)
-        {
+        } catch (Exception var3) {
             ;
         }
     }
@@ -93,27 +79,21 @@ public class GuiScreenEditOnlineWorld extends GuiScreen
     /**
      * Fired when a key is typed. This is the equivalent of KeyListener.keyTyped(KeyEvent e).
      */
-    protected void keyTyped(char par1, int par2)
-    {
+    protected void keyTyped(char par1, int par2) {
         this.field_96201_d.textboxKeyTyped(par1, par2);
         this.field_96203_c.textboxKeyTyped(par1, par2);
 
-        if (par1 == 9)
-        {
-            if (this.field_96201_d.isFocused())
-            {
+        if (par1 == 9) {
+            if (this.field_96201_d.isFocused()) {
                 this.field_96201_d.setFocused(false);
                 this.field_96203_c.setFocused(true);
-            }
-            else
-            {
+            } else {
                 this.field_96201_d.setFocused(true);
                 this.field_96203_c.setFocused(false);
             }
         }
 
-        if (par1 == 13)
-        {
+        if (par1 == 13) {
             this.func_96200_g();
         }
 
@@ -123,8 +103,7 @@ public class GuiScreenEditOnlineWorld extends GuiScreen
     /**
      * Called when the mouse is clicked.
      */
-    protected void mouseClicked(int par1, int par2, int par3)
-    {
+    protected void mouseClicked(int par1, int par2, int par3) {
         super.mouseClicked(par1, par2, par3);
         this.field_96203_c.mouseClicked(par1, par2, par3);
         this.field_96201_d.mouseClicked(par1, par2, par3);
@@ -133,8 +112,7 @@ public class GuiScreenEditOnlineWorld extends GuiScreen
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
-    {
+    public void drawScreen(int par1, int par2, float par3) {
         StringTranslate var4 = StringTranslate.getInstance();
         this.drawDefaultBackground();
         this.drawCenteredString(this.fontRenderer, var4.translateKey("mco.configure.world.edit.title"), this.width / 2, 17, 16777215);

@@ -4,8 +4,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-public class Packet131MapData extends Packet
-{
+public class Packet131MapData extends Packet {
     public short itemID;
 
     /**
@@ -18,13 +17,11 @@ public class Packet131MapData extends Packet
      */
     public byte[] itemData;
 
-    public Packet131MapData()
-    {
+    public Packet131MapData() {
         this.isChunkDataPacket = true;
     }
 
-    public Packet131MapData(short par1, short par2, byte[] par3ArrayOfByte)
-    {
+    public Packet131MapData(short par1, short par2, byte[] par3ArrayOfByte) {
         this.isChunkDataPacket = true;
         this.itemID = par1;
         this.uniqueID = par2;
@@ -34,8 +31,7 @@ public class Packet131MapData extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInputStream par1DataInputStream) throws IOException
-    {
+    public void readPacketData(DataInputStream par1DataInputStream) throws IOException {
         this.itemID = par1DataInputStream.readShort();
         this.uniqueID = par1DataInputStream.readShort();
         this.itemData = new byte[par1DataInputStream.readUnsignedShort()];
@@ -45,8 +41,7 @@ public class Packet131MapData extends Packet
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
-    {
+    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException {
         par1DataOutputStream.writeShort(this.itemID);
         par1DataOutputStream.writeShort(this.uniqueID);
         par1DataOutputStream.writeShort(this.itemData.length);
@@ -56,16 +51,14 @@ public class Packet131MapData extends Packet
     /**
      * Passes this Packet on to the NetHandler for processing.
      */
-    public void processPacket(NetHandler par1NetHandler)
-    {
+    public void processPacket(NetHandler par1NetHandler) {
         par1NetHandler.handleMapData(this);
     }
 
     /**
      * Abstract. Return the size of the packet (not counting the header).
      */
-    public int getPacketSize()
-    {
+    public int getPacketSize() {
         return 4 + this.itemData.length;
     }
 }

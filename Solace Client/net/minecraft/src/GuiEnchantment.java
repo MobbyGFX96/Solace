@@ -1,17 +1,21 @@
 package net.minecraft.src;
 
-import java.util.Random;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 import org.lwjgl.util.glu.GLU;
 
-public class GuiEnchantment extends GuiContainer
-{
-    /** The book model used on the GUI. */
+import java.util.Random;
+
+public class GuiEnchantment extends GuiContainer {
+    /**
+     * The book model used on the GUI.
+     */
     private static ModelBook bookModel = new ModelBook();
     private Random rand = new Random();
 
-    /** ContainerEnchantment object associated with this gui */
+    /**
+     * ContainerEnchantment object associated with this gui
+     */
     private ContainerEnchantment containerEnchantment;
     public int field_74214_o;
     public float field_74213_p;
@@ -23,18 +27,16 @@ public class GuiEnchantment extends GuiContainer
     ItemStack theItemStack;
     private String field_94079_C;
 
-    public GuiEnchantment(InventoryPlayer par1InventoryPlayer, World par2World, int par3, int par4, int par5, String par6Str)
-    {
+    public GuiEnchantment(InventoryPlayer par1InventoryPlayer, World par2World, int par3, int par4, int par5, String par6Str) {
         super(new ContainerEnchantment(par1InventoryPlayer, par2World, par3, par4, par5));
-        this.containerEnchantment = (ContainerEnchantment)this.inventorySlots;
+        this.containerEnchantment = (ContainerEnchantment) this.inventorySlots;
         this.field_94079_C = par6Str;
     }
 
     /**
      * Draw the foreground layer for the GuiContainer (everything in front of the items)
      */
-    protected void drawGuiContainerForegroundLayer(int par1, int par2)
-    {
+    protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         this.fontRenderer.drawString(this.field_94079_C == null ? StatCollector.translateToLocal("container.enchant") : this.field_94079_C, 12, 5, 4210752);
         this.fontRenderer.drawString(StatCollector.translateToLocal("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
     }
@@ -42,8 +44,7 @@ public class GuiEnchantment extends GuiContainer
     /**
      * Called from the main game loop to update the screen.
      */
-    public void updateScreen()
-    {
+    public void updateScreen() {
         super.updateScreen();
         this.func_74205_h();
     }
@@ -51,19 +52,16 @@ public class GuiEnchantment extends GuiContainer
     /**
      * Called when the mouse is clicked.
      */
-    protected void mouseClicked(int par1, int par2, int par3)
-    {
+    protected void mouseClicked(int par1, int par2, int par3) {
         super.mouseClicked(par1, par2, par3);
         int var4 = (this.width - this.xSize) / 2;
         int var5 = (this.height - this.ySize) / 2;
 
-        for (int var6 = 0; var6 < 3; ++var6)
-        {
+        for (int var6 = 0; var6 < 3; ++var6) {
             int var7 = par1 - (var4 + 60);
             int var8 = par2 - (var5 + 14 + 19 * var6);
 
-            if (var7 >= 0 && var8 >= 0 && var7 < 108 && var8 < 19 && this.containerEnchantment.enchantItem(this.mc.thePlayer, var6))
-            {
+            if (var7 >= 0 && var8 >= 0 && var7 < 108 && var8 < 19 && this.containerEnchantment.enchantItem(this.mc.thePlayer, var6)) {
                 this.mc.playerController.sendEnchantPacket(this.containerEnchantment.windowId, var6);
             }
         }
@@ -72,8 +70,7 @@ public class GuiEnchantment extends GuiContainer
     /**
      * Draw the background layer for the GuiContainer (everything behind the items)
      */
-    protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
-    {
+    protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.renderEngine.bindTexture("/gui/enchant.png");
         int var4 = (this.width - this.xSize) / 2;
@@ -104,31 +101,27 @@ public class GuiEnchantment extends GuiContainer
         GL11.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
         float var10 = this.field_74212_q + (this.field_74213_p - this.field_74212_q) * par1 + 0.25F;
         float var11 = this.field_74212_q + (this.field_74213_p - this.field_74212_q) * par1 + 0.75F;
-        var10 = (var10 - (float)MathHelper.truncateDoubleToInt((double)var10)) * 1.6F - 0.3F;
-        var11 = (var11 - (float)MathHelper.truncateDoubleToInt((double)var11)) * 1.6F - 0.3F;
+        var10 = (var10 - (float) MathHelper.truncateDoubleToInt((double) var10)) * 1.6F - 0.3F;
+        var11 = (var11 - (float) MathHelper.truncateDoubleToInt((double) var11)) * 1.6F - 0.3F;
 
-        if (var10 < 0.0F)
-        {
+        if (var10 < 0.0F) {
             var10 = 0.0F;
         }
 
-        if (var11 < 0.0F)
-        {
+        if (var11 < 0.0F) {
             var11 = 0.0F;
         }
 
-        if (var10 > 1.0F)
-        {
+        if (var10 > 1.0F) {
             var10 = 1.0F;
         }
 
-        if (var11 > 1.0F)
-        {
+        if (var11 > 1.0F) {
             var11 = 1.0F;
         }
 
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-        bookModel.render((Entity)null, 0.0F, var10, var11, var9, 0.0F, 0.0625F);
+        bookModel.render((Entity) null, 0.0F, var10, var11, var9, 0.0F, 0.0625F);
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         RenderHelper.disableStandardItemLighting();
         GL11.glMatrixMode(GL11.GL_PROJECTION);
@@ -141,44 +134,34 @@ public class GuiEnchantment extends GuiContainer
         this.mc.renderEngine.bindTexture("/gui/enchant.png");
         EnchantmentNameParts.instance.setRandSeed(this.containerEnchantment.nameSeed);
 
-        for (int var12 = 0; var12 < 3; ++var12)
-        {
+        for (int var12 = 0; var12 < 3; ++var12) {
             String var13 = EnchantmentNameParts.instance.generateRandomEnchantName();
             this.zLevel = 0.0F;
             this.mc.renderEngine.bindTexture("/gui/enchant.png");
             int var14 = this.containerEnchantment.enchantLevels[var12];
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-            if (var14 == 0)
-            {
+            if (var14 == 0) {
                 this.drawTexturedModalRect(var4 + 60, var5 + 14 + 19 * var12, 0, 185, 108, 19);
-            }
-            else
-            {
+            } else {
                 String var15 = "" + var14;
                 FontRenderer var16 = this.mc.standardGalacticFontRenderer;
                 int var17 = 6839882;
 
-                if (this.mc.thePlayer.experienceLevel < var14 && !this.mc.thePlayer.capabilities.isCreativeMode)
-                {
+                if (this.mc.thePlayer.experienceLevel < var14 && !this.mc.thePlayer.capabilities.isCreativeMode) {
                     this.drawTexturedModalRect(var4 + 60, var5 + 14 + 19 * var12, 0, 185, 108, 19);
                     var16.drawSplitString(var13, var4 + 62, var5 + 16 + 19 * var12, 104, (var17 & 16711422) >> 1);
                     var16 = this.mc.fontRenderer;
                     var17 = 4226832;
                     var16.drawStringWithShadow(var15, var4 + 62 + 104 - var16.getStringWidth(var15), var5 + 16 + 19 * var12 + 7, var17);
-                }
-                else
-                {
+                } else {
                     int var18 = par2 - (var4 + 60);
                     int var19 = par3 - (var5 + 14 + 19 * var12);
 
-                    if (var18 >= 0 && var19 >= 0 && var18 < 108 && var19 < 19)
-                    {
+                    if (var18 >= 0 && var19 >= 0 && var18 < 108 && var19 < 19) {
                         this.drawTexturedModalRect(var4 + 60, var5 + 14 + 19 * var12, 0, 204, 108, 19);
                         var17 = 16777088;
-                    }
-                    else
-                    {
+                    } else {
                         this.drawTexturedModalRect(var4 + 60, var5 + 14 + 19 * var12, 0, 166, 108, 19);
                     }
 
@@ -191,17 +174,14 @@ public class GuiEnchantment extends GuiContainer
         }
     }
 
-    public void func_74205_h()
-    {
+    public void func_74205_h() {
         ItemStack var1 = this.inventorySlots.getSlot(0).getStack();
 
-        if (!ItemStack.areItemStacksEqual(var1, this.theItemStack))
-        {
+        if (!ItemStack.areItemStacksEqual(var1, this.theItemStack)) {
             this.theItemStack = var1;
 
-            do
-            {
-                this.field_74211_r += (float)(this.rand.nextInt(4) - this.rand.nextInt(4));
+            do {
+                this.field_74211_r += (float) (this.rand.nextInt(4) - this.rand.nextInt(4));
             }
             while (this.field_74213_p <= this.field_74211_r + 1.0F && this.field_74213_p >= this.field_74211_r - 1.0F);
         }
@@ -211,43 +191,34 @@ public class GuiEnchantment extends GuiContainer
         this.field_74208_u = this.field_74209_t;
         boolean var2 = false;
 
-        for (int var3 = 0; var3 < 3; ++var3)
-        {
-            if (this.containerEnchantment.enchantLevels[var3] != 0)
-            {
+        for (int var3 = 0; var3 < 3; ++var3) {
+            if (this.containerEnchantment.enchantLevels[var3] != 0) {
                 var2 = true;
             }
         }
 
-        if (var2)
-        {
+        if (var2) {
             this.field_74209_t += 0.2F;
-        }
-        else
-        {
+        } else {
             this.field_74209_t -= 0.2F;
         }
 
-        if (this.field_74209_t < 0.0F)
-        {
+        if (this.field_74209_t < 0.0F) {
             this.field_74209_t = 0.0F;
         }
 
-        if (this.field_74209_t > 1.0F)
-        {
+        if (this.field_74209_t > 1.0F) {
             this.field_74209_t = 1.0F;
         }
 
         float var5 = (this.field_74211_r - this.field_74213_p) * 0.4F;
         float var4 = 0.2F;
 
-        if (var5 < -var4)
-        {
+        if (var5 < -var4) {
             var5 = -var4;
         }
 
-        if (var5 > var4)
-        {
+        if (var5 > var4) {
             var5 = var4;
         }
 

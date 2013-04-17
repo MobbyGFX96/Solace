@@ -2,12 +2,15 @@ package net.minecraft.src;
 
 import java.awt.image.BufferedImage;
 
-public class ThreadDownloadImageData
-{
-    /** The image data. */
+public class ThreadDownloadImageData {
+    /**
+     * The image data.
+     */
     public BufferedImage image;
 
-    /** Number of open references to this ThreadDownloadImageData */
+    /**
+     * Number of open references to this ThreadDownloadImageData
+     */
     public int referenceCount = 1;
 
     /**
@@ -21,8 +24,7 @@ public class ThreadDownloadImageData
      */
     public boolean textureSetupComplete = false;
 
-    public ThreadDownloadImageData(String par1, IImageBuffer par2IImageBuffer)
-    {
+    public ThreadDownloadImageData(String par1, IImageBuffer par2IImageBuffer) {
         (new ThreadDownloadImage(this, par1, par2IImageBuffer)).start();
     }
 }

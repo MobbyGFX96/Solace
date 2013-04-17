@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public interface ICommandSender
-{
+public interface ICommandSender {
     /**
      * Gets the name of this command sender (usually username, but possibly "Rcon")
      */
@@ -17,7 +16,7 @@ public interface ICommandSender
     /**
      * Translates and formats the given string key with the given arguments.
      */
-    String translateString(String var1, Object ... var2);
+    String translateString(String var1, Object... var2);
 
     /**
      * Return the position for this command sender.

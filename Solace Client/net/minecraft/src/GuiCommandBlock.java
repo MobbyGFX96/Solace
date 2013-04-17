@@ -1,37 +1,38 @@
 package net.minecraft.src;
 
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import org.lwjgl.input.Keyboard;
 
-public class GuiCommandBlock extends GuiScreen
-{
-    /** Text field containing the command block's command. */
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+
+public class GuiCommandBlock extends GuiScreen {
+    /**
+     * Text field containing the command block's command.
+     */
     private GuiTextField commandTextField;
 
-    /** Command block being edited. */
+    /**
+     * Command block being edited.
+     */
     private final TileEntityCommandBlock commandBlock;
     private GuiButton field_100003_c;
     private GuiButton field_100002_d;
 
-    public GuiCommandBlock(TileEntityCommandBlock par1)
-    {
+    public GuiCommandBlock(TileEntityCommandBlock par1) {
         this.commandBlock = par1;
     }
 
     /**
      * Called from the main game loop to update the screen.
      */
-    public void updateScreen()
-    {
+    public void updateScreen() {
         this.commandTextField.updateCursorCounter();
     }
 
     /**
      * Adds the buttons (and other controls) to the screen in question.
      */
-    public void initGui()
-    {
+    public void initGui() {
         StringTranslate var1 = StringTranslate.getInstance();
         Keyboard.enableRepeatEvents(true);
         this.buttonList.clear();
@@ -47,42 +48,33 @@ public class GuiCommandBlock extends GuiScreen
     /**
      * Called when the screen is unloaded. Used to disable keyboard repeat events
      */
-    public void onGuiClosed()
-    {
+    public void onGuiClosed() {
         Keyboard.enableRepeatEvents(false);
     }
 
     /**
      * Fired when a control is clicked. This is the equivalent of ActionListener.actionPerformed(ActionEvent e).
      */
-    protected void actionPerformed(GuiButton par1GuiButton)
-    {
-        if (par1GuiButton.enabled)
-        {
-            if (par1GuiButton.id == 1)
-            {
-                this.mc.displayGuiScreen((GuiScreen)null);
-            }
-            else if (par1GuiButton.id == 0)
-            {
+    protected void actionPerformed(GuiButton par1GuiButton) {
+        if (par1GuiButton.enabled) {
+            if (par1GuiButton.id == 1) {
+                this.mc.displayGuiScreen((GuiScreen) null);
+            } else if (par1GuiButton.id == 0) {
                 String var2 = "MC|AdvCdm";
                 ByteArrayOutputStream var3 = new ByteArrayOutputStream();
                 DataOutputStream var4 = new DataOutputStream(var3);
 
-                try
-                {
+                try {
                     var4.writeInt(this.commandBlock.xCoord);
                     var4.writeInt(this.commandBlock.yCoord);
                     var4.writeInt(this.commandBlock.zCoord);
                     Packet.writeString(this.commandTextField.getText(), var4);
                     this.mc.getNetHandler().addToSendQueue(new Packet250CustomPayload(var2, var3.toByteArray()));
-                }
-                catch (Exception var6)
-                {
+                } catch (Exception var6) {
                     var6.printStackTrace();
                 }
 
-                this.mc.displayGuiScreen((GuiScreen)null);
+                this.mc.displayGuiScreen((GuiScreen) null);
             }
         }
     }
@@ -90,20 +82,15 @@ public class GuiCommandBlock extends GuiScreen
     /**
      * Fired when a key is typed. This is the equivalent of KeyListener.keyTyped(KeyEvent e).
      */
-    protected void keyTyped(char par1, int par2)
-    {
+    protected void keyTyped(char par1, int par2) {
         this.commandTextField.textboxKeyTyped(par1, par2);
         this.field_100003_c.enabled = this.commandTextField.getText().trim().length() > 0;
 
-        if (par2 != 28 && par1 != 13)
-        {
-            if (par2 == 1)
-            {
+        if (par2 != 28 && par1 != 13) {
+            if (par2 == 1) {
                 this.actionPerformed(this.field_100002_d);
             }
-        }
-        else
-        {
+        } else {
             this.actionPerformed(this.field_100003_c);
         }
     }
@@ -111,8 +98,7 @@ public class GuiCommandBlock extends GuiScreen
     /**
      * Called when the mouse is clicked.
      */
-    protected void mouseClicked(int par1, int par2, int par3)
-    {
+    protected void mouseClicked(int par1, int par2, int par3) {
         super.mouseClicked(par1, par2, par3);
         this.commandTextField.mouseClicked(par1, par2, par3);
     }
@@ -120,8 +106,7 @@ public class GuiCommandBlock extends GuiScreen
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
-    {
+    public void drawScreen(int par1, int par2, float par3) {
         StringTranslate var4 = StringTranslate.getInstance();
         this.drawDefaultBackground();
         this.drawCenteredString(this.fontRenderer, var4.translateKey("advMode.setCommand"), this.width / 2, this.height / 4 - 60 + 20, 16777215);

@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public interface IEntitySelector
-{
+public interface IEntitySelector {
     IEntitySelector field_94557_a = new EntitySelectorAlive();
     IEntitySelector field_96566_b = new EntitySelectorInventory();
 

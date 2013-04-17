@@ -2,14 +2,12 @@ package net.minecraft.src;
 
 import org.lwjgl.input.Keyboard;
 
-public class GuiRenameWorld extends GuiScreen
-{
+public class GuiRenameWorld extends GuiScreen {
     private GuiScreen parentGuiScreen;
     private GuiTextField theGuiTextField;
     private final String worldName;
 
-    public GuiRenameWorld(GuiScreen par1GuiScreen, String par2Str)
-    {
+    public GuiRenameWorld(GuiScreen par1GuiScreen, String par2Str) {
         this.parentGuiScreen = par1GuiScreen;
         this.worldName = par2Str;
     }
@@ -17,16 +15,14 @@ public class GuiRenameWorld extends GuiScreen
     /**
      * Called from the main game loop to update the screen.
      */
-    public void updateScreen()
-    {
+    public void updateScreen() {
         this.theGuiTextField.updateCursorCounter();
     }
 
     /**
      * Adds the buttons (and other controls) to the screen in question.
      */
-    public void initGui()
-    {
+    public void initGui() {
         StringTranslate var1 = StringTranslate.getInstance();
         Keyboard.enableRepeatEvents(true);
         this.buttonList.clear();
@@ -43,24 +39,18 @@ public class GuiRenameWorld extends GuiScreen
     /**
      * Called when the screen is unloaded. Used to disable keyboard repeat events
      */
-    public void onGuiClosed()
-    {
+    public void onGuiClosed() {
         Keyboard.enableRepeatEvents(false);
     }
 
     /**
      * Fired when a control is clicked. This is the equivalent of ActionListener.actionPerformed(ActionEvent e).
      */
-    protected void actionPerformed(GuiButton par1GuiButton)
-    {
-        if (par1GuiButton.enabled)
-        {
-            if (par1GuiButton.id == 1)
-            {
+    protected void actionPerformed(GuiButton par1GuiButton) {
+        if (par1GuiButton.enabled) {
+            if (par1GuiButton.id == 1) {
                 this.mc.displayGuiScreen(this.parentGuiScreen);
-            }
-            else if (par1GuiButton.id == 0)
-            {
+            } else if (par1GuiButton.id == 0) {
                 ISaveFormat var2 = this.mc.getSaveLoader();
                 var2.renameWorld(this.worldName, this.theGuiTextField.getText().trim());
                 this.mc.displayGuiScreen(this.parentGuiScreen);
@@ -71,22 +61,19 @@ public class GuiRenameWorld extends GuiScreen
     /**
      * Fired when a key is typed. This is the equivalent of KeyListener.keyTyped(KeyEvent e).
      */
-    protected void keyTyped(char par1, int par2)
-    {
+    protected void keyTyped(char par1, int par2) {
         this.theGuiTextField.textboxKeyTyped(par1, par2);
-        ((GuiButton)this.buttonList.get(0)).enabled = this.theGuiTextField.getText().trim().length() > 0;
+        ((GuiButton) this.buttonList.get(0)).enabled = this.theGuiTextField.getText().trim().length() > 0;
 
-        if (par1 == 13)
-        {
-            this.actionPerformed((GuiButton)this.buttonList.get(0));
+        if (par1 == 13) {
+            this.actionPerformed((GuiButton) this.buttonList.get(0));
         }
     }
 
     /**
      * Called when the mouse is clicked.
      */
-    protected void mouseClicked(int par1, int par2, int par3)
-    {
+    protected void mouseClicked(int par1, int par2, int par3) {
         super.mouseClicked(par1, par2, par3);
         this.theGuiTextField.mouseClicked(par1, par2, par3);
     }
@@ -94,8 +81,7 @@ public class GuiRenameWorld extends GuiScreen
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
-    {
+    public void drawScreen(int par1, int par2, float par3) {
         StringTranslate var4 = StringTranslate.getInstance();
         this.drawDefaultBackground();
         this.drawCenteredString(this.fontRenderer, var4.translateKey("selectWorld.renameTitle"), this.width / 2, this.height / 4 - 60 + 20, 16777215);

@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public enum EnumOptions
-{
+public enum EnumOptions {
     MUSIC("options.music", true, false),
     SOUND("options.sound", true, false),
     INVERT_MOUSE("options.invertMouse", false, true),
@@ -38,17 +37,14 @@ public enum EnumOptions
     private final boolean enumBoolean;
     private final String enumString;
 
-    public static EnumOptions getEnumOptions(int par0)
-    {
+    public static EnumOptions getEnumOptions(int par0) {
         EnumOptions[] var1 = values();
         int var2 = var1.length;
 
-        for (int var3 = 0; var3 < var2; ++var3)
-        {
+        for (int var3 = 0; var3 < var2; ++var3) {
             EnumOptions var4 = var1[var3];
 
-            if (var4.returnEnumOrdinal() == par0)
-            {
+            if (var4.returnEnumOrdinal() == par0) {
                 return var4;
             }
         }
@@ -56,30 +52,25 @@ public enum EnumOptions
         return null;
     }
 
-    private EnumOptions(String par3Str, boolean par4, boolean par5)
-    {
+    private EnumOptions(String par3Str, boolean par4, boolean par5) {
         this.enumString = par3Str;
         this.enumFloat = par4;
         this.enumBoolean = par5;
     }
 
-    public boolean getEnumFloat()
-    {
+    public boolean getEnumFloat() {
         return this.enumFloat;
     }
 
-    public boolean getEnumBoolean()
-    {
+    public boolean getEnumBoolean() {
         return this.enumBoolean;
     }
 
-    public int returnEnumOrdinal()
-    {
+    public int returnEnumOrdinal() {
         return this.ordinal();
     }
 
-    public String getEnumString()
-    {
+    public String getEnumString() {
         return this.enumString;
     }
 }

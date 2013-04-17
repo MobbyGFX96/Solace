@@ -1,13 +1,15 @@
 package net.minecraft.src;
 
+import org.lwjgl.opengl.GL11;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import org.lwjgl.opengl.GL11;
 
-public class WorldRenderer
-{
-    /** Reference to the World object. */
+public class WorldRenderer {
+    /**
+     * Reference to the World object.
+     */
     public World worldObj;
     private int glRenderList = -1;
     private static Tessellator tessellator = Tessellator.instance;
@@ -16,68 +18,105 @@ public class WorldRenderer
     public int posY;
     public int posZ;
 
-    /** Pos X minus */
+    /**
+     * Pos X minus
+     */
     public int posXMinus;
 
-    /** Pos Y minus */
+    /**
+     * Pos Y minus
+     */
     public int posYMinus;
 
-    /** Pos Z minus */
+    /**
+     * Pos Z minus
+     */
     public int posZMinus;
 
-    /** Pos X clipped */
+    /**
+     * Pos X clipped
+     */
     public int posXClip;
 
-    /** Pos Y clipped */
+    /**
+     * Pos Y clipped
+     */
     public int posYClip;
 
-    /** Pos Z clipped */
+    /**
+     * Pos Z clipped
+     */
     public int posZClip;
     public boolean isInFrustum = false;
 
-    /** Should this renderer skip this render pass */
+    /**
+     * Should this renderer skip this render pass
+     */
     public boolean[] skipRenderPass = new boolean[2];
 
-    /** Pos X plus */
+    /**
+     * Pos X plus
+     */
     public int posXPlus;
 
-    /** Pos Y plus */
+    /**
+     * Pos Y plus
+     */
     public int posYPlus;
 
-    /** Pos Z plus */
+    /**
+     * Pos Z plus
+     */
     public int posZPlus;
 
-    /** Boolean for whether this renderer needs to be updated or not */
+    /**
+     * Boolean for whether this renderer needs to be updated or not
+     */
     public boolean needsUpdate;
 
-    /** Axis aligned bounding box */
+    /**
+     * Axis aligned bounding box
+     */
     public AxisAlignedBB rendererBoundingBox;
 
-    /** Chunk index */
+    /**
+     * Chunk index
+     */
     public int chunkIndex;
 
-    /** Is this renderer visible according to the occlusion query */
+    /**
+     * Is this renderer visible according to the occlusion query
+     */
     public boolean isVisible = true;
 
-    /** Is this renderer waiting on the result of the occlusion query */
+    /**
+     * Is this renderer waiting on the result of the occlusion query
+     */
     public boolean isWaitingOnOcclusionQuery;
 
-    /** OpenGL occlusion query */
+    /**
+     * OpenGL occlusion query
+     */
     public int glOcclusionQuery;
 
-    /** Is the chunk lit */
+    /**
+     * Is the chunk lit
+     */
     public boolean isChunkLit;
     private boolean isInitialized = false;
 
-    /** All the tile entities that have special rendering code for this chunk */
+    /**
+     * All the tile entities that have special rendering code for this chunk
+     */
     public List tileEntityRenderers = new ArrayList();
     private List tileEntities;
 
-    /** Bytes sent to the GPU */
+    /**
+     * Bytes sent to the GPU
+     */
     private int bytesDrawn;
 
-    public WorldRenderer(World par1World, List par2List, int par3, int par4, int par5, int par6)
-    {
+    public WorldRenderer(World par1World, List par2List, int par3, int par4, int par5, int par6) {
         this.worldObj = par1World;
         this.tileEntities = par2List;
         this.glRenderList = par6;
@@ -89,10 +128,8 @@ public class WorldRenderer
     /**
      * Sets a new position for the renderer and setting it up so it can be reloaded with the new data for that position
      */
-    public void setPosition(int par1, int par2, int par3)
-    {
-        if (par1 != this.posX || par2 != this.posY || par3 != this.posZ)
-        {
+    public void setPosition(int par1, int par2, int par3) {
+        if (par1 != this.posX || par2 != this.posY || par3 != this.posZ) {
             this.setDontDraw();
             this.posX = par1;
             this.posY = par2;
@@ -107,26 +144,23 @@ public class WorldRenderer
             this.posYMinus = par2 - this.posYClip;
             this.posZMinus = par3 - this.posZClip;
             float var4 = 6.0F;
-            this.rendererBoundingBox = AxisAlignedBB.getBoundingBox((double)((float)par1 - var4), (double)((float)par2 - var4), (double)((float)par3 - var4), (double)((float)(par1 + 16) + var4), (double)((float)(par2 + 16) + var4), (double)((float)(par3 + 16) + var4));
+            this.rendererBoundingBox = AxisAlignedBB.getBoundingBox((double) ((float) par1 - var4), (double) ((float) par2 - var4), (double) ((float) par3 - var4), (double) ((float) (par1 + 16) + var4), (double) ((float) (par2 + 16) + var4), (double) ((float) (par3 + 16) + var4));
             GL11.glNewList(this.glRenderList + 2, GL11.GL_COMPILE);
-            RenderItem.renderAABB(AxisAlignedBB.getAABBPool().getAABB((double)((float)this.posXClip - var4), (double)((float)this.posYClip - var4), (double)((float)this.posZClip - var4), (double)((float)(this.posXClip + 16) + var4), (double)((float)(this.posYClip + 16) + var4), (double)((float)(this.posZClip + 16) + var4)));
+            RenderItem.renderAABB(AxisAlignedBB.getAABBPool().getAABB((double) ((float) this.posXClip - var4), (double) ((float) this.posYClip - var4), (double) ((float) this.posZClip - var4), (double) ((float) (this.posXClip + 16) + var4), (double) ((float) (this.posYClip + 16) + var4), (double) ((float) (this.posZClip + 16) + var4)));
             GL11.glEndList();
             this.markDirty();
         }
     }
 
-    private void setupGLTranslation()
-    {
-        GL11.glTranslatef((float)this.posXClip, (float)this.posYClip, (float)this.posZClip);
+    private void setupGLTranslation() {
+        GL11.glTranslatef((float) this.posXClip, (float) this.posYClip, (float) this.posZClip);
     }
 
     /**
      * Will update this chunk renderer
      */
-    public void updateRenderer()
-    {
-        if (this.needsUpdate)
-        {
+    public void updateRenderer() {
+        if (this.needsUpdate) {
             this.needsUpdate = false;
             int var1 = this.posX;
             int var2 = this.posY;
@@ -135,8 +169,7 @@ public class WorldRenderer
             int var5 = this.posY + 16;
             int var6 = this.posZ + 16;
 
-            for (int var7 = 0; var7 < 2; ++var7)
-            {
+            for (int var7 = 0; var7 < 2; ++var7) {
                 this.skipRenderPass[var7] = true;
             }
 
@@ -147,30 +180,23 @@ public class WorldRenderer
             byte var8 = 1;
             ChunkCache var9 = new ChunkCache(this.worldObj, var1 - var8, var2 - var8, var3 - var8, var4 + var8, var5 + var8, var6 + var8, var8);
 
-            if (!var9.extendedLevelsInChunkCache())
-            {
+            if (!var9.extendedLevelsInChunkCache()) {
                 ++chunksUpdated;
                 RenderBlocks var10 = new RenderBlocks(var9);
                 this.bytesDrawn = 0;
 
-                for (int var11 = 0; var11 < 2; ++var11)
-                {
+                for (int var11 = 0; var11 < 2; ++var11) {
                     boolean var12 = false;
                     boolean var13 = false;
                     boolean var14 = false;
 
-                    for (int var15 = var2; var15 < var5; ++var15)
-                    {
-                        for (int var16 = var3; var16 < var6; ++var16)
-                        {
-                            for (int var17 = var1; var17 < var4; ++var17)
-                            {
+                    for (int var15 = var2; var15 < var5; ++var15) {
+                        for (int var16 = var3; var16 < var6; ++var16) {
+                            for (int var17 = var1; var17 < var4; ++var17) {
                                 int var18 = var9.getBlockId(var17, var15, var16);
 
-                                if (var18 > 0)
-                                {
-                                    if (!var14)
-                                    {
+                                if (var18 > 0) {
+                                    if (!var14) {
                                         var14 = true;
                                         GL11.glNewList(this.glRenderList + var11, GL11.GL_COMPILE);
                                         GL11.glPushMatrix();
@@ -180,31 +206,25 @@ public class WorldRenderer
                                         GL11.glScalef(var19, var19, var19);
                                         GL11.glTranslatef(8.0F, 8.0F, 8.0F);
                                         tessellator.startDrawingQuads();
-                                        tessellator.setTranslation((double)(-this.posX), (double)(-this.posY), (double)(-this.posZ));
+                                        tessellator.setTranslation((double) (-this.posX), (double) (-this.posY), (double) (-this.posZ));
                                     }
 
                                     Block var23 = Block.blocksList[var18];
 
-                                    if (var23 != null)
-                                    {
-                                        if (var11 == 0 && var23.hasTileEntity())
-                                        {
+                                    if (var23 != null) {
+                                        if (var11 == 0 && var23.hasTileEntity()) {
                                             TileEntity var20 = var9.getBlockTileEntity(var17, var15, var16);
 
-                                            if (TileEntityRenderer.instance.hasSpecialRenderer(var20))
-                                            {
+                                            if (TileEntityRenderer.instance.hasSpecialRenderer(var20)) {
                                                 this.tileEntityRenderers.add(var20);
                                             }
                                         }
 
                                         int var24 = var23.getRenderBlockPass();
 
-                                        if (var24 != var11)
-                                        {
+                                        if (var24 != var11) {
                                             var12 = true;
-                                        }
-                                        else if (var24 == var11)
-                                        {
+                                        } else if (var24 == var11) {
                                             var13 |= var10.renderBlockByRenderType(var23, var17, var15, var16);
                                         }
                                     }
@@ -213,25 +233,20 @@ public class WorldRenderer
                         }
                     }
 
-                    if (var14)
-                    {
+                    if (var14) {
                         this.bytesDrawn += tessellator.draw();
                         GL11.glPopMatrix();
                         GL11.glEndList();
                         tessellator.setTranslation(0.0D, 0.0D, 0.0D);
-                    }
-                    else
-                    {
+                    } else {
                         var13 = false;
                     }
 
-                    if (var13)
-                    {
+                    if (var13) {
                         this.skipRenderPass[var11] = false;
                     }
 
-                    if (!var12)
-                    {
+                    if (!var12) {
                         break;
                     }
                 }
@@ -252,21 +267,18 @@ public class WorldRenderer
      * Returns the distance of this chunk renderer to the entity without performing the final normalizing square root,
      * for performance reasons.
      */
-    public float distanceToEntitySquared(Entity par1Entity)
-    {
-        float var2 = (float)(par1Entity.posX - (double)this.posXPlus);
-        float var3 = (float)(par1Entity.posY - (double)this.posYPlus);
-        float var4 = (float)(par1Entity.posZ - (double)this.posZPlus);
+    public float distanceToEntitySquared(Entity par1Entity) {
+        float var2 = (float) (par1Entity.posX - (double) this.posXPlus);
+        float var3 = (float) (par1Entity.posY - (double) this.posYPlus);
+        float var4 = (float) (par1Entity.posZ - (double) this.posZPlus);
         return var2 * var2 + var3 * var3 + var4 * var4;
     }
 
     /**
      * When called this renderer won't draw anymore until its gets initialized again
      */
-    public void setDontDraw()
-    {
-        for (int var1 = 0; var1 < 2; ++var1)
-        {
+    public void setDontDraw() {
+        for (int var1 = 0; var1 < 2; ++var1) {
             this.skipRenderPass[var1] = true;
         }
 
@@ -274,8 +286,7 @@ public class WorldRenderer
         this.isInitialized = false;
     }
 
-    public void stopRendering()
-    {
+    public void stopRendering() {
         this.setDontDraw();
         this.worldObj = null;
     }
@@ -283,37 +294,32 @@ public class WorldRenderer
     /**
      * Takes in the pass the call list is being requested for. Args: renderPass
      */
-    public int getGLCallListForPass(int par1)
-    {
+    public int getGLCallListForPass(int par1) {
         return !this.isInFrustum ? -1 : (!this.skipRenderPass[par1] ? this.glRenderList + par1 : -1);
     }
 
-    public void updateInFrustum(ICamera par1ICamera)
-    {
+    public void updateInFrustum(ICamera par1ICamera) {
         this.isInFrustum = par1ICamera.isBoundingBoxInFrustum(this.rendererBoundingBox);
     }
 
     /**
      * Renders the occlusion query GL List
      */
-    public void callOcclusionQueryList()
-    {
+    public void callOcclusionQueryList() {
         GL11.glCallList(this.glRenderList + 2);
     }
 
     /**
      * Checks if all render passes are to be skipped. Returns false if the renderer is not initialized
      */
-    public boolean skipAllRenderPasses()
-    {
+    public boolean skipAllRenderPasses() {
         return !this.isInitialized ? false : this.skipRenderPass[0] && this.skipRenderPass[1];
     }
 
     /**
      * Marks the current renderer data as dirty and needing to be updated.
      */
-    public void markDirty()
-    {
+    public void markDirty() {
         this.needsUpdate = true;
     }
 }

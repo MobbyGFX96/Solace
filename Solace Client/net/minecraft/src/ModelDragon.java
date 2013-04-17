@@ -2,47 +2,69 @@ package net.minecraft.src;
 
 import org.lwjgl.opengl.GL11;
 
-public class ModelDragon extends ModelBase
-{
-    /** The head Model renderer of the dragon */
+public class ModelDragon extends ModelBase {
+    /**
+     * The head Model renderer of the dragon
+     */
     private ModelRenderer head;
 
-    /** The neck Model renderer of the dragon */
+    /**
+     * The neck Model renderer of the dragon
+     */
     private ModelRenderer neck;
 
-    /** The jaw Model renderer of the dragon */
+    /**
+     * The jaw Model renderer of the dragon
+     */
     private ModelRenderer jaw;
 
-    /** The body Model renderer of the dragon */
+    /**
+     * The body Model renderer of the dragon
+     */
     private ModelRenderer body;
 
-    /** The rear leg Model renderer of the dragon */
+    /**
+     * The rear leg Model renderer of the dragon
+     */
     private ModelRenderer rearLeg;
 
-    /** The front leg Model renderer of the dragon */
+    /**
+     * The front leg Model renderer of the dragon
+     */
     private ModelRenderer frontLeg;
 
-    /** The rear leg tip Model renderer of the dragon */
+    /**
+     * The rear leg tip Model renderer of the dragon
+     */
     private ModelRenderer rearLegTip;
 
-    /** The front leg tip Model renderer of the dragon */
+    /**
+     * The front leg tip Model renderer of the dragon
+     */
     private ModelRenderer frontLegTip;
 
-    /** The rear foot Model renderer of the dragon */
+    /**
+     * The rear foot Model renderer of the dragon
+     */
     private ModelRenderer rearFoot;
 
-    /** The front foot Model renderer of the dragon */
+    /**
+     * The front foot Model renderer of the dragon
+     */
     private ModelRenderer frontFoot;
 
-    /** The wing Model renderer of the dragon */
+    /**
+     * The wing Model renderer of the dragon
+     */
     private ModelRenderer wing;
 
-    /** The wing tip Model renderer of the dragon */
+    /**
+     * The wing tip Model renderer of the dragon
+     */
     private ModelRenderer wingTip;
     private float partialTicks;
 
-    public ModelDragon(float par1)
-    {
+    public ModelDragon(float par1) {
         this.textureWidth = 256;
         this.textureHeight = 256;
         this.setTextureOffset("body.body", 0, 0);
@@ -124,21 +146,19 @@ public class ModelDragon extends ModelBase
      * Used for easily adding entity-dependent animations. The second and third float params here are the same second
      * and third as in the setRotationAngles method.
      */
-    public void setLivingAnimations(EntityLiving par1EntityLiving, float par2, float par3, float par4)
-    {
+    public void setLivingAnimations(EntityLiving par1EntityLiving, float par2, float par3, float par4) {
         this.partialTicks = par4;
     }
 
     /**
      * Sets the models various rotation angles then renders the model.
      */
-    public void render(Entity par1Entity, float par2, float par3, float par4, float par5, float par6, float par7)
-    {
+    public void render(Entity par1Entity, float par2, float par3, float par4, float par5, float par6, float par7) {
         GL11.glPushMatrix();
-        EntityDragon var8 = (EntityDragon)par1Entity;
+        EntityDragon var8 = (EntityDragon) par1Entity;
         float var9 = var8.prevAnimTime + (var8.animTime - var8.prevAnimTime) * this.partialTicks;
-        this.jaw.rotateAngleX = (float)(Math.sin((double)(var9 * (float)Math.PI * 2.0F)) + 1.0D) * 0.2F;
-        float var10 = (float)(Math.sin((double)(var9 * (float)Math.PI * 2.0F - 1.0F)) + 1.0D);
+        this.jaw.rotateAngleX = (float) (Math.sin((double) (var9 * (float) Math.PI * 2.0F)) + 1.0D) * 0.2F;
+        float var10 = (float) (Math.sin((double) (var9 * (float) Math.PI * 2.0F - 1.0F)) + 1.0D);
         var10 = (var10 * var10 * 1.0F + var10 * 2.0F) * 0.05F;
         GL11.glTranslatef(0.0F, var10 - 2.0F, -3.0F);
         GL11.glRotatef(var10 * 2.0F, 1.0F, 0.0F, 0.0F);
@@ -147,26 +167,25 @@ public class ModelDragon extends ModelBase
         float var14 = 1.5F;
         double[] var15 = var8.getMovementOffsets(6, this.partialTicks);
         float var16 = this.updateRotations(var8.getMovementOffsets(5, this.partialTicks)[0] - var8.getMovementOffsets(10, this.partialTicks)[0]);
-        float var17 = this.updateRotations(var8.getMovementOffsets(5, this.partialTicks)[0] + (double)(var16 / 2.0F));
+        float var17 = this.updateRotations(var8.getMovementOffsets(5, this.partialTicks)[0] + (double) (var16 / 2.0F));
         var11 += 2.0F;
-        float var18 = var9 * (float)Math.PI * 2.0F;
+        float var18 = var9 * (float) Math.PI * 2.0F;
         var11 = 20.0F;
         float var12 = -12.0F;
         float var21;
 
-        for (int var19 = 0; var19 < 5; ++var19)
-        {
+        for (int var19 = 0; var19 < 5; ++var19) {
             double[] var20 = var8.getMovementOffsets(5 - var19, this.partialTicks);
-            var21 = (float)Math.cos((double)((float)var19 * 0.45F + var18)) * 0.15F;
-            this.neck.rotateAngleY = this.updateRotations(var20[0] - var15[0]) * (float)Math.PI / 180.0F * var14;
-            this.neck.rotateAngleX = var21 + (float)(var20[1] - var15[1]) * (float)Math.PI / 180.0F * var14 * 5.0F;
-            this.neck.rotateAngleZ = -this.updateRotations(var20[0] - (double)var17) * (float)Math.PI / 180.0F * var14;
+            var21 = (float) Math.cos((double) ((float) var19 * 0.45F + var18)) * 0.15F;
+            this.neck.rotateAngleY = this.updateRotations(var20[0] - var15[0]) * (float) Math.PI / 180.0F * var14;
+            this.neck.rotateAngleX = var21 + (float) (var20[1] - var15[1]) * (float) Math.PI / 180.0F * var14 * 5.0F;
+            this.neck.rotateAngleZ = -this.updateRotations(var20[0] - (double) var17) * (float) Math.PI / 180.0F * var14;
             this.neck.rotationPointY = var11;
             this.neck.rotationPointZ = var12;
             this.neck.rotationPointX = var13;
-            var11 = (float)((double)var11 + Math.sin((double)this.neck.rotateAngleX) * 10.0D);
-            var12 = (float)((double)var12 - Math.cos((double)this.neck.rotateAngleY) * Math.cos((double)this.neck.rotateAngleX) * 10.0D);
-            var13 = (float)((double)var13 - Math.sin((double)this.neck.rotateAngleY) * Math.cos((double)this.neck.rotateAngleX) * 10.0D);
+            var11 = (float) ((double) var11 + Math.sin((double) this.neck.rotateAngleX) * 10.0D);
+            var12 = (float) ((double) var12 - Math.cos((double) this.neck.rotateAngleY) * Math.cos((double) this.neck.rotateAngleX) * 10.0D);
+            var13 = (float) ((double) var13 - Math.sin((double) this.neck.rotateAngleY) * Math.cos((double) this.neck.rotateAngleX) * 10.0D);
             this.neck.render(par7);
         }
 
@@ -174,8 +193,8 @@ public class ModelDragon extends ModelBase
         this.head.rotationPointZ = var12;
         this.head.rotationPointX = var13;
         double[] var23 = var8.getMovementOffsets(0, this.partialTicks);
-        this.head.rotateAngleY = this.updateRotations(var23[0] - var15[0]) * (float)Math.PI / 180.0F * 1.0F;
-        this.head.rotateAngleZ = -this.updateRotations(var23[0] - (double)var17) * (float)Math.PI / 180.0F * 1.0F;
+        this.head.rotateAngleY = this.updateRotations(var23[0] - var15[0]) * (float) Math.PI / 180.0F * 1.0F;
+        this.head.rotateAngleZ = -this.updateRotations(var23[0] - (double) var17) * (float) Math.PI / 180.0F * 1.0F;
         this.head.render(par7);
         GL11.glPushMatrix();
         GL11.glTranslatef(0.0F, 1.0F, 0.0F);
@@ -184,14 +203,13 @@ public class ModelDragon extends ModelBase
         this.body.rotateAngleZ = 0.0F;
         this.body.render(par7);
 
-        for (int var22 = 0; var22 < 2; ++var22)
-        {
+        for (int var22 = 0; var22 < 2; ++var22) {
             GL11.glEnable(GL11.GL_CULL_FACE);
-            var21 = var9 * (float)Math.PI * 2.0F;
-            this.wing.rotateAngleX = 0.125F - (float)Math.cos((double)var21) * 0.2F;
+            var21 = var9 * (float) Math.PI * 2.0F;
+            this.wing.rotateAngleX = 0.125F - (float) Math.cos((double) var21) * 0.2F;
             this.wing.rotateAngleY = 0.25F;
-            this.wing.rotateAngleZ = (float)(Math.sin((double)var21) + 0.125D) * 0.8F;
-            this.wingTip.rotateAngleZ = -((float)(Math.sin((double)(var21 + 2.0F)) + 0.5D)) * 0.75F;
+            this.wing.rotateAngleZ = (float) (Math.sin((double) var21) + 0.125D) * 0.8F;
+            this.wingTip.rotateAngleZ = -((float) (Math.sin((double) (var21 + 2.0F)) + 0.5D)) * 0.75F;
             this.rearLeg.rotateAngleX = 1.0F + var10 * 0.1F;
             this.rearLegTip.rotateAngleX = 0.5F + var10 * 0.1F;
             this.rearFoot.rotateAngleX = 0.75F + var10 * 0.1F;
@@ -203,8 +221,7 @@ public class ModelDragon extends ModelBase
             this.rearLeg.render(par7);
             GL11.glScalef(-1.0F, 1.0F, 1.0F);
 
-            if (var22 == 0)
-            {
+            if (var22 == 0) {
                 GL11.glCullFace(GL11.GL_FRONT);
             }
         }
@@ -212,26 +229,25 @@ public class ModelDragon extends ModelBase
         GL11.glPopMatrix();
         GL11.glCullFace(GL11.GL_BACK);
         GL11.glDisable(GL11.GL_CULL_FACE);
-        float var24 = -((float)Math.sin((double)(var9 * (float)Math.PI * 2.0F))) * 0.0F;
-        var18 = var9 * (float)Math.PI * 2.0F;
+        float var24 = -((float) Math.sin((double) (var9 * (float) Math.PI * 2.0F))) * 0.0F;
+        var18 = var9 * (float) Math.PI * 2.0F;
         var11 = 10.0F;
         var12 = 60.0F;
         var13 = 0.0F;
         var15 = var8.getMovementOffsets(11, this.partialTicks);
 
-        for (int var25 = 0; var25 < 12; ++var25)
-        {
+        for (int var25 = 0; var25 < 12; ++var25) {
             var23 = var8.getMovementOffsets(12 + var25, this.partialTicks);
-            var24 = (float)((double)var24 + Math.sin((double)((float)var25 * 0.45F + var18)) * 0.05000000074505806D);
-            this.neck.rotateAngleY = (this.updateRotations(var23[0] - var15[0]) * var14 + 180.0F) * (float)Math.PI / 180.0F;
-            this.neck.rotateAngleX = var24 + (float)(var23[1] - var15[1]) * (float)Math.PI / 180.0F * var14 * 5.0F;
-            this.neck.rotateAngleZ = this.updateRotations(var23[0] - (double)var17) * (float)Math.PI / 180.0F * var14;
+            var24 = (float) ((double) var24 + Math.sin((double) ((float) var25 * 0.45F + var18)) * 0.05000000074505806D);
+            this.neck.rotateAngleY = (this.updateRotations(var23[0] - var15[0]) * var14 + 180.0F) * (float) Math.PI / 180.0F;
+            this.neck.rotateAngleX = var24 + (float) (var23[1] - var15[1]) * (float) Math.PI / 180.0F * var14 * 5.0F;
+            this.neck.rotateAngleZ = this.updateRotations(var23[0] - (double) var17) * (float) Math.PI / 180.0F * var14;
             this.neck.rotationPointY = var11;
             this.neck.rotationPointZ = var12;
             this.neck.rotationPointX = var13;
-            var11 = (float)((double)var11 + Math.sin((double)this.neck.rotateAngleX) * 10.0D);
-            var12 = (float)((double)var12 - Math.cos((double)this.neck.rotateAngleY) * Math.cos((double)this.neck.rotateAngleX) * 10.0D);
-            var13 = (float)((double)var13 - Math.sin((double)this.neck.rotateAngleY) * Math.cos((double)this.neck.rotateAngleX) * 10.0D);
+            var11 = (float) ((double) var11 + Math.sin((double) this.neck.rotateAngleX) * 10.0D);
+            var12 = (float) ((double) var12 - Math.cos((double) this.neck.rotateAngleY) * Math.cos((double) this.neck.rotateAngleX) * 10.0D);
+            var13 = (float) ((double) var13 - Math.sin((double) this.neck.rotateAngleY) * Math.cos((double) this.neck.rotateAngleX) * 10.0D);
             this.neck.render(par7);
         }
 
@@ -243,18 +259,15 @@ public class ModelDragon extends ModelBase
      * or subtracts 360 degrees, so that the appearance is the same, although the numbers are then simplified to range
      * -180 to 180
      */
-    private float updateRotations(double par1)
-    {
-        while (par1 >= 180.0D)
-        {
+    private float updateRotations(double par1) {
+        while (par1 >= 180.0D) {
             par1 -= 360.0D;
         }
 
-        while (par1 < -180.0D)
-        {
+        while (par1 < -180.0D) {
             par1 += 360.0D;
         }
 
-        return (float)par1;
+        return (float) par1;
     }
 }

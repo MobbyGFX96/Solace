@@ -1,5 +1,4 @@
 package net.minecraft.src;
 
-class McoServerListINNER1
-{
+class McoServerListINNER1 {
 }

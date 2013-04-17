@@ -1,12 +1,11 @@
 package net.minecraft.src;
 
-public interface ILogAgent
-{
+public interface ILogAgent {
     void logInfo(String var1);
 
     void logWarning(String var1);
 
-    void func_98231_b(String var1, Object ... var2);
+    void func_98231_b(String var1, Object... var2);
 
     void func_98235_b(String var1, Throwable var2);
 

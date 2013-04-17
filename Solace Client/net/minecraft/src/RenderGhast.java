@@ -2,22 +2,18 @@ package net.minecraft.src;
 
 import org.lwjgl.opengl.GL11;
 
-public class RenderGhast extends RenderLiving
-{
-    public RenderGhast()
-    {
+public class RenderGhast extends RenderLiving {
+    public RenderGhast() {
         super(new ModelGhast(), 0.5F);
     }
 
     /**
      * Pre-Renders the Ghast.
      */
-    protected void preRenderGhast(EntityGhast par1EntityGhast, float par2)
-    {
-        float var4 = ((float)par1EntityGhast.prevAttackCounter + (float)(par1EntityGhast.attackCounter - par1EntityGhast.prevAttackCounter) * par2) / 20.0F;
+    protected void preRenderGhast(EntityGhast par1EntityGhast, float par2) {
+        float var4 = ((float) par1EntityGhast.prevAttackCounter + (float) (par1EntityGhast.attackCounter - par1EntityGhast.prevAttackCounter) * par2) / 20.0F;
 
-        if (var4 < 0.0F)
-        {
+        if (var4 < 0.0F) {
             var4 = 0.0F;
         }
 
@@ -32,8 +28,7 @@ public class RenderGhast extends RenderLiving
      * Allows the render to do any OpenGL state modifications necessary before the model is rendered. Args:
      * entityLiving, partialTickTime
      */
-    protected void preRenderCallback(EntityLiving par1EntityLiving, float par2)
-    {
-        this.preRenderGhast((EntityGhast)par1EntityLiving, par2);
+    protected void preRenderCallback(EntityLiving par1EntityLiving, float par2) {
+        this.preRenderGhast((EntityGhast) par1EntityLiving, par2);
     }
 }

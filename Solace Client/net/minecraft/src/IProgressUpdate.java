@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public interface IProgressUpdate
-{
+public interface IProgressUpdate {
     /**
      * "Saving level", or the loading,or downloading equivelent
      */

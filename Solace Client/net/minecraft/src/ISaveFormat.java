@@ -2,8 +2,7 @@ package net.minecraft.src;
 
 import java.util.List;
 
-public interface ISaveFormat
-{
+public interface ISaveFormat {
     /**
      * Returns back a loader for the specified save directory
      */

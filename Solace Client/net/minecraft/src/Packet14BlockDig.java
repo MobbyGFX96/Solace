@@ -4,27 +4,36 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-public class Packet14BlockDig extends Packet
-{
-    /** Block X position. */
+public class Packet14BlockDig extends Packet {
+    /**
+     * Block X position.
+     */
     public int xPosition;
 
-    /** Block Y position. */
+    /**
+     * Block Y position.
+     */
     public int yPosition;
 
-    /** Block Z position. */
+    /**
+     * Block Z position.
+     */
     public int zPosition;
 
-    /** Punched face of the block. */
+    /**
+     * Punched face of the block.
+     */
     public int face;
 
-    /** Status of the digging (started, ongoing, broken). */
+    /**
+     * Status of the digging (started, ongoing, broken).
+     */
     public int status;
 
-    public Packet14BlockDig() {}
+    public Packet14BlockDig() {
+    }
 
-    public Packet14BlockDig(int par1, int par2, int par3, int par4, int par5)
-    {
+    public Packet14BlockDig(int par1, int par2, int par3, int par4, int par5) {
         this.status = par1;
         this.xPosition = par2;
         this.yPosition = par3;
@@ -35,8 +44,7 @@ public class Packet14BlockDig extends Packet
     /**
      * Abstract. Reads the raw packet data from the data stream.
      */
-    public void readPacketData(DataInputStream par1DataInputStream) throws IOException
-    {
+    public void readPacketData(DataInputStream par1DataInputStream) throws IOException {
         this.status = par1DataInputStream.read();
         this.xPosition = par1DataInputStream.readInt();
         this.yPosition = par1DataInputStream.read();
@@ -47,8 +55,7 @@ public class Packet14BlockDig extends Packet
     /**
      * Abstract. Writes the raw packet data to the data stream.
      */
-    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException
-    {
+    public void writePacketData(DataOutputStream par1DataOutputStream) throws IOException {
         par1DataOutputStream.write(this.status);
         par1DataOutputStream.writeInt(this.xPosition);
         par1DataOutputStream.write(this.yPosition);
@@ -59,16 +66,14 @@ public class Packet14BlockDig extends Packet
     /**
      * Passes this Packet on to the NetHandler for processing.
      */
-    public void processPacket(NetHandler par1NetHandler)
-    {
+    public void processPacket(NetHandler par1NetHandler) {
         par1NetHandler.handleBlockDig(this);
     }
 
     /**
      * Abstract. Return the size of the packet (not counting the header).
      */
-    public int getPacketSize()
-    {
+    public int getPacketSize() {
         return 11;
     }
 }

@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public class DestroyBlockProgress
-{
+public class DestroyBlockProgress {
     /**
      * entity ID of the player associated with this partially destroyed Block. Used to identify the Blocks in the client
      * Renderer, max 1 per player on a server
@@ -21,26 +20,22 @@ public class DestroyBlockProgress
      */
     private int createdAtCloudUpdateTick;
 
-    public DestroyBlockProgress(int par1, int par2, int par3, int par4)
-    {
+    public DestroyBlockProgress(int par1, int par2, int par3, int par4) {
         this.miningPlayerEntId = par1;
         this.partialBlockX = par2;
         this.partialBlockY = par3;
         this.partialBlockZ = par4;
     }
 
-    public int getPartialBlockX()
-    {
+    public int getPartialBlockX() {
         return this.partialBlockX;
     }
 
-    public int getPartialBlockY()
-    {
+    public int getPartialBlockY() {
         return this.partialBlockY;
     }
 
-    public int getPartialBlockZ()
-    {
+    public int getPartialBlockZ() {
         return this.partialBlockZ;
     }
 
@@ -48,34 +43,29 @@ public class DestroyBlockProgress
      * inserts damage value into this partially destroyed Block. -1 causes client renderer to delete it, otherwise
      * ranges from 1 to 10
      */
-    public void setPartialBlockDamage(int par1)
-    {
-        if (par1 > 10)
-        {
+    public void setPartialBlockDamage(int par1) {
+        if (par1 > 10) {
             par1 = 10;
         }
 
         this.partialBlockProgress = par1;
     }
 
-    public int getPartialBlockDamage()
-    {
+    public int getPartialBlockDamage() {
         return this.partialBlockProgress;
     }
 
     /**
      * saves the current Cloud update tick into the PartiallyDestroyedBlock
      */
-    public void setCloudUpdateTick(int par1)
-    {
+    public void setCloudUpdateTick(int par1) {
         this.createdAtCloudUpdateTick = par1;
     }
 
     /**
      * retrieves the 'date' at which the PartiallyDestroyedBlock was created
      */
-    public int getCreationCloudUpdateTick()
-    {
+    public int getCreationCloudUpdateTick() {
         return this.createdAtCloudUpdateTick;
     }
 }

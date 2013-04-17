@@ -3,19 +3,16 @@ package net.minecraft.src;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-public class RenderSnowball extends Render
-{
+public class RenderSnowball extends Render {
     private Item field_94151_a;
     private int field_94150_f;
 
-    public RenderSnowball(Item par1, int par2)
-    {
+    public RenderSnowball(Item par1, int par2) {
         this.field_94151_a = par1;
         this.field_94150_f = par2;
     }
 
-    public RenderSnowball(Item par1)
-    {
+    public RenderSnowball(Item par1) {
         this(par1, 0);
     }
 
@@ -25,25 +22,22 @@ public class RenderSnowball extends Render
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
-    {
+    public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9) {
         Icon var10 = this.field_94151_a.getIconFromDamage(this.field_94150_f);
 
-        if (var10 != null)
-        {
+        if (var10 != null) {
             GL11.glPushMatrix();
-            GL11.glTranslatef((float)par2, (float)par4, (float)par6);
+            GL11.glTranslatef((float) par2, (float) par4, (float) par6);
             GL11.glEnable(GL12.GL_RESCALE_NORMAL);
             GL11.glScalef(0.5F, 0.5F, 0.5F);
             this.loadTexture("/gui/items.png");
             Tessellator var11 = Tessellator.instance;
 
-            if (var10 == ItemPotion.func_94589_d("potion_splash"))
-            {
-                int var12 = PotionHelper.func_77915_a(((EntityPotion)par1Entity).getPotionDamage(), false);
-                float var13 = (float)(var12 >> 16 & 255) / 255.0F;
-                float var14 = (float)(var12 >> 8 & 255) / 255.0F;
-                float var15 = (float)(var12 & 255) / 255.0F;
+            if (var10 == ItemPotion.func_94589_d("potion_splash")) {
+                int var12 = PotionHelper.func_77915_a(((EntityPotion) par1Entity).getPotionDamage(), false);
+                float var13 = (float) (var12 >> 16 & 255) / 255.0F;
+                float var14 = (float) (var12 >> 8 & 255) / 255.0F;
+                float var15 = (float) (var12 & 255) / 255.0F;
                 GL11.glColor3f(var13, var14, var15);
                 GL11.glPushMatrix();
                 this.func_77026_a(var11, ItemPotion.func_94589_d("potion_contents"));
@@ -57,8 +51,7 @@ public class RenderSnowball extends Render
         }
     }
 
-    private void func_77026_a(Tessellator par1Tessellator, Icon par2Icon)
-    {
+    private void func_77026_a(Tessellator par1Tessellator, Icon par2Icon) {
         float var3 = par2Icon.getMinU();
         float var4 = par2Icon.getMaxU();
         float var5 = par2Icon.getMinV();
@@ -70,10 +63,10 @@ public class RenderSnowball extends Render
         GL11.glRotatef(-this.renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
         par1Tessellator.startDrawingQuads();
         par1Tessellator.setNormal(0.0F, 1.0F, 0.0F);
-        par1Tessellator.addVertexWithUV((double)(0.0F - var8), (double)(0.0F - var9), 0.0D, (double)var3, (double)var6);
-        par1Tessellator.addVertexWithUV((double)(var7 - var8), (double)(0.0F - var9), 0.0D, (double)var4, (double)var6);
-        par1Tessellator.addVertexWithUV((double)(var7 - var8), (double)(var7 - var9), 0.0D, (double)var4, (double)var5);
-        par1Tessellator.addVertexWithUV((double)(0.0F - var8), (double)(var7 - var9), 0.0D, (double)var3, (double)var5);
+        par1Tessellator.addVertexWithUV((double) (0.0F - var8), (double) (0.0F - var9), 0.0D, (double) var3, (double) var6);
+        par1Tessellator.addVertexWithUV((double) (var7 - var8), (double) (0.0F - var9), 0.0D, (double) var4, (double) var6);
+        par1Tessellator.addVertexWithUV((double) (var7 - var8), (double) (var7 - var9), 0.0D, (double) var4, (double) var5);
+        par1Tessellator.addVertexWithUV((double) (0.0F - var8), (double) (var7 - var9), 0.0D, (double) var3, (double) var5);
         par1Tessellator.draw();
     }
 }

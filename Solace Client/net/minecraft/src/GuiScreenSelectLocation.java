@@ -1,10 +1,10 @@
 package net.minecraft.src;
 
-import java.util.List;
 import net.minecraft.client.Minecraft;
 
-public class GuiScreenSelectLocation extends GuiScreen
-{
+import java.util.List;
+
+public class GuiScreenSelectLocation extends GuiScreen {
     protected GuiScreenCreateOnlineWorld field_96242_a;
     private int field_96238_b = -1;
     private SelectionListLocation field_96239_c;
@@ -14,8 +14,7 @@ public class GuiScreenSelectLocation extends GuiScreen
     private String field_96241_p;
     private String field_96240_q;
 
-    public GuiScreenSelectLocation(GuiScreenCreateOnlineWorld par1, List par2, Location par3, String par4Str, String par5Str)
-    {
+    public GuiScreenSelectLocation(GuiScreenCreateOnlineWorld par1, List par2, Location par3, String par4Str, String par5Str) {
         this.field_96242_a = par1;
         this.field_96244_o = par2;
         this.field_96243_n = par3;
@@ -26,8 +25,7 @@ public class GuiScreenSelectLocation extends GuiScreen
     /**
      * Adds the buttons (and other controls) to the screen in question.
      */
-    public void initGui()
-    {
+    public void initGui() {
         StringTranslate var1 = StringTranslate.getInstance();
         this.buttonList.add(this.field_96237_d = new GuiSmallButton(6, this.width / 2 - 75, this.height - 38, var1.translateKey("gui.done")));
         this.field_96239_c = new SelectionListLocation(this);
@@ -37,12 +35,9 @@ public class GuiScreenSelectLocation extends GuiScreen
     /**
      * Fired when a control is clicked. This is the equivalent of ActionListener.actionPerformed(ActionEvent e).
      */
-    protected void actionPerformed(GuiButton par1GuiButton)
-    {
-        if (par1GuiButton.enabled)
-        {
-            switch (par1GuiButton.id)
-            {
+    protected void actionPerformed(GuiButton par1GuiButton) {
+        if (par1GuiButton.enabled) {
+            switch (par1GuiButton.id) {
                 case 5:
                     break;
 
@@ -60,12 +55,10 @@ public class GuiScreenSelectLocation extends GuiScreen
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
-    {
+    public void drawScreen(int par1, int par2, float par3) {
         this.field_96239_c.drawScreen(par1, par2, par3);
 
-        if (this.field_96238_b <= 0)
-        {
+        if (this.field_96238_b <= 0) {
             this.mc.texturePackList.updateAvaliableTexturePacks();
             this.field_96238_b += 20;
         }
@@ -79,44 +72,36 @@ public class GuiScreenSelectLocation extends GuiScreen
     /**
      * Called from the main game loop to update the screen.
      */
-    public void updateScreen()
-    {
+    public void updateScreen() {
         super.updateScreen();
         --this.field_96238_b;
     }
 
-    static Minecraft func_96232_a(GuiScreenSelectLocation par0GuiScreenSelectLocation)
-    {
+    static Minecraft func_96232_a(GuiScreenSelectLocation par0GuiScreenSelectLocation) {
         return par0GuiScreenSelectLocation.mc;
     }
 
-    static List func_96236_b(GuiScreenSelectLocation par0GuiScreenSelectLocation)
-    {
+    static List func_96236_b(GuiScreenSelectLocation par0GuiScreenSelectLocation) {
         return par0GuiScreenSelectLocation.field_96244_o;
     }
 
-    static Location func_96234_a(GuiScreenSelectLocation par0GuiScreenSelectLocation, Location par1Location)
-    {
+    static Location func_96234_a(GuiScreenSelectLocation par0GuiScreenSelectLocation, Location par1Location) {
         return par0GuiScreenSelectLocation.field_96243_n = par1Location;
     }
 
-    static GuiSmallButton func_96230_c(GuiScreenSelectLocation par0GuiScreenSelectLocation)
-    {
+    static GuiSmallButton func_96230_c(GuiScreenSelectLocation par0GuiScreenSelectLocation) {
         return par0GuiScreenSelectLocation.field_96237_d;
     }
 
-    static Location func_96233_d(GuiScreenSelectLocation par0GuiScreenSelectLocation)
-    {
+    static Location func_96233_d(GuiScreenSelectLocation par0GuiScreenSelectLocation) {
         return par0GuiScreenSelectLocation.field_96243_n;
     }
 
-    static FontRenderer func_96231_e(GuiScreenSelectLocation par0GuiScreenSelectLocation)
-    {
+    static FontRenderer func_96231_e(GuiScreenSelectLocation par0GuiScreenSelectLocation) {
         return par0GuiScreenSelectLocation.fontRenderer;
     }
 
-    static FontRenderer func_96235_f(GuiScreenSelectLocation par0GuiScreenSelectLocation)
-    {
+    static FontRenderer func_96235_f(GuiScreenSelectLocation par0GuiScreenSelectLocation) {
         return par0GuiScreenSelectLocation.fontRenderer;
     }
 }

@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public interface IBossDisplayData
-{
+public interface IBossDisplayData {
     int getMaxHealth();
 
     /**

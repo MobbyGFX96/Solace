@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public enum EnumRarity
-{
+public enum EnumRarity {
     common(15, "Common"),
     uncommon(14, "Uncommon"),
     rare(11, "Rare"),
@@ -13,11 +12,12 @@ public enum EnumRarity
      */
     public final int rarityColor;
 
-    /** Rarity name. */
+    /**
+     * Rarity name.
+     */
     public final String rarityName;
 
-    private EnumRarity(int par3, String par4Str)
-    {
+    private EnumRarity(int par3, String par4Str) {
         this.rarityColor = par3;
         this.rarityName = par4Str;
     }

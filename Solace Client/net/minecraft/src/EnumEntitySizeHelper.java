@@ -1,62 +1,42 @@
 package net.minecraft.src;
 
-class EnumEntitySizeHelper
-{
+class EnumEntitySizeHelper {
     static final int[] field_96565_a = new int[EnumEntitySize.values().length];
 
-    static
-    {
-        try
-        {
+    static {
+        try {
             field_96565_a[EnumEntitySize.SIZE_1.ordinal()] = 1;
-        }
-        catch (NoSuchFieldError var6)
-        {
+        } catch (NoSuchFieldError var6) {
             ;
         }
 
-        try
-        {
+        try {
             field_96565_a[EnumEntitySize.SIZE_2.ordinal()] = 2;
-        }
-        catch (NoSuchFieldError var5)
-        {
+        } catch (NoSuchFieldError var5) {
             ;
         }
 
-        try
-        {
+        try {
             field_96565_a[EnumEntitySize.SIZE_3.ordinal()] = 3;
-        }
-        catch (NoSuchFieldError var4)
-        {
+        } catch (NoSuchFieldError var4) {
             ;
         }
 
-        try
-        {
+        try {
             field_96565_a[EnumEntitySize.SIZE_4.ordinal()] = 4;
-        }
-        catch (NoSuchFieldError var3)
-        {
+        } catch (NoSuchFieldError var3) {
             ;
         }
 
-        try
-        {
+        try {
             field_96565_a[EnumEntitySize.SIZE_5.ordinal()] = 5;
-        }
-        catch (NoSuchFieldError var2)
-        {
+        } catch (NoSuchFieldError var2) {
             ;
         }
 
-        try
-        {
+        try {
             field_96565_a[EnumEntitySize.SIZE_6.ordinal()] = 6;
-        }
-        catch (NoSuchFieldError var1)
-        {
+        } catch (NoSuchFieldError var1) {
             ;
         }
     }

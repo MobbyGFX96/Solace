@@ -2,8 +2,7 @@ package net.minecraft.src;
 
 import java.util.Random;
 
-public class Particle
-{
+public class Particle {
     private static Random rand = new Random();
     public double posX;
     public double posY;
@@ -24,23 +23,20 @@ public class Particle
     public double prevTintBlue;
     public double prevTintAlpha;
 
-    public void update(GuiParticle par1GuiParticle)
-    {
+    public void update(GuiParticle par1GuiParticle) {
         this.posX += this.velocityX;
         this.posY += this.velocityY;
         this.velocityX *= this.accelScale;
         this.velocityY *= this.accelScale;
         this.velocityY += 0.1D;
 
-        if (++this.timeTick > this.timeLimit)
-        {
+        if (++this.timeTick > this.timeLimit) {
             this.setDead();
         }
 
-        this.tintAlpha = 2.0D - (double)this.timeTick / (double)this.timeLimit * 2.0D;
+        this.tintAlpha = 2.0D - (double) this.timeTick / (double) this.timeLimit * 2.0D;
 
-        if (this.tintAlpha > 1.0D)
-        {
+        if (this.tintAlpha > 1.0D) {
             this.tintAlpha = 1.0D;
         }
 
@@ -48,8 +44,7 @@ public class Particle
         this.tintAlpha *= 0.5D;
     }
 
-    public void preUpdate()
-    {
+    public void preUpdate() {
         this.prevTintRed = this.tintRed;
         this.prevTintGreen = this.tintGreen;
         this.prevTintBlue = this.tintBlue;
@@ -58,8 +53,7 @@ public class Particle
         this.prevPosY = this.posY;
     }
 
-    public void setDead()
-    {
+    public void setDead() {
         this.isDead = true;
     }
 }

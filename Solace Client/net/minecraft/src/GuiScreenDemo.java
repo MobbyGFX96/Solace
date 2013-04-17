@@ -1,16 +1,15 @@
 package net.minecraft.src;
 
-import java.net.URI;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-public class GuiScreenDemo extends GuiScreen
-{
+import java.net.URI;
+
+public class GuiScreenDemo extends GuiScreen {
     /**
      * Adds the buttons (and other controls) to the screen in question.
      */
-    public void initGui()
-    {
+    public void initGui() {
         this.buttonList.clear();
         byte var1 = -16;
         this.buttonList.add(new GuiButton(1, this.width / 2 - 116, this.height / 2 + 62 + var1, 114, 20, StatCollector.translateToLocal("demo.help.buy")));
@@ -20,28 +19,23 @@ public class GuiScreenDemo extends GuiScreen
     /**
      * Fired when a control is clicked. This is the equivalent of ActionListener.actionPerformed(ActionEvent e).
      */
-    protected void actionPerformed(GuiButton par1GuiButton)
-    {
-        switch (par1GuiButton.id)
-        {
+    protected void actionPerformed(GuiButton par1GuiButton) {
+        switch (par1GuiButton.id) {
             case 1:
                 par1GuiButton.enabled = false;
 
-                try
-                {
+                try {
                     Class var2 = Class.forName("java.awt.Desktop");
-                    Object var3 = var2.getMethod("getDesktop", new Class[0]).invoke((Object)null, new Object[0]);
-                    var2.getMethod("browse", new Class[] {URI.class}).invoke(var3, new Object[] {new URI("http://www.minecraft.net/store?source=demo")});
-                }
-                catch (Throwable var4)
-                {
+                    Object var3 = var2.getMethod("getDesktop", new Class[0]).invoke((Object) null, new Object[0]);
+                    var2.getMethod("browse", new Class[]{URI.class}).invoke(var3, new Object[]{new URI("http://www.minecraft.net/store?source=demo")});
+                } catch (Throwable var4) {
                     var4.printStackTrace();
                 }
 
                 break;
 
             case 2:
-                this.mc.displayGuiScreen((GuiScreen)null);
+                this.mc.displayGuiScreen((GuiScreen) null);
                 this.mc.setIngameFocus();
         }
     }
@@ -49,16 +43,14 @@ public class GuiScreenDemo extends GuiScreen
     /**
      * Called from the main game loop to update the screen.
      */
-    public void updateScreen()
-    {
+    public void updateScreen() {
         super.updateScreen();
     }
 
     /**
      * Draws either a gradient over the background screen (when it exists) or a flat gradient over background.png
      */
-    public void drawDefaultBackground()
-    {
+    public void drawDefaultBackground() {
         super.drawDefaultBackground();
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.renderEngine.bindTexture("/gui/demo_bg.png");
@@ -70,8 +62,7 @@ public class GuiScreenDemo extends GuiScreen
     /**
      * Draws the screen and all the components in it.
      */
-    public void drawScreen(int par1, int par2, float par3)
-    {
+    public void drawScreen(int par1, int par2, float par3) {
         this.drawDefaultBackground();
         int var4 = (this.width - 248) / 2 + 10;
         int var5 = (this.height - 166) / 2 + 8;
@@ -79,15 +70,15 @@ public class GuiScreenDemo extends GuiScreen
         var5 += 12;
         GameSettings var7 = this.mc.gameSettings;
         String var6 = StatCollector.translateToLocal("demo.help.movementShort");
-        var6 = String.format(var6, new Object[] {Keyboard.getKeyName(var7.keyBindForward.keyCode), Keyboard.getKeyName(var7.keyBindLeft.keyCode), Keyboard.getKeyName(var7.keyBindBack.keyCode), Keyboard.getKeyName(var7.keyBindRight.keyCode)});
+        var6 = String.format(var6, new Object[]{Keyboard.getKeyName(var7.keyBindForward.keyCode), Keyboard.getKeyName(var7.keyBindLeft.keyCode), Keyboard.getKeyName(var7.keyBindBack.keyCode), Keyboard.getKeyName(var7.keyBindRight.keyCode)});
         this.fontRenderer.drawString(var6, var4, var5, 5197647);
         var6 = StatCollector.translateToLocal("demo.help.movementMouse");
         this.fontRenderer.drawString(var6, var4, var5 + 12, 5197647);
         var6 = StatCollector.translateToLocal("demo.help.jump");
-        var6 = String.format(var6, new Object[] {Keyboard.getKeyName(var7.keyBindJump.keyCode)});
+        var6 = String.format(var6, new Object[]{Keyboard.getKeyName(var7.keyBindJump.keyCode)});
         this.fontRenderer.drawString(var6, var4, var5 + 24, 5197647);
         var6 = StatCollector.translateToLocal("demo.help.inventory");
-        var6 = String.format(var6, new Object[] {Keyboard.getKeyName(var7.keyBindInventory.keyCode)});
+        var6 = String.format(var6, new Object[]{Keyboard.getKeyName(var7.keyBindInventory.keyCode)});
         this.fontRenderer.drawString(var6, var4, var5 + 36, 5197647);
         this.fontRenderer.drawSplitString(StatCollector.translateToLocal("demo.help.fullWrapped"), var4, var5 + 68, 218, 2039583);
         super.drawScreen(par1, par2, par3);

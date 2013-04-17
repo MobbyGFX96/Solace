@@ -1,7 +1,6 @@
 package net.minecraft.src;
 
-public enum EnumOS
-{
+public enum EnumOS {
     LINUX,
     SOLARIS,
     WINDOWS,

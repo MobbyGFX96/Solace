@@ -2,8 +2,7 @@ package net.minecraft.src;
 
 import java.util.List;
 
-public interface ICrafting
-{
+public interface ICrafting {
     void sendContainerAndContentsToPlayer(Container var1, List var2);
 
     /**

@@ -2,8 +2,7 @@ package net.minecraft.src;
 
 import org.lwjgl.opengl.GL11;
 
-public class GuiChest extends GuiContainer
-{
+public class GuiChest extends GuiContainer {
     private IInventory upperChestInventory;
     private IInventory lowerChestInventory;
 
@@ -12,8 +11,7 @@ public class GuiChest extends GuiContainer
      */
     private int inventoryRows = 0;
 
-    public GuiChest(IInventory par1IInventory, IInventory par2IInventory)
-    {
+    public GuiChest(IInventory par1IInventory, IInventory par2IInventory) {
         super(new ContainerChest(par1IInventory, par2IInventory));
         this.upperChestInventory = par1IInventory;
         this.lowerChestInventory = par2IInventory;
@@ -27,8 +25,7 @@ public class GuiChest extends GuiContainer
     /**
      * Draw the foreground layer for the GuiContainer (everything in front of the items)
      */
-    protected void drawGuiContainerForegroundLayer(int par1, int par2)
-    {
+    protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         this.fontRenderer.drawString(this.lowerChestInventory.isInvNameLocalized() ? this.lowerChestInventory.getInvName() : StatCollector.translateToLocal(this.lowerChestInventory.getInvName()), 8, 6, 4210752);
         this.fontRenderer.drawString(this.upperChestInventory.isInvNameLocalized() ? this.upperChestInventory.getInvName() : StatCollector.translateToLocal(this.upperChestInventory.getInvName()), 8, this.ySize - 96 + 2, 4210752);
     }
@@ -36,8 +33,7 @@ public class GuiChest extends GuiContainer
     /**
      * Draw the background layer for the GuiContainer (everything behind the items)
      */
-    protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
-    {
+    protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.renderEngine.bindTexture("/gui/container.png");
         int var4 = (this.width - this.xSize) / 2;

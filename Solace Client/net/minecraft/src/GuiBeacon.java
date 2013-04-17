@@ -1,18 +1,17 @@
 package net.minecraft.src;
 
+import org.lwjgl.opengl.GL11;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.util.Iterator;
-import org.lwjgl.opengl.GL11;
 
-public class GuiBeacon extends GuiContainer
-{
+public class GuiBeacon extends GuiContainer {
     private TileEntityBeacon beacon;
     private GuiBeaconButtonConfirm beaconConfirmButton;
     private boolean buttonsNotDrawn;
 
-    public GuiBeacon(InventoryPlayer par1, TileEntityBeacon par2)
-    {
+    public GuiBeacon(InventoryPlayer par1, TileEntityBeacon par2) {
         super(new ContainerBeacon(par1, par2));
         this.beacon = par2;
         this.xSize = 230;
@@ -22,8 +21,7 @@ public class GuiBeacon extends GuiContainer
     /**
      * Adds the buttons (and other controls) to the screen in question.
      */
-    public void initGui()
-    {
+    public void initGui() {
         super.initGui();
         this.buttonList.add(this.beaconConfirmButton = new GuiBeaconButtonConfirm(this, -1, this.guiLeft + 164, this.guiTop + 107));
         this.buttonList.add(new GuiBeaconButtonCancel(this, -2, this.guiLeft + 190, this.guiTop + 107));
@@ -34,12 +32,10 @@ public class GuiBeacon extends GuiContainer
     /**
      * Called from the main game loop to update the screen.
      */
-    public void updateScreen()
-    {
+    public void updateScreen() {
         super.updateScreen();
 
-        if (this.buttonsNotDrawn && this.beacon.getLevels() >= 0)
-        {
+        if (this.buttonsNotDrawn && this.beacon.getLevels() >= 0) {
             this.buttonsNotDrawn = false;
             int var2;
             int var3;
@@ -47,23 +43,18 @@ public class GuiBeacon extends GuiContainer
             int var5;
             GuiBeaconButtonPower var6;
 
-            for (int var1 = 0; var1 <= 2; ++var1)
-            {
+            for (int var1 = 0; var1 <= 2; ++var1) {
                 var2 = TileEntityBeacon.effectsList[var1].length;
                 var3 = var2 * 22 + (var2 - 1) * 2;
 
-                for (var4 = 0; var4 < var2; ++var4)
-                {
+                for (var4 = 0; var4 < var2; ++var4) {
                     var5 = TileEntityBeacon.effectsList[var1][var4].id;
                     var6 = new GuiBeaconButtonPower(this, var1 << 8 | var5, this.guiLeft + 76 + var4 * 24 - var3 / 2, this.guiTop + 22 + var1 * 25, var5, var1);
                     this.buttonList.add(var6);
 
-                    if (var1 >= this.beacon.getLevels())
-                    {
+                    if (var1 >= this.beacon.getLevels()) {
                         var6.enabled = false;
-                    }
-                    else if (var5 == this.beacon.getPrimaryEffect())
-                    {
+                    } else if (var5 == this.beacon.getPrimaryEffect()) {
                         var6.func_82254_b(true);
                     }
                 }
@@ -73,33 +64,25 @@ public class GuiBeacon extends GuiContainer
             var2 = TileEntityBeacon.effectsList[var7].length + 1;
             var3 = var2 * 22 + (var2 - 1) * 2;
 
-            for (var4 = 0; var4 < var2 - 1; ++var4)
-            {
+            for (var4 = 0; var4 < var2 - 1; ++var4) {
                 var5 = TileEntityBeacon.effectsList[var7][var4].id;
                 var6 = new GuiBeaconButtonPower(this, var7 << 8 | var5, this.guiLeft + 167 + var4 * 24 - var3 / 2, this.guiTop + 47, var5, var7);
                 this.buttonList.add(var6);
 
-                if (var7 >= this.beacon.getLevels())
-                {
+                if (var7 >= this.beacon.getLevels()) {
                     var6.enabled = false;
-                }
-                else if (var5 == this.beacon.getSecondaryEffect())
-                {
+                } else if (var5 == this.beacon.getSecondaryEffect()) {
                     var6.func_82254_b(true);
                 }
             }
 
-            if (this.beacon.getPrimaryEffect() > 0)
-            {
+            if (this.beacon.getPrimaryEffect() > 0) {
                 GuiBeaconButtonPower var8 = new GuiBeaconButtonPower(this, var7 << 8 | this.beacon.getPrimaryEffect(), this.guiLeft + 167 + (var2 - 1) * 24 - var3 / 2, this.guiTop + 47, this.beacon.getPrimaryEffect(), var7);
                 this.buttonList.add(var8);
 
-                if (var7 >= this.beacon.getLevels())
-                {
+                if (var7 >= this.beacon.getLevels()) {
                     var8.enabled = false;
-                }
-                else if (this.beacon.getPrimaryEffect() == this.beacon.getSecondaryEffect())
-                {
+                } else if (this.beacon.getPrimaryEffect() == this.beacon.getSecondaryEffect()) {
                     var8.func_82254_b(true);
                 }
             }
@@ -111,35 +94,25 @@ public class GuiBeacon extends GuiContainer
     /**
      * Fired when a control is clicked. This is the equivalent of ActionListener.actionPerformed(ActionEvent e).
      */
-    protected void actionPerformed(GuiButton par1GuiButton)
-    {
-        if (par1GuiButton.id == -2)
-        {
-            this.mc.displayGuiScreen((GuiScreen)null);
-        }
-        else if (par1GuiButton.id == -1)
-        {
+    protected void actionPerformed(GuiButton par1GuiButton) {
+        if (par1GuiButton.id == -2) {
+            this.mc.displayGuiScreen((GuiScreen) null);
+        } else if (par1GuiButton.id == -1) {
             String var2 = "MC|Beacon";
             ByteArrayOutputStream var3 = new ByteArrayOutputStream();
             DataOutputStream var4 = new DataOutputStream(var3);
 
-            try
-            {
+            try {
                 var4.writeInt(this.beacon.getPrimaryEffect());
                 var4.writeInt(this.beacon.getSecondaryEffect());
                 this.mc.getNetHandler().addToSendQueue(new Packet250CustomPayload(var2, var3.toByteArray()));
-            }
-            catch (Exception var6)
-            {
+            } catch (Exception var6) {
                 var6.printStackTrace();
             }
 
-            this.mc.displayGuiScreen((GuiScreen)null);
-        }
-        else if (par1GuiButton instanceof GuiBeaconButtonPower)
-        {
-            if (((GuiBeaconButtonPower)par1GuiButton).func_82255_b())
-            {
+            this.mc.displayGuiScreen((GuiScreen) null);
+        } else if (par1GuiButton instanceof GuiBeaconButtonPower) {
+            if (((GuiBeaconButtonPower) par1GuiButton).func_82255_b()) {
                 return;
             }
 
@@ -147,12 +120,9 @@ public class GuiBeacon extends GuiContainer
             int var8 = var7 & 255;
             int var9 = var7 >> 8;
 
-            if (var9 < 3)
-            {
+            if (var9 < 3) {
                 this.beacon.setPrimaryEffect(var8);
-            }
-            else
-            {
+            } else {
                 this.beacon.setSecondaryEffect(var8);
             }
 
@@ -165,19 +135,16 @@ public class GuiBeacon extends GuiContainer
     /**
      * Draw the foreground layer for the GuiContainer (everything in front of the items)
      */
-    protected void drawGuiContainerForegroundLayer(int par1, int par2)
-    {
+    protected void drawGuiContainerForegroundLayer(int par1, int par2) {
         RenderHelper.disableStandardItemLighting();
         this.drawCenteredString(this.fontRenderer, StatCollector.translateToLocal("tile.beacon.primary"), 62, 10, 14737632);
         this.drawCenteredString(this.fontRenderer, StatCollector.translateToLocal("tile.beacon.secondary"), 169, 10, 14737632);
         Iterator var3 = this.buttonList.iterator();
 
-        while (var3.hasNext())
-        {
-            GuiButton var4 = (GuiButton)var3.next();
+        while (var3.hasNext()) {
+            GuiButton var4 = (GuiButton) var3.next();
 
-            if (var4.func_82252_a())
-            {
+            if (var4.func_82252_a()) {
                 var4.func_82251_b(par1 - this.guiLeft, par2 - this.guiTop);
                 break;
             }
@@ -189,8 +156,7 @@ public class GuiBeacon extends GuiContainer
     /**
      * Draw the background layer for the GuiContainer (everything behind the items)
      */
-    protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
-    {
+    protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.renderEngine.bindTexture("/gui/beacon.png");
         int var4 = (this.width - this.xSize) / 2;

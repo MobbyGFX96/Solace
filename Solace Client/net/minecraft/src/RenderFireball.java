@@ -3,19 +3,16 @@ package net.minecraft.src;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-public class RenderFireball extends Render
-{
+public class RenderFireball extends Render {
     private float field_77002_a;
 
-    public RenderFireball(float par1)
-    {
+    public RenderFireball(float par1) {
         this.field_77002_a = par1;
     }
 
-    public void doRenderFireball(EntityFireball par1EntityFireball, double par2, double par4, double par6, float par8, float par9)
-    {
+    public void doRenderFireball(EntityFireball par1EntityFireball, double par2, double par4, double par6, float par8, float par9) {
         GL11.glPushMatrix();
-        GL11.glTranslatef((float)par2, (float)par4, (float)par6);
+        GL11.glTranslatef((float) par2, (float) par4, (float) par6);
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         float var10 = this.field_77002_a;
         GL11.glScalef(var10 / 1.0F, var10 / 1.0F, var10 / 1.0F);
@@ -33,10 +30,10 @@ public class RenderFireball extends Render
         GL11.glRotatef(-this.renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
         var12.startDrawingQuads();
         var12.setNormal(0.0F, 1.0F, 0.0F);
-        var12.addVertexWithUV((double)(0.0F - var18), (double)(0.0F - var19), 0.0D, (double)var13, (double)var16);
-        var12.addVertexWithUV((double)(var17 - var18), (double)(0.0F - var19), 0.0D, (double)var14, (double)var16);
-        var12.addVertexWithUV((double)(var17 - var18), (double)(1.0F - var19), 0.0D, (double)var14, (double)var15);
-        var12.addVertexWithUV((double)(0.0F - var18), (double)(1.0F - var19), 0.0D, (double)var13, (double)var15);
+        var12.addVertexWithUV((double) (0.0F - var18), (double) (0.0F - var19), 0.0D, (double) var13, (double) var16);
+        var12.addVertexWithUV((double) (var17 - var18), (double) (0.0F - var19), 0.0D, (double) var14, (double) var16);
+        var12.addVertexWithUV((double) (var17 - var18), (double) (1.0F - var19), 0.0D, (double) var14, (double) var15);
+        var12.addVertexWithUV((double) (0.0F - var18), (double) (1.0F - var19), 0.0D, (double) var13, (double) var15);
         var12.draw();
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         GL11.glPopMatrix();
@@ -48,8 +45,7 @@ public class RenderFireball extends Render
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
-    {
-        this.doRenderFireball((EntityFireball)par1Entity, par2, par4, par6, par8, par9);
+    public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9) {
+        this.doRenderFireball((EntityFireball) par1Entity, par2, par4, par6, par8, par9);
     }
 }

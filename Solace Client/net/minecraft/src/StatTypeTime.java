@@ -1,13 +1,11 @@
 package net.minecraft.src;
 
-final class StatTypeTime implements IStatType
-{
+final class StatTypeTime implements IStatType {
     /**
      * Formats a given stat for human consumption.
      */
-    public String format(int par1)
-    {
-        double var2 = (double)par1 / 20.0D;
+    public String format(int par1) {
+        double var2 = (double) par1 / 20.0D;
         double var4 = var2 / 60.0D;
         double var6 = var4 / 60.0D;
         double var8 = var6 / 24.0D;

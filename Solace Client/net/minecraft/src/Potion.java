@@ -1,8 +1,9 @@
 package net.minecraft.src;
 
-public class Potion
-{
-    /** The array of potion types. */
+public class Potion {
+    /**
+     * The array of potion types.
+     */
     public static final Potion[] potionTypes = new Potion[32];
     public static final Potion field_76423_b = null;
     public static final Potion moveSpeed = (new Potion(1, false, 8171462)).setPotionName("potion.moveSpeed").setIconIndex(0, 0);
@@ -15,35 +16,55 @@ public class Potion
     public static final Potion jump = (new Potion(8, false, 7889559)).setPotionName("potion.jump").setIconIndex(2, 1);
     public static final Potion confusion = (new Potion(9, true, 5578058)).setPotionName("potion.confusion").setIconIndex(3, 1).setEffectiveness(0.25D);
 
-    /** The regeneration Potion object. */
+    /**
+     * The regeneration Potion object.
+     */
     public static final Potion regeneration = (new Potion(10, false, 13458603)).setPotionName("potion.regeneration").setIconIndex(7, 0).setEffectiveness(0.25D);
     public static final Potion resistance = (new Potion(11, false, 10044730)).setPotionName("potion.resistance").setIconIndex(6, 1);
 
-    /** The fire resistance Potion object. */
+    /**
+     * The fire resistance Potion object.
+     */
     public static final Potion fireResistance = (new Potion(12, false, 14981690)).setPotionName("potion.fireResistance").setIconIndex(7, 1);
 
-    /** The water breathing Potion object. */
+    /**
+     * The water breathing Potion object.
+     */
     public static final Potion waterBreathing = (new Potion(13, false, 3035801)).setPotionName("potion.waterBreathing").setIconIndex(0, 2);
 
-    /** The invisibility Potion object. */
+    /**
+     * The invisibility Potion object.
+     */
     public static final Potion invisibility = (new Potion(14, false, 8356754)).setPotionName("potion.invisibility").setIconIndex(0, 1);
 
-    /** The blindness Potion object. */
+    /**
+     * The blindness Potion object.
+     */
     public static final Potion blindness = (new Potion(15, true, 2039587)).setPotionName("potion.blindness").setIconIndex(5, 1).setEffectiveness(0.25D);
 
-    /** The night vision Potion object. */
+    /**
+     * The night vision Potion object.
+     */
     public static final Potion nightVision = (new Potion(16, false, 2039713)).setPotionName("potion.nightVision").setIconIndex(4, 1);
 
-    /** The hunger Potion object. */
+    /**
+     * The hunger Potion object.
+     */
     public static final Potion hunger = (new Potion(17, true, 5797459)).setPotionName("potion.hunger").setIconIndex(1, 1);
 
-    /** The weakness Potion object. */
+    /**
+     * The weakness Potion object.
+     */
     public static final Potion weakness = (new Potion(18, true, 4738376)).setPotionName("potion.weakness").setIconIndex(5, 0);
 
-    /** The poison Potion object. */
+    /**
+     * The poison Potion object.
+     */
     public static final Potion poison = (new Potion(19, true, 5149489)).setPotionName("potion.poison").setIconIndex(6, 0).setEffectiveness(0.25D);
 
-    /** The wither Potion object. */
+    /**
+     * The wither Potion object.
+     */
     public static final Potion wither = (new Potion(20, true, 3484199)).setPotionName("potion.wither").setIconIndex(1, 2).setEffectiveness(0.25D);
     public static final Potion field_76434_w = null;
     public static final Potion field_76444_x = null;
@@ -57,13 +78,19 @@ public class Potion
     public static final Potion field_76407_F = null;
     public static final Potion field_76408_G = null;
 
-    /** The Id of a Potion object. */
+    /**
+     * The Id of a Potion object.
+     */
     public final int id;
 
-    /** The name of the Potion. */
+    /**
+     * The name of the Potion.
+     */
     private String name = "";
 
-    /** The index for the icon displayed when the potion effect is active. */
+    /**
+     * The index for the icon displayed when the potion effect is active.
+     */
     private int statusIconIndex = -1;
 
     /**
@@ -73,21 +100,19 @@ public class Potion
     private double effectiveness;
     private boolean usable;
 
-    /** Is the color of the liquid for this potion. */
+    /**
+     * Is the color of the liquid for this potion.
+     */
     private final int liquidColor;
 
-    protected Potion(int par1, boolean par2, int par3)
-    {
+    protected Potion(int par1, boolean par2, int par3) {
         this.id = par1;
         potionTypes[par1] = this;
         this.isBadEffect = par2;
 
-        if (par2)
-        {
+        if (par2) {
             this.effectiveness = 0.5D;
-        }
-        else
-        {
+        } else {
             this.effectiveness = 1.0D;
         }
 
@@ -97,8 +122,7 @@ public class Potion
     /**
      * Sets the index for the icon displayed in the player's inventory when the status is active.
      */
-    protected Potion setIconIndex(int par1, int par2)
-    {
+    protected Potion setIconIndex(int par1, int par2) {
         this.statusIconIndex = par1 + par2 * 8;
         return this;
     }
@@ -106,44 +130,28 @@ public class Potion
     /**
      * returns the ID of the potion
      */
-    public int getId()
-    {
+    public int getId() {
         return this.id;
     }
 
-    public void performEffect(EntityLiving par1EntityLiving, int par2)
-    {
-        if (this.id == regeneration.id)
-        {
-            if (par1EntityLiving.getHealth() < par1EntityLiving.getMaxHealth())
-            {
+    public void performEffect(EntityLiving par1EntityLiving, int par2) {
+        if (this.id == regeneration.id) {
+            if (par1EntityLiving.getHealth() < par1EntityLiving.getMaxHealth()) {
                 par1EntityLiving.heal(1);
             }
-        }
-        else if (this.id == poison.id)
-        {
-            if (par1EntityLiving.getHealth() > 1)
-            {
+        } else if (this.id == poison.id) {
+            if (par1EntityLiving.getHealth() > 1) {
                 par1EntityLiving.attackEntityFrom(DamageSource.magic, 1);
             }
-        }
-        else if (this.id == wither.id)
-        {
+        } else if (this.id == wither.id) {
             par1EntityLiving.attackEntityFrom(DamageSource.wither, 1);
-        }
-        else if (this.id == hunger.id && par1EntityLiving instanceof EntityPlayer)
-        {
-            ((EntityPlayer)par1EntityLiving).addExhaustion(0.025F * (float)(par2 + 1));
-        }
-        else if ((this.id != heal.id || par1EntityLiving.isEntityUndead()) && (this.id != harm.id || !par1EntityLiving.isEntityUndead()))
-        {
-            if (this.id == harm.id && !par1EntityLiving.isEntityUndead() || this.id == heal.id && par1EntityLiving.isEntityUndead())
-            {
+        } else if (this.id == hunger.id && par1EntityLiving instanceof EntityPlayer) {
+            ((EntityPlayer) par1EntityLiving).addExhaustion(0.025F * (float) (par2 + 1));
+        } else if ((this.id != heal.id || par1EntityLiving.isEntityUndead()) && (this.id != harm.id || !par1EntityLiving.isEntityUndead())) {
+            if (this.id == harm.id && !par1EntityLiving.isEntityUndead() || this.id == heal.id && par1EntityLiving.isEntityUndead()) {
                 par1EntityLiving.attackEntityFrom(DamageSource.magic, 6 << par2);
             }
-        }
-        else
-        {
+        } else {
             par1EntityLiving.heal(6 << par2);
         }
     }
@@ -151,29 +159,21 @@ public class Potion
     /**
      * Hits the provided entity with this potion's instant effect.
      */
-    public void affectEntity(EntityLiving par1EntityLiving, EntityLiving par2EntityLiving, int par3, double par4)
-    {
+    public void affectEntity(EntityLiving par1EntityLiving, EntityLiving par2EntityLiving, int par3, double par4) {
         int var6;
 
-        if ((this.id != heal.id || par2EntityLiving.isEntityUndead()) && (this.id != harm.id || !par2EntityLiving.isEntityUndead()))
-        {
-            if (this.id == harm.id && !par2EntityLiving.isEntityUndead() || this.id == heal.id && par2EntityLiving.isEntityUndead())
-            {
-                var6 = (int)(par4 * (double)(6 << par3) + 0.5D);
+        if ((this.id != heal.id || par2EntityLiving.isEntityUndead()) && (this.id != harm.id || !par2EntityLiving.isEntityUndead())) {
+            if (this.id == harm.id && !par2EntityLiving.isEntityUndead() || this.id == heal.id && par2EntityLiving.isEntityUndead()) {
+                var6 = (int) (par4 * (double) (6 << par3) + 0.5D);
 
-                if (par1EntityLiving == null)
-                {
+                if (par1EntityLiving == null) {
                     par2EntityLiving.attackEntityFrom(DamageSource.magic, var6);
-                }
-                else
-                {
+                } else {
                     par2EntityLiving.attackEntityFrom(DamageSource.causeIndirectMagicDamage(par2EntityLiving, par1EntityLiving), var6);
                 }
             }
-        }
-        else
-        {
-            var6 = (int)(par4 * (double)(6 << par3) + 0.5D);
+        } else {
+            var6 = (int) (par4 * (double) (6 << par3) + 0.5D);
             par2EntityLiving.heal(var6);
         }
     }
@@ -181,32 +181,24 @@ public class Potion
     /**
      * Returns true if the potion has an instant effect instead of a continuous one (eg Harming)
      */
-    public boolean isInstant()
-    {
+    public boolean isInstant() {
         return false;
     }
 
     /**
      * checks if Potion effect is ready to be applied this tick.
      */
-    public boolean isReady(int par1, int par2)
-    {
+    public boolean isReady(int par1, int par2) {
         int var3;
 
-        if (this.id != regeneration.id && this.id != poison.id)
-        {
-            if (this.id == wither.id)
-            {
+        if (this.id != regeneration.id && this.id != poison.id) {
+            if (this.id == wither.id) {
                 var3 = 40 >> par2;
                 return var3 > 0 ? par1 % var3 == 0 : true;
-            }
-            else
-            {
+            } else {
                 return this.id == hunger.id;
             }
-        }
-        else
-        {
+        } else {
             var3 = 25 >> par2;
             return var3 > 0 ? par1 % var3 == 0 : true;
         }
@@ -215,8 +207,7 @@ public class Potion
     /**
      * Set the potion name.
      */
-    public Potion setPotionName(String par1Str)
-    {
+    public Potion setPotionName(String par1Str) {
         this.name = par1Str;
         return this;
     }
@@ -224,69 +215,57 @@ public class Potion
     /**
      * returns the name of the potion
      */
-    public String getName()
-    {
+    public String getName() {
         return this.name;
     }
 
     /**
      * Returns true if the potion has a associated status icon to display in then inventory when active.
      */
-    public boolean hasStatusIcon()
-    {
+    public boolean hasStatusIcon() {
         return this.statusIconIndex >= 0;
     }
 
     /**
      * Returns the index for the icon to display when the potion is active.
      */
-    public int getStatusIconIndex()
-    {
+    public int getStatusIconIndex() {
         return this.statusIconIndex;
     }
 
     /**
      * This method returns true if the potion effect is bad - negative - for the entity.
      */
-    public boolean isBadEffect()
-    {
+    public boolean isBadEffect() {
         return this.isBadEffect;
     }
 
-    public static String getDurationString(PotionEffect par0PotionEffect)
-    {
-        if (par0PotionEffect.func_100011_g())
-        {
+    public static String getDurationString(PotionEffect par0PotionEffect) {
+        if (par0PotionEffect.func_100011_g()) {
             return "**:**";
-        }
-        else
-        {
+        } else {
             int var1 = par0PotionEffect.getDuration();
             return StringUtils.ticksToElapsedTime(var1);
         }
     }
 
-    protected Potion setEffectiveness(double par1)
-    {
+    protected Potion setEffectiveness(double par1) {
         this.effectiveness = par1;
         return this;
     }
 
-    public double getEffectiveness()
-    {
+    public double getEffectiveness() {
         return this.effectiveness;
     }
 
-    public boolean isUsable()
-    {
+    public boolean isUsable() {
         return this.usable;
     }
 
     /**
      * Returns the color of the potion liquid.
      */
-    public int getLiquidColor()
-    {
+    public int getLiquidColor() {
         return this.liquidColor;
     }
 }
